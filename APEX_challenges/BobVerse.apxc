@@ -1,0 +1,18 @@
+public class BobVerse {
+    public void createTheBobVerse() {
+        List<Account> accList = new List<Account>();
+        for(Account acc: [SELECT Name FROM Account WHERE Name != 'Bob']) {
+            acc.Name = 'Bob';
+            accList.add(acc);
+        }
+        
+        integer legionOfBobs = 200;
+        for(integer i = 0; i < legionOfBobs; i++) {
+            Account bob = new Account();
+            bob.Name = 'Bob';
+            accList.add(bob);
+        }
+        
+        upsert accList;
+    }
+}
