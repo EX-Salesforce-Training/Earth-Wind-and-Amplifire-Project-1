@@ -10,7 +10,6 @@ public class Pokemon {
         for(String name: pokeList) {
             Account pokemon = new Account();
             pokemon.Name = name;
-            pokemon.Name = name;
             pokemonAccounts.add(pokemon);
         }
         insert pokemonAccounts;
