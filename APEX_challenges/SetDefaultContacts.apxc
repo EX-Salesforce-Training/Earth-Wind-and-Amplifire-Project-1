@@ -2,14 +2,8 @@ public class SetDefaultContacts {
     public void setDefault() {
         List<Contact> contactList = new List<Contact>();
         for(Contact c: [SELECT Email, Phone FROM Contact WHERE Email = '' OR Phone = '']) {
-            if(c.Email == null) {
-                c.Email = 'noEmail@fake.com';
-            }
-            
-            if(c.Phone == null) {
-                c.Phone = '(555) 555-5555';
-            }
-            
+            c.Email = (c.Email == null) ? 'noEmail@fake.com' : c.Email;
+            c.Phone = (c.Phone == null) ? '(555) 555-555' : c.Phone;
             contactList.add(c);
         }
         update contactList;
