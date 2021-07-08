@@ -1,0 +1,69 @@
+public class PokemonAccounts {
+	// list for the accounts
+	List<Account> pokemonNames = new List<Account>();
+    
+    // to create 151 accounts with the pokemon names
+    public void AddName(){ 
+        // loop through list and add a name 151 times
+    for(integer i = 0; i < 151; i++){
+            Account a = new Account();
+            a.Name = 'Mew' + i;
+            pokemonNames.add(a);
+        }
+    
+        insert pokemonNames;
+    }
+    
+    // delete acounts
+    public void DeleteName(){
+        
+        List<Account> accountList = [SELECT Name FROM Account WHERE Name LIKE '%Mew%'];
+        
+        delete accountList;
+    }
+    
+    // add email and phone number to accounts without them
+    public void AddDefault(){
+        
+        	List<Contact> emailList = new List<Contact>();
+        	List<Contact> phoneList = new List<Contact>();
+        
+       
+        for(Contact a : [SELECT Phone FROM Contact WHERE Phone = null]) {
+            a.Phone = '(123) 459-5689' ;
+            phoneList.add(a);
+            }
+        update phoneList;
+        
+        for(Contact b : [SELECT Email FROM Contact WHERE Email = null]) {
+            b.Email = 'default@default.com' ;
+            emailList.add(b);
+        }
+        update emailList;
+         }
+    
+    // add contacts and change to bob
+    public void AddBob(){
+        
+        List<Contact> bobVerse = new List<Contact>();
+        List<Contact> nameChange = new List<Contact>();
+        
+        for(integer i = 0; i < 200; i++){
+            Contact a = new Contact();
+            a.FirstName = 'Bob';
+            a.LastName = 'Bob';
+            bobVerse.add(a);
+        }
+        upsert bobVerse;
+        
+        for(Contact f : [SELECT Name FROM Contact WHERE Name != 'Bob']) {
+            f.FirstName = 'Bob';
+            nameChange.add(f);
+        }
+        
+        
+        database.update(nameChange, false);
+        
+        
+        
+    }
