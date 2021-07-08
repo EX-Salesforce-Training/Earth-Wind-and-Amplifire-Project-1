@@ -1,0 +1,71 @@
+public class NewbyN {
+	
+    
+    
+    // method to create accounts
+    // calls another method to create contacts
+    public void NewAccounts() {
+        
+        Integer N = 25;
+        List<Account> newAccounts = new List<Account>();
+        
+        // create new accounts
+        
+            for(integer i = 0; i < N; i++) {
+            	Account a = new Account();    
+                a.Name = 'theName' + i;
+                a.AnnualRevenue = '50000' * i;
+                a.Phone = 0000000000 + i;
+                a.Site = 'www.default.default';
+                newAccounts.add(a);
+             }
+            
+            insert newAccounts;
+            
+            
+            // call method to create accounts
+            newContacts(N);
+        }
+     }
+    
+    public void newContacts(N) {
+        List<Contact> newContacts = new List<Contact>();
+        
+        // create new Contacts
+            for(integer i = 0; i < N; i++) {
+                Contact c = new Contact();
+                c.FirstName = 'FirstName' + i;
+                c.LastName = 'LastName' + i;
+                c.Email = 'default@email.com';
+                c.Phone = 0000000000 + i;
+                newContacts.add(c);
+             }
+            
+            insert newContacts;
+        
+    }
+    
+    
+    // grab contact through relationship query
+    // update phone number
+    public void childQuery() {
+        List<Account> accList = [SELECT Phone, (SELECT Id, Phone FROM Contacts) FROM Account];
+        List<Contact> contList = new List<Contact>();
+        for(Account a : AccList) {
+            List<Contact> totContact = a.Contacts;
+            for(Contact c : totContact) {
+                c.phone = a.phone;
+                contList.add(c);
+            }
+           }
+        update contList;
+     }
+    
+	// show on system debug
+    public void queryData() {
+        
+        for(Contact c : [SELECT FirstName, LastName, Account.Name, Account.Phone, Account.Site FROM Contact ]) {
+            system.debug(c.FirstName + c.LastName + c.Account.Name + c.Account.Phone + c.Account.Site);
+         }
+       }
+}
