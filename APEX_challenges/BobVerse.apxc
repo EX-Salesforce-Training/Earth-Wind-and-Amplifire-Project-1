@@ -8,8 +8,8 @@ public class BobVerse {
             accList.add(acc);
         }
         
-        integer legionOfBobs = 200;
-        for(integer i = 0; i < legionOfBobs; i++) {
+        Integer legionOfBobs = 200;
+        for(Integer i = 0; i < legionOfBobs; i++) {
             Account bob = new Account();
             bob.Name = 'Bob';
             accList.add(bob);
