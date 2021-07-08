@@ -1,0 +1,80 @@
+/*
+
+Create a method that creates N number of accounts, within it call a second method that creates N contacts. 
+Relate the newly created contacts to the newly created accounts. 
+
+As a part of this fill out the following fields for each account:
+Name, annual revenue, phone, and site.
+
+Fill out the following fields: 
+Last name, first name, phone, and email.
+
+Once these are created ensure they are inserted into the database.
+
+Create a third method that gets all child contacts from the account using a relationship query, 
+and then changes the contact phone number to the account phone number.
+
+Persist these changes.
+
+Query for contacts and retrieve each contacts first and last name, and then the related account name, 
+phone, and site. Using system.debug display each of these in a debug log.
+
+ */
+
+
+public class AccountCreator {
+
+	// @desc : create N accounts and N contacts
+	public void createAccounts(Integer numberOfAccounts) {
+		List<Account> accountList = new List<Account>();
+		for(Integer i = 0; i < numberOfAccounts; i++) {
+			Account newAccount = new Account();
+			newAccount.Name = 'Fake Account ' + i;
+			newAccount.AnnualRevenue = 500000;
+			newAccount.Phone = '(555) 555-5555';
+			newAccount.Site = 'fake-website.com';
+			accountList.add(newAccount);
+		}
+        insert accountList;
+		createContacts(accountList);
+	}
+
+	// @desc : create N contacts
+	public void createContacts(List<Account> accountList) {
+		List<Contact> contactList = new List<Contact>();
+		for(Account acc: accountList) {
+			Contact newContact = new Contact();
+			newContact.FirstName = acc.Name;
+			newContact.LastName = acc.Name;
+			newContact.Phone = '(123) 456 - 7890';
+			newContact.Email = 'noemail@fake.com';
+            newContact.AccountId = acc.Id;
+			contactList.add(newContact);
+		}
+		insert contactList;
+	}
+	
+    // @desc : set the contact phones numbers to all be contact phone numbers
+	public void setPhoneContacts() {
+		List<Account> accountList = [SELECT Phone, (SELECT Phone, Id FROM Contacts) FROM Account];
+		List<Contact> contactList = new List<Contact>();
+		for(Account acc: accountList) {
+			if(acc.Contacts != null) {
+				List<Contact> currContacts = acc.Contacts;
+				for(Contact con: currContacts) {
+					con.Phone = acc.Phone;
+					contactList.add(con);
+				}
+			}
+		}
+		update contactList;
+	}
+
+	// @desc: query for contacts, retrieve each contact's first + last name and related account name
+	//      : phone and site, display to debug log
+	public void systemLog() {
+		for(Contact con: [SELECT FirstName, LastName, Account.Name, Account.Phone, Account.Site FROM Contact]) {
+			System.debug(con.FirstName + ' ' + con.LastName + ' ' + con.Account.Name + ' ' + con.Account.Phone + ' ' + con.Account.Site);
+		}
+	}
+}
