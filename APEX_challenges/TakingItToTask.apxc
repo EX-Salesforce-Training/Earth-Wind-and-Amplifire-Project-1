@@ -12,7 +12,7 @@ public class TakingItToTask {
 				updateEmailTask.OwnerId = c.OwnerId;
 				updateEmailTask.Subject = 'Update Email';
 				updateEmailTask.Status = 'In Progress';
-				updateEmailTast.Priority = 'High';
+				updateEmailTask.Priority = 'High';
 				
 				taskList.add(updateEmailTask);
 			}
