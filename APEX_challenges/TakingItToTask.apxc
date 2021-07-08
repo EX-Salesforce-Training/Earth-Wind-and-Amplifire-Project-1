@@ -1,0 +1,28 @@
+
+public class TakingItToTask {
+
+	public void setPhone() {
+		List<Contact> contactList = [SELECT Phone, Email, OwnerId, Account.Phone FROM Contact WHERE Phone = NULL OR EMAIL = NULL];
+
+		List<Task> taskList = new List<Task>();
+		for(Contact c: contactList) {
+			if(c.Email == null) {
+				Task updateEmailTask = new Task();
+
+				updateEmailTask.OwnerId = c.OwnerId;
+				updateEmailTask.Subject = 'Update Email';
+				updateEmailTask.Status = 'In Progress';
+				updateEmailTast.Priority = 'High';
+				
+				taskList.add(updateEmailTask);
+			}
+
+			if(c.Phone == null) {
+				c.Phone = c.Account.Phone;
+			}
+		}
+
+		update contactList;
+		insert taskList;
+	}
+}
