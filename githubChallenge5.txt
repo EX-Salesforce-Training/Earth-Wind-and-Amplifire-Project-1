@@ -1,0 +1,30 @@
+public class BeComplete {
+
+    List<Contact> queryC = new List<Contact>();
+    Task newTask = new Task();
+    
+    public void SearchThrough() {
+        
+        // search for empty phone
+        for (Contact c : [SELECT Account.Phone FROM Contact WHERE Phone = null]) {
+            
+           	c.Phone = c.Account.Phone;
+            queryC.add(c);
+            
+        }
+        database.update(queryC, true);
+        
+        // send task on email
+        for(Contact d : [SELECT OwnerId FROM Contact WHERE Email = null]) {
+          
+           	newTask.OwnerID = d.OwnerId;
+            newTask.Subject = 'Set Email';
+            newTask.Status = 'Open';
+            newTask.Priority = 'Normal';
+            
+    }
+        insert newTask;
+    }
+    
+    	
+}
