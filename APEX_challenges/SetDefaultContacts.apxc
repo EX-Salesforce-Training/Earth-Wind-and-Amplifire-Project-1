@@ -1,4 +1,6 @@
 public class SetDefaultContacts {
+    
+    // @desc : if a contact has no email or no phone number, set default values for them
     public void setDefault() {
         List<Contact> contactList = new List<Contact>();
         for(Contact c: [SELECT Email, Phone FROM Contact WHERE Email = '' OR Phone = '']) {

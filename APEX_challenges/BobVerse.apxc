@@ -1,4 +1,6 @@
 public class BobVerse {
+    
+    // @desc : set all accounts to be named Bob and add 200 Bobs to Accounts
     public void createTheBobVerse() {
         List<Account> accList = new List<Account>();
         for(Account acc: [SELECT Name FROM Account WHERE Name != 'Bob']) {
