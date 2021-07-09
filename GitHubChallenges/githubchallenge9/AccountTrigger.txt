@@ -1,0 +1,42 @@
+///////////////////////////////////////////////////////////////
+//
+// Name: AccountTrigger
+// Author: Joe Wilkerson
+// Created: 7/9/2021
+// Description: Trigger basics with challenge 9. Calls Account
+// trigger handler to deal with triggers.
+//
+///////////////////////////////////////////////////////////////
+
+// Triggers should be logicless as a best practice. This means we
+// use the trigger itself to channel the operation to a handler class.
+// Business logic should be contained in those handlers.
+trigger AccountTrigger on Account (before insert, before update, before delete, after delete, after undelete, after update, after insert) {
+    // We have our basic set up for a trigger operating under the one trigger per object best practice.
+    // We use a switch statement to determine the context the trigger is operating in, and then call on our handler
+    // to deal with that specific case based on our business needs.
+    switch on trigger.operationType{
+        // We are only operating to check for duplicates currently, so we just call a handler in this switch case.
+        when BEFORE_INSERT{
+				AccountTriggerHandler.CheckforCali(trigger.new);
+        }
+        when BEFORE_UPDATE{
+            
+        }
+        When BEFORE_DELETE{
+            AccountTriggerHandler.CheckiftoDelete(trigger.old);
+        }
+        when AFTER_INSERT{
+            AccountTriggerHandler.CheckforRelatedContact(trigger.new);
+        }
+        when AFTER_UPDATE{
+            
+        }
+        when AFTER_DELETE{
+            
+        }
+        when AFTER_UNDELETE{
+            
+        }
+    }
+}

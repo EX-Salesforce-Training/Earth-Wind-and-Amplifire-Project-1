@@ -1,0 +1,38 @@
+public class AccountTriggerHandler {
+    
+    // handles when a record is to be deleted but has active opportunities
+    public static void CheckiftoDelete(List<Account> toBeDeleted ){
+        for (Account acc : toBeDeleted) {
+            for (Opportunity check : [SELECT OwnerId, StageName FROM Opportunity WHERE OwnerId = :acc.OwnerId]) {
+                if (check.StageName != 'Closed Won' || check.StageName != 'Closed Lost') {
+                    check.addError('ERROR: Cannot delete accounts that have not Closed');
+                }
+            }
+        }
+    }
+    
+    // handles when trying to create a new account in california and stops it
+    public static void CheckforCali(List<Account> newAccount) {
+        
+        for(Account check : newAccount){
+            if(check.ShippingState == 'CA'){
+                check.addError('ERROR: Cannot create an account in California');
+            }
+        }
+     }
+    
+    // new account checked if has a related contact should have a generic placeholder from accounts data
+    public static void CheckforRelatedContact(List<Account> accountToCheck) {
+        	Contact check = new Contact();
+        	
+        
+        for(Account acc : accountToCheck) {
+            check = [SELECT OwnerId FROM Contact WHERE OwnerId = :acc.OwnerId];
+                if(check == null){
+                    check = new Contact(OwnerId = acc.OwnerId);
+                    }
+        }
+        update check;
+       
+            }
+        
