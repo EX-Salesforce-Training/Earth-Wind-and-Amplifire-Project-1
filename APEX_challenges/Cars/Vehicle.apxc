@@ -1,0 +1,62 @@
+// Authoer: Zackary Frazier
+// Last Modified: 7/09/2021
+// Description:
+// 	defines a vehicle class as something
+// 	that can move, stop, and consist of multiple
+// 	vehicles. It can be of type Transport.AIR,
+// 	Transport.WATER, or Transport.LAND
+
+public abstract class Vehicle {
+
+	public enum Transport {AIR, WATER, LAND}
+
+	// @desc : double > 0 in miles per hour
+	protected Double speed {
+		set {
+			if(value >= 0) {
+				this.speed = value;
+			}
+		}
+		get;
+	}
+
+	// @desc : integer > 0
+	protected Integer numberOfVehicles {
+		set {
+			if(value >= 0) {
+				this.numberOfVehicles = value;
+			}
+		}
+		get;
+	}
+
+	// @desc : default constructor, assume no speed, one vehicle
+	public Vehicle() {
+		this(0, 1);
+	}
+
+	// @desc : single arg constructor, set speed and 1 vehicle
+	public Vehicle(Double speed) {
+		this(speed, 1);
+	}
+
+	// @desc : single arg constructor, set speed 0, numberOfVehicles
+	public Vehicle(Integer numberOfVehicles) {
+		this(0, numberOfVehicles);
+	}
+
+	// @desc : two-arg constructor, set speed and numberOfVehicles
+	public Vehicle(Double speed, Integer numberOfVehicles) {
+		this.speed = speed;
+		this.numberOfVehicles = numberOfVehicles;
+	}
+
+    // @desc : method to set the vehicle's speed
+	public abstract void move(Double speed);
+    
+    // @desc : method to stop the vehicle
+	public abstract void stop();
+    
+    // @desc : method for the vehicle to make some sort of sound
+	protected abstract void makeNoise();
+}

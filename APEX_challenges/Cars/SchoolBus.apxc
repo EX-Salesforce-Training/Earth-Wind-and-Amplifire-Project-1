@@ -1,0 +1,149 @@
+// Author: Zackary Frazier
+// Last Modified: 7/09/2021
+// Description:
+// 	defines a SchoolBus which which goes from
+// 	location to location
+
+
+public class SchoolBus extends Vehicle implements Bus {
+	
+    // ordered list of addresses the bus stops at
+	public List<String> routes {set; get;}
+    public static final Transport mode = Transport.LAND;
+    
+    // the index of routes that we are currently at
+    private Integer routeIndex {
+        get;
+        set {
+            if(value < routes.size()) {
+                routeIndex = value;
+            }
+        }
+    }
+    
+    protected String licensePlate;
+	
+	// @desc : sets the next stop for the bus, or null
+	//       : null means the bus is not headed anywhere it
+	//       : is scheduled to go, i.e. it's done for the day
+	private String nextStop {
+		set {
+			if(routes.contains(value)) {
+				nextStop = value;
+                routeIndex = routes.indexOf(value);
+            }
+		}
+		get;
+	}
+
+	/* constructors  */
+    
+    // @desc : create a schoolbus with no routes, one vehicle, no speed
+	public SchoolBus() {
+		this(new List<String>());
+	}
+	
+    // @desc : create a schoolbus with specific routes, one vehicle, no speed
+	public SchoolBus(List<String> routes) {
+        super();
+		this.routes = routes;
+	}
+	
+    // @desc : create a schoolbus with a set speed, list of routes, and numberOfVehicles
+	public SchoolBus(List<String> routes, Double speed, Integer numberOfVehicles) {
+        super(speed, numberOfVehicles);
+		this.routes = routes;
+	}
+
+	/* Interface functions */
+    
+    // @desc : return the location the bus is currently headed towards
+	public String getNextStop() {
+		return nextStop;
+	}
+
+    // @desc : set the next stop to a specific next 
+	public void setNextStop(String nextStop) {
+		this.nextStop = nextStop;
+	}
+    
+    // @desc : set the next logical stop, the stop at routeIndex + 1
+    public void setNextStop() {
+        if(routeIndex < routes.size() - 1) {
+        	this.nextStop = routes[routeIndex+1];
+        } else if(!routes.isEmpty()) {
+            this.nextStop = routes[0];
+        }
+    }
+	
+	// @desc : get all stops that have yet to be visited as a string    
+    public String getRemainingStops() {
+        String remainingStops = 'Remaining Stops: ';
+        for(Integer i = routeIndex; i < routes.size(); i++) {
+            remainingStops += routes[i];
+            
+            if(i + 1 < routes.size()) {
+                remainingStops += ', ';
+            }
+        }
+        return remainingStops;
+    }
+    
+    // @desc : retrieve the bus' license plate
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+	 
+    // @desc : update the bus' license plate
+    public void setLicensePlate(String plate) {
+        licensePlate = plate;
+    }
+    
+    // @desc : return a stringified version of our routes
+    //       : a stringified version is returned so it cannot
+    //       : be modified
+    public String getRoutes() {
+        String routes = 'Routes: ';
+        for(Integer i = 0; i < this.routes.size(); i++) {
+            routes += this.routes[i];
+            if(i + 1 < this.routes.size()) {
+                routes += ', ';
+            }
+        }
+        return routes;
+    }
+    
+    // @desc : add a single route to our bus route
+    public void setRoute(String route) {
+        routes.add(route);
+    }
+    
+    // @desc : add multiple routes at once
+    public void setRoutes(List<String> routes) {
+        this.routes.addAll(routes);
+    }
+
+	/* override superclass functions */
+    
+    // @desc : set the bus' speed
+	public override void move(Double speed) {
+		this.speed = speed;
+	}
+	
+    // @desc : set bus speed to 0
+    public override void stop() {
+        speed = 0;
+    }
+    
+    // @desc : make a noise
+    protected override void makeNoise() {
+        System.debug('Honk!');
+    }
+    
+    /* new methods */
+    
+    // @desc : honk the bus!
+    public void honk() {
+        makeNoise();
+    }
+}

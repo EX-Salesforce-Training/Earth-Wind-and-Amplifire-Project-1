@@ -1,0 +1,16 @@
+// Author: Zackary Frazier
+// Last Modified: 7/09/2021
+// Description:
+// 	defines an interface for a bus which has a list of
+// 	routes it travels.
+
+public interface Bus {
+	String getNextStop();
+    String getRemainingStops();
+	void setNextStop(String nextStop);
+    String getRoutes();
+    void setRoute(String route);
+    void setRoutes(List<String> routes);
+    String getLicensePlate();
+    void setLicensePlate(String plate);
+}

@@ -46,7 +46,7 @@ public class AccountCreator {
 			Contact newContact = new Contact();
 			newContact.FirstName = acc.Name;
 			newContact.LastName = acc.Name;
-			newContact.Phone = '(123) 456 - 7890';
+			newContact.Phone = '(123) 456-7890';
 			newContact.Email = 'noemail@fake.com';
             newContact.AccountId = acc.Id;
 			contactList.add(newContact);
