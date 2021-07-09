@@ -1,0 +1,50 @@
+/*
+////////////////////////////////////////////////////////////
+//		
+//		Name: Vehicle
+//		Author: Joe Wilkerson
+//		Date Created: 7/9/2021
+//		Description: Superclass of Vehicle to track number of vehicles,
+//		speed, and mode of transport. One interface that will have abstract
+//		methods and on subclass to inherit and extend and implement its
+//		own parts.
+//		
+///////////////////////////////////////////////////////////
+*/
+
+
+
+
+
+
+public virtual class Vehicle {
+    
+    public Integer amountVehicles = 8;
+    public String vehicleSpeed = 'Full Speed';
+    public String direction = 'north';
+    public String stopping;
+    public enum Transport {
+        AIR,
+        WATER,
+        LAND
+    }
+    
+    // method to determine movement
+    public void Movement(String speed, String direction) {
+       this.vehicleSpeed = speed;
+       this.direction = direction; 
+      }
+    
+    // method to determine how fast it stops
+    public void Stopped(String howFast) {
+        this.stopping = howFast;
+    }
+   	
+    // how big is the fleet
+    public void FleetChange(integer amount) {
+        this.amountVehicles = amount;
+    }
+    
+    
+    
+}

@@ -1,0 +1,65 @@
+public class ShippingFleet extends Vehicle implements Ship  {
+    
+    Transport current = Transport.Water;
+    String hornType = 'bullhorn';
+	String shipCargo = 'wheat';
+    String destination = 'Spain';
+    String fuel = 'full';
+    String cargoStatus = 'loaded';
+    integer crew = 550;
+    
+    // constructor with no arg
+    public ShippingFleet() {
+        this.amountVehicles = 8;
+       }
+    
+    // constructor with ships
+    public ShippingFleet(Integer ships) {
+        this.amountVehicles = ships;
+         }
+    
+    
+    // method to determine horn
+    public void Horn(String hornType){
+        this.hornType = hornType;
+    }
+    // cargo in ship
+    public void CargoInShip(String cargo){
+        this.shipCargo = cargo;
+    }
+    // the destination of ship
+    public void ShipDestination(String destination){
+        this.destination = destination;
+    }
+    // amount of crew members
+    public void CrewMembers(integer crew){
+        this.crew = crew;
+    }
+    // check the tank status
+    public void HowMuchFuel(String fuelStatus){
+        this.fuel = fuelStatus;
+    }
+    // check to see if loading or unloading
+    public void LoadingOrUnloading(String cargoOnShipStatus, String stopping){
+        this.cargoStatus = cargoOnShipStatus;
+        Stopped(stopping);
+    }
+    
+    // current status of ship
+    public void SetCourse(String speed, String direction){
+        Movement(speed, direction);
+     }
+    
+    // to change status of ship
+    public void ChangeStatus(String speed, String direction, Integer amount) {
+        super.Movement(speed, direction);
+        super.FleetChange(amount);
+    }
+    
+    // show the status of the ship
+    public void CurrentStatus(){
+        System.debug('The status of the fleet: Transport Type: '+current+' HornType: '+hornType+' Ship Cargo: '+shipCargo+' Ship Destination: '+destination+' Fuel Status: '+fuel+
+                    ' Cargo Status: '+cargoStatus+' Amount of Crew: '+crew+' Amount of Ships in Fleet: '+amountVehicles+' Current Speed: '+vehicleSpeed+' Current Direction: '+direction);
+    }
+     
+}

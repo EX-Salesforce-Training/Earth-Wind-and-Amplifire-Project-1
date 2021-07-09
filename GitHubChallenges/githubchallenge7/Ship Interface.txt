@@ -1,0 +1,16 @@
+public interface Ship {
+    
+    // method to determine horn
+    void Horn(String hornType);
+    // cargo in ship
+    void CargoInShip(String cargo);
+    // the destination of ship
+    void ShipDestination(String destination);
+    // amount of crew members
+   	void CrewMembers(Integer crew);
+    // check the tank status
+    void HowMuchFuel(String fuelStatus);
+    // check to see if loading or unloading
+    void LoadingOrUnloading(String cargoOnShipStatus, String stopping);
+
+}
