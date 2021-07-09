@@ -1,0 +1,71 @@
+public class AccountTriggerHandler {
+    
+	// @desc: helper function, gets a list of all account ids from a list of accounts
+    private static Set<String> getAccountIds(List<Account> accounts) {
+        Set<String> accountIds = new Set<String>();
+        for(Account acc: accounts) {
+        	accountIds.add(acc.id);    
+        }
+        return accountIds;
+    }
+
+	// @desc: helper function, given list of contacts, determine if at least one of them 
+	// 		: corresponding to the given account
+    private static Boolean hasContact(List<Contact> contacts, Account acc) {
+        for(Contact con: contacts) {
+            if(acc.Id == con.accountId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+	// @desc: helper function, add errors to the accounts whose ids match the id passed in
+	private static void addErrorsToAccounts(List<Account> accounts, String id, String message) {
+		for(Account acc : accounts) {
+			if(acc.id == id) {
+				acc.addError(message);
+			}
+		}
+	}
+    
+    // @desc : disallow the deletion of accounts with active opportunities
+    public static void handleDelete(List<Account> accountsToDelete) {
+        
+        Set<String> accountIds = getAccountIds(accountsToDelete);
+        List<Opportunity> oppList = [SELECT StageName, AccountId FROM Opportunity WHERE AccountId IN :accountIds];
+        
+		// if any opportunities are not closed, add an error to their corresponding account(s)
+        for(Opportunity opp: oppList) {
+            if(opp.StageName != 'Closed Won' && opp.StageName != 'Closed Lost') {
+				addErrorsToAccounts(accountsToDelete, opp.accountId, 'This account has an active opportunity.');
+            }
+        }
+    }
+    
+    // @desc : ensure that the account is not being started in California
+    public static void handleInsert(List<Account> accountsToAdd) {
+        for(Account acc: accountsToAdd) {
+            if(acc.BillingState == 'CA') {
+                acc.addError('We are no longer accepting new accounts whose location is in California.');
+            }
+        }
+    }
+    
+    // @desc : ensure that every new account has a new contact created for it
+    public static void handleAfterInsert(List<Account> accountsAdded) {
+        Set<String> accountIds = getAccountIds(accountsAdded);
+        List<Contact> contactList = [SELECT Name FROM Contact WHERE accountId IN :accountIds];
+        List<Contact> contactsToAdd = new List<Contact>();
+        
+        for(Account acc: accountsAdded) {
+            if(!hasContact(contactList, acc)) {
+                Contact dummyContact = new Contact();
+                dummyContact.AccountId = acc.Id;
+                dummyContact.LastName = 'Fill Me In';
+                contactsToAdd.add(dummyContact);
+            }
+        }
+        insert contactsToAdd;
+    }
+}
