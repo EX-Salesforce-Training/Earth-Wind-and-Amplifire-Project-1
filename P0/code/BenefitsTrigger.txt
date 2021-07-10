@@ -1,0 +1,38 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+//		Name: BenefitsTrigger
+//		Author: Joe Wilkerson
+//		Date Created: 7/9/2021
+//		Description: Trigger to handle when a user wants to delete a record added by the owner.
+//		Linked with BenefitsTriggerHandler to deal with the logic.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+trigger BenefitsTrigger on Benefit__c (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
+    // We check the context of the trigger, and then route it to the appropriate handler methods.
+    Switch on Trigger.OperationType {
+        when BEFORE_INSERT {
+            
+        } 
+        when BEFORE_UPDATE {
+            
+        }
+        when BEFORE_DELETE {
+            BenefitsTriggerHandler.CheckforOwner(trigger.old);
+        }
+        when AFTER_INSERT {
+            
+        }
+        when AFTER_UPDATE {
+            
+        }
+        when AFTER_DELETE {
+            
+        }
+        when AFTER_UNDELETE {
+            
+        } when else {
+            
+        }
+        
+    }
+}
