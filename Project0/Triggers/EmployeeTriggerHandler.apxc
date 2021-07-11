@@ -1,0 +1,30 @@
+// @author: Zackary Frazier
+// @last modified: 7/10/2021
+// @description:
+// 	This trigger handler verifies data for employee records
+
+public class EmployeeTriggerHandler {
+    
+    // @desc : create a map of record type info for employees
+    private static Map<ID, Schema.RecordTypeInfo> rtMap = Schema.SObjectType.Employee__c.getRecordTypeInfosById();
+    
+    // @desc : return the record type of an employee
+    private static String getRecordType(Employee__c e) {
+        String RecordType = rtMap.get(e.RecordTypeId).getName();
+        return RecordType;
+    }
+    
+    // @desc : this function ensures an employee has the appropriate
+    //       : income field set, and that no employees are created with
+    //       : no income. Which field depends on the employee record type.
+    public static void ensureEmployeeWage(List<Employee__c> newEmployees) {
+        for(Employee__c e: newEmployees) {
+            String RecordType = getRecordType(e);
+            if(e.salary__c == null && RecordType == 'Salaried Employee') {
+                e.addError('Must specify a salary for this employee.');
+            } else if(e.Hourly_Rate__c == null && RecordType == 'Hourly Employee') {
+                e.addError('Must specify a wage for this employee.');
+            }
+        }
+    }
+}

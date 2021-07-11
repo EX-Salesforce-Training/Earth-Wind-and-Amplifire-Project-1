@@ -1,0 +1,8 @@
+// @author: Zackary Frazier
+// @last modified: 7/10/2021
+// @description:
+// 	This trigger handles events on the employee object
+
+trigger EmployeeTrigger on Employee__c (before insert) {
+	EmployeeTriggerHandler.ensureEmployeeWage(Trigger.new);
+}
