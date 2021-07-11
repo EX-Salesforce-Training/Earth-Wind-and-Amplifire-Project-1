@@ -1,0 +1,27 @@
+// @author : Zackary Frazier
+// @last modified: 7/10/2021
+// @description:
+// 	collection of various utilities
+
+public class Util {
+	
+    public class StringUtil {
+        public List<List<String>> chunkify(String str, Integer size) {
+            List<String> charList = str.split('');
+            List<List<String>> ChunkifiedString = new List<List<String>>();
+            
+            Integer k = 0;
+            for(Integer i = 0; i < charList.size(); i += size) {
+                chunkifiedString.add(new List<String>());
+                for(Integer j = 0; j < size; j++) {
+                    if(i + j < charList.size()) {
+                		chunkifiedString[k].add(charList[i + j]);
+                    }
+                }
+                k++;
+            }
+            
+            return chunkifiedString;
+        }
+    }
+}

@@ -8,6 +8,10 @@ public class EmployeeTriggerHandler {
     // @desc : create a map of record type info for employees
     private static Map<ID, Schema.RecordTypeInfo> rtMap = Schema.SObjectType.Employee__c.getRecordTypeInfosById();
     
+    // @desc : these variables show federal minimum wages
+    private static final Double federalMinimumWage = 7.25;
+    private static final Double federalMinimumSalary = federalMinimumWage * 40 * 52;
+    
     // @desc : return the record type of an employee
     private static String getRecordType(Employee__c e) {
         String RecordType = rtMap.get(e.RecordTypeId).getName();
@@ -20,10 +24,22 @@ public class EmployeeTriggerHandler {
     public static void ensureEmployeeWage(List<Employee__c> newEmployees) {
         for(Employee__c e: newEmployees) {
             String RecordType = getRecordType(e);
-            if(e.salary__c == null && RecordType == 'Salaried Employee') {
-                e.addError('Must specify a salary for this employee.');
-            } else if(e.Hourly_Rate__c == null && RecordType == 'Hourly Employee') {
-                e.addError('Must specify a wage for this employee.');
+            switch on RecordType {
+                when 'Salaried Employee' {
+                    if(e.Salary__c == null) {
+                		e.addError('Must specify a salary for this employee.');
+                	} else if(e.Salary__c < federalMinimumSalary) {
+                    	e.addError('Employee\'s salary must be above federal minimum wage ($' + federalMinimumSalary.format() + ').');
+                	}
+                }
+                
+                when 'Hourly Employee' {
+                    if(e.Hourly_Rate__c == null) {
+                		e.addError('Must specify an hourly rate for this employee.');
+                	} else if(e.Hourly_Rate__c < federalMinimumWage) {
+                    	e.addError('Employee\'s hourly rate must be above federal minimum wage ($' + federalMinimumWage.format() + ').');
+                	}
+                }
             }
         }
     }
