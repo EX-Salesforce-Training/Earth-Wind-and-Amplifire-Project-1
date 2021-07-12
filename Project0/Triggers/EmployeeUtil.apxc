@@ -1,0 +1,18 @@
+// @author: Zackary Frazier
+// @last modified: 7/11/2021
+// @description:
+// 	This is a utility class for handling employee records
+
+
+public class EmployeeUtil {
+	// @desc : create a map of record type info for employees
+    private static Map<ID, Schema.RecordTypeInfo> rtMap = Schema.SObjectType.Employee__c.getRecordTypeInfosById();
+    
+    // @desc : return the record type of an employee
+	//       : this is for before insert triggers where
+	//		 : the record type cannot be easily grabbed
+    public static String getRecordType(Employee__c e) {
+        String RecordType = rtMap.get(e.RecordTypeId).getName();
+        return RecordType;
+    }
+}

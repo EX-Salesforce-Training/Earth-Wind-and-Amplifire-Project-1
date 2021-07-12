@@ -1,29 +1,20 @@
 // @author: Zackary Frazier
-// @last modified: 7/10/2021
+// @last modified: 7/11/2021
 // @description:
 // 	This trigger handler verifies data for employee records
 
 public class EmployeeTriggerHandler {
     
-    // @desc : create a map of record type info for employees
-    private static Map<ID, Schema.RecordTypeInfo> rtMap = Schema.SObjectType.Employee__c.getRecordTypeInfosById();
-    
     // @desc : these variables show federal minimum wages
     private static final Double federalMinimumWage = 7.25;
     private static final Double federalMinimumSalary = federalMinimumWage * 40 * 52;
-    
-    // @desc : return the record type of an employee
-    private static String getRecordType(Employee__c e) {
-        String RecordType = rtMap.get(e.RecordTypeId).getName();
-        return RecordType;
-    }
     
     // @desc : this function ensures an employee has the appropriate
     //       : income field set, and that no employees are created with
     //       : no income. Which field depends on the employee record type.
     public static void ensureEmployeeWage(List<Employee__c> newEmployees) {
         for(Employee__c e: newEmployees) {
-            String RecordType = getRecordType(e);
+            String RecordType = EmployeeUtil.getRecordType(e);
             switch on RecordType {
                 when 'Salaried Employee' {
                     if(e.Salary__c == null) {
@@ -43,4 +34,3 @@ public class EmployeeTriggerHandler {
             }
         }
     }
-}
