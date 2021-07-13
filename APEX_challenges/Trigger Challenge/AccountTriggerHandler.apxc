@@ -20,7 +20,7 @@ public class AccountTriggerHandler {
         return false;
     }
 
-	// @desc: helper function, add errors to the accounts whose ids match the id passed in
+	// @desc: helper function, add errors to the account whose ids match the id passed in
 	private static void addErrorsToAccounts(List<Account> accounts, String id, String message) {
 		for(Account acc : accounts) {
 			if(acc.id == id) {

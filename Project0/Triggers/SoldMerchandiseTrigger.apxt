@@ -1,0 +1,25 @@
+// @author: Zackary Frazier
+// @last modified: 7/12/2021
+// @desc:
+//    the trigger for sold merchandise, redirects business logic to the handler
+
+trigger SoldMerchandiseTrigger on Sold_Merchandise__c (before insert, after insert, before update, after update) {
+    switch on Trigger.OperationType {
+        when BEFORE_INSERT {
+            SoldMerchandiseTriggerHandler.ensureQuantityBeforeSale(Trigger.new);
+			SoldMerchandiseTriggerHandler.setUnitPrice(Trigger.new);
+        }
+        
+        when BEFORE_UPDATE {
+            SoldMerchandiseTriggerHandler.ensureQuantityBeforeUpdate(Trigger.new, Trigger.old);
+        }
+        
+        when AFTER_UPDATE {
+            SoldMerchandiseTriggerHandler.updateInventoryAfterUpdate(Trigger.new, Trigger.old);
+        }
+        
+        when AFTER_INSERT {
+            SoldMerchandiseTriggerHandler.updateInventoryAfterSale(Trigger.new);
+        }
+    }
+}
