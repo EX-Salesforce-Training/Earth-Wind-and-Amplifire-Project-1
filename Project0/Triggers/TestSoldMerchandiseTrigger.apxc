@@ -63,23 +63,66 @@ public class TestSoldMerchandiseTrigger {
         utility.destroyTestData();
     }
     
-    // @desc : test that the database cannot be updated after a sale
+    // @desc : test that the unit price cannot be updated after a sale
     @isTest
     static void testEnsureQuantityBeforeUpdate() {
         TestSoldMerchandiseTriggerUtil utility = new TestSoldMerchandiseTriggerUtil();
         
         Database.SaveResult srAdd = utility.addSoldMerch(5);
         System.assert(srAdd.isSuccess());
-        Sold_Merchandise__c merch = [SELECT Unit_Price__c FROM Sold_Merchandise__c WHERE Id = :srAdd.id][0];
-        merch.Unit_Price__c = 10;
-        Database.SaveResult srUpdate = Database.update(merch, false);
-        System.assert(!srUpdate.isSuccess());
+        List<Sold_Merchandise__c> merchList = [SELECT Unit_Price__c FROM Sold_Merchandise__c WHERE Id = :srAdd.id];
+        
+        for(Sold_Merchandise__c merch: merchList) {
+            merch.Unit_Price__c++;
+        }
+        
+        List<Database.SaveResult> srUpdateList = Database.update(merchList, false);
+        for(Database.SaveResult sr: srUpdateList) {
+            System.assert(!sr.isSuccess());
+        }
 
         utility.destroyTestData();
     }
     
     @isTest
-    static void testUpdateInventoryAfterUpdate() {
+    static void testUpdateInventoryAfterUpdateShouldFail() {
+        TestSoldMerchandiseTriggerUtil utility = new TestSoldMerchandiseTriggerUtil();
+        Database.SaveResult srAdd = utility.addSoldMerch(5);
         
+        System.assert(srAdd.isSuccess());
+        List<Sold_Merchandise__c> merchList = [SELECT Quantity__c FROM Sold_Merchandise__c WHERE Id = :srAdd.id];
+        for(Sold_Merchandise__c merch: merchList) {
+            merch.Quantity__c++;
+        }
+        
+        List<Database.SaveResult> srList = Database.update(merchList, false);
+        for(Database.SaveResult sr: srList) {
+            System.assert(!sr.isSuccess());
+        }
+        
+        utility.destroyTestData();
+    }
+    
+    @isTest
+    static void testupdateInventoryAfterUpdateShouldWork() {
+        TestSoldMerchandiseTriggerUtil utility = new TestSoldMerchandiseTriggerUtil();
+        Database.SaveResult srAdd = utility.addSoldMerch(5);
+        
+        System.assert(srAdd.isSuccess());
+        List<Sold_Merchandise__c> merchList = [SELECT Quantity__c, 
+                                               Inventory_Item__r.Quantity__c 
+                                               FROM Sold_Merchandise__c 
+                                               WHERE Id = :srAdd.id];
+        for(Sold_Merchandise__c merch: merchList) {
+            merch.Quantity__c--;
+        }
+        
+        List<Database.SaveResult> srList = Database.update(merchList, false);
+        for(Database.SaveResult sr: srList) {
+            System.assert(sr.isSuccess());
+        }
+        
+        
+        utility.destroyTestData();
     }
 }
