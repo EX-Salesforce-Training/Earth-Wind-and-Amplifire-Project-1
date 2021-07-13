@@ -1,0 +1,14 @@
+public class BenefitsTriggerHandler {
+
+    
+    // check if what is getting deleted was created by system admin
+    // then alert the user
+    public static void CheckforOwner(List<Benefit__c> deleteListCheck){
+        
+         for(Benefit__c check : deleteListCheck){
+            if (check.OwnerId == 'Joseph Wilkerson' ) {
+                check.addError('ERROR: Do not delete records created by Admin');
+            }
+        }
+    }
+}

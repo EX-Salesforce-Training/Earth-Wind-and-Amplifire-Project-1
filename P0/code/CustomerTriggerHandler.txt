@@ -1,0 +1,26 @@
+public class CustomerTriggerHandler {
+    
+    // check if customer added an email
+    // if not add a default one
+    public static void CheckforEmail(List<Customer__c> customertoCheck){
+        for( Customer__c c: customertoCheck){
+            if(c.Customer_Email__c == null){
+             	c.Customer_Email__c = 'default@.com';
+                
+            }
+        }
+    }
+    
+    // check if customer added an order
+    // if not alert them to it
+    public static void CheckforOrder(List<Customer__c> orderToCheck){
+        
+        for(Customer__c check : orderToCheck) {
+            if(check.Food_Order__c == null){
+                check.addError('ERROR: You did not place an order.');
+            }
+        }
+        
+    }
+
+}
