@@ -1,0 +1,84 @@
+// @Author : Zackary Frazier
+// @last modified: 7/13/2021
+// @desc:
+//    A utility for creating test data to test the sold merchandise trigger
+
+public class TestSoldMerchandiseTriggerUtil {
+    
+    public final ID retailerId;
+    public final ID itemId;
+    public final ID transactionId;
+    public List<ID> merchIdList;
+    
+    public final Double defaultUnitPrice = 5;
+    public final Double defaultQuantity = 10;
+    
+    // @desc : in the constructor set up a dummy item and a dummy retailer
+    public TestSoldMerchandiseTriggerUtil() {
+        retailerId = setupRetailer();
+        itemId = setupItem();
+        transactionId = setupTransaction();
+        merchIdList = new List<ID>();
+    }
+    
+    // @desc : cleanup function
+    public void destroyTestData() {
+        List<Sold_Merchandise__c> merchList = [SELECT Id From Sold_Merchandise__c WHERE Id IN :merchIdList];
+        delete merchList;
+        
+        List<Transaction__c> transList = [SELECT Id FROM Transaction__c WHERE Id = :transactionId];
+        delete transList;
+        
+        List<Inventory_Item__c> itemList = [SELECT Id FROM Inventory_Item__c WHERE Id = :itemId];
+        delete itemList;
+        
+        List<Retailer__c> retailerList = [SELECT Id FROM Retailer__c WHERE Id = :retailerId];
+        delete retailerList;
+    }
+    
+    // @desc : create a new retailer for testing
+    public ID setupRetailer() {
+        Retailer__c retail = new Retailer__C();
+        retail.Name = 'Test Retailer';
+        retail.Phone_Number__c = '(555) 555-5555';
+        retail.Address__c = Math.random() + ' test lane';
+        retail.Email_Address__c = Math.random() + '123@test.com';
+        insert retail;
+        return retail.id;
+    }
+    
+    // @test : create a new item for testing purposes
+    private ID setupItem() {
+        Inventory_Item__c item = new Inventory_Item__c();
+        item.Delivery_Date__c = System.today();
+        item.Name = 'Test Item';
+        item.Quantity__c = this.defaultQuantity;
+        item.Price__c = this.defaultUnitPrice;
+        item.Retailer__c = retailerId;
+        insert item;
+        return item.id;
+    }
+    
+    // @desc : set up dummy transaction
+    private ID setupTransaction() {
+        Transaction__c trans = new Transaction__c();
+        trans.Customer_Name__c = 'Bob Bobbertson';
+        trans.Retailer__c = retailerId;
+        trans.Purchase_Date__c = System.today();
+        insert trans;
+        return trans.id;
+    }
+    
+    // @desc : add a new piece of sold merchandise to the test data
+    public Database.SaveResult addSoldMerch(Double quantity) {
+        Sold_Merchandise__c merch = new Sold_Merchandise__c();
+        merch.Quantity__c = quantity;
+        merch.Inventory_Item__c = itemId;
+        merch.Transaction__c = transactionId;
+       	Database.SaveResult sr = Database.insert(merch, false);
+        if(sr.isSuccess()) {
+        	merchIdList.add(sr.id);
+        }
+        return sr;
+    }
+}
