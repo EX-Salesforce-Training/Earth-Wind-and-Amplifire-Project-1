@@ -1,0 +1,82 @@
+@isTest
+public class TestContactTrigger {
+    private static Integer maximum = 3;
+    
+    
+	@TestSetup
+    public static void setup() {
+        List<Account> accList = new List<Account>();
+        List<String> sites = new List<String> { 'www.naruto.com', 'www.facebook.com', 'www.google.com'};
+        
+        for(Integer i = 0; i < maximum; i++) {
+            Account acc = new Account();
+            acc.Name = Math.random() + ' WOO!';
+            if(Math.mod(i, 3) == 0) {
+                acc.Site = sites[0];
+            } else if(Math.mod(i, 3) == 1) {
+                acc.Site = sites[1];
+            } else {
+                acc.Site = sites[2];
+            }
+            accList.add(acc);
+        }
+        
+        insert accList;
+    }
+    
+    @isTest
+    static void createCon() {
+        Contact c = new Contact();
+        c.Email = 'swiggitySwag@naruto.com';
+        c.LastName = 'swag';
+        insert c;
+        
+        Account acc = [SELECT Id FROM Account WHERE Site = 'www.naruto.com' ][0];
+        Contact con = [SELECT AccountId FROM Contact WHERE Email='swiggitySwag@naruto.com'][0];
+        System.assertEquals(acc.id, con.accountId);
+    }
+    
+    @isTest
+    static void failToConnectToAccount() {
+        Contact c = new Contact();
+        c.Email = 'swiggitySwag@fake.com';
+        c.LastName = 'swag';
+        insert c;
+        
+        Account acc = [SELECT Id, (SELECT AccountId FROM Contacts) FROM Account WHERE Site = 'www.naruto.com' ][0];
+        System.assert(acc.Contacts.isEmpty());
+    }
+    
+    @isTest
+    static void testBulk() {
+        List<Contact> conList = new List<Contact>();
+        for(Integer i = 0; i < 3; i++) {
+            Contact c = new Contact();
+            if(i == 0) {
+                c.Email = 'swiggitySwag@naruto.com';
+            } else if(i == 1) {
+                c.Email = 'swiggitySwag@facebook.com';  
+            } else {
+                c.Email = 'swiggitySwag@google.com';
+            }
+            c.LastName = 'swag' + Math.random();
+            conList.add(c);
+        }
+        insert conList;
+        
+        List<Account> accList = 
+            [SELECT Id, 
+             (SELECT AccountId FROM Contacts) 
+             FROM Account 
+             WHERE Id IN 
+             (SELECT AccountId FROM Contact)];
+       
+        for(Account acc: accList) {
+            for(Contact con: acc.Contacts) {
+            	System.assertNotEquals(con.accountId, null);
+            	System.assertEquals(con.AccountId, acc.Id);
+            }
+        }
+    }
+    
+}

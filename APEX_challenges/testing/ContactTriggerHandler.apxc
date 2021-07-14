@@ -1,0 +1,21 @@
+public class ContactTriggerHandler {
+    private static String formatSiteFromEmail(String email) {
+        return 'www.' + email.split('@')[1];
+    }
+    
+    public static void connectAccountToContact(List<Contact> newContacts) {
+        Set<String> conSites = new Set<String>();
+        for(Contact con: newContacts) {
+            conSites.add(formatSiteFromEmail(con.Email));
+        }
+        List<Account> accList = [SELECT Site FROM Account WHERE Site IN :conSites];
+        
+        for(Contact con: newContacts) {
+            for(Account acc: accList) {
+                if(con.AccountId == null && formatSiteFromEmail(con.Email) == acc.Site) {
+                    con.accountId = acc.id;
+                }
+            }
+        }
+    }
+}
