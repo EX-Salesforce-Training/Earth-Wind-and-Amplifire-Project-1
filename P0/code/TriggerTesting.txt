@@ -1,0 +1,78 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+//		Name: TriggerTesting
+//		Author: Joe Wilkerson
+//		Date Created: 7/917021
+//		Description: Test class for Benefits trigger and customer trigger.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+@isTest
+public class TriggerTesting {
+
+    @isTest
+    static void TestBenefitsTrigger() {
+        
+        //create object to test
+        Benefit__c newOne = new Benefit__c();
+        newOne.Name = 'Joe';
+        
+        
+        
+        
+        // insert then delete
+        // then check if the trigger fired
+        insert newOne;
+        
+        Test.startTest();
+        Database.DeleteResult result = Database.delete(newOne, false);
+        Test.stopTest();
+        
+       System.assert(True, result.isSuccess()); 
+        System.assert(result.getErrors().size() > 0);
+       System.assertEquals('ERROR: Do not delete records created by Admin',
+                             result.getErrors()[0].getMessage());
+        
+    }
+    
+    @isTest
+    static void TestCustomerEmailTrigger() {
+        
+        //create object to test
+        Food_Order__c orderTest = new Food_Order__C();
+        orderTest.Name = 'Test';
+        insert orderTest;
+        Customer__c newEmail = new Customer__c();
+        newEmail.Customer_Email__c = '';
+        newEmail.Food_Order_Lookup__c = orderTest.id;
+        
+        
+        // insert 
+        // then check if the trigger fired
+        Test.startTest();
+        Database.SaveResult result = Database.insert(newEmail);
+        Test.stopTest();
+        
+       System.assert(result.isSuccess()); 
+    }
+    
+    @isTest
+    static void TestCustomerOrderTrigger() {
+        
+        //create object to test
+        Food_Order__c orderTest2 = new Food_Order__C();
+        orderTest2.Name = 'Test';
+        insert orderTest2;
+        Customer__c newFood = new Customer__c();
+        newFood.Food_Order_Lookup__c = orderTest2.id;
+        
+        // insert
+        // then check if the trigger fired
+        Test.startTest();
+        Database.SaveResult result = Database.insert(newFood);
+        Test.stopTest();
+        
+       System.assert(result.isSuccess()); 
+        System.assertEquals('default@.com', newFood.Customer_Email__c);
+    }
+}
