@@ -1,23 +1,15 @@
 @isTest
 public class TestContactTrigger {
-    private static Integer maximum = 3;
-    
     
 	@TestSetup
     public static void setup() {
         List<Account> accList = new List<Account>();
         List<String> sites = new List<String> { 'www.naruto.com', 'www.facebook.com', 'www.google.com'};
         
-        for(Integer i = 0; i < maximum; i++) {
+        for(String site: sites) {
             Account acc = new Account();
             acc.Name = Math.random() + ' WOO!';
-            if(Math.mod(i, 3) == 0) {
-                acc.Site = sites[0];
-            } else if(Math.mod(i, 3) == 1) {
-                acc.Site = sites[1];
-            } else {
-                acc.Site = sites[2];
-            }
+            acc.Site = site;
             accList.add(acc);
         }
         
@@ -43,22 +35,20 @@ public class TestContactTrigger {
         c.LastName = 'swag';
         insert c;
         
-        Account acc = [SELECT Id, (SELECT AccountId FROM Contacts) FROM Account WHERE Site = 'www.naruto.com' ][0];
-        System.assert(acc.Contacts.isEmpty());
+        Account accList = [SELECT Id, (SELECT AccountId FROM Contacts) FROM Account];
+        for(Account acc: accList) {
+            System.assert(acc.Contacts.isEmpty());
+        }
     }
     
     @isTest
     static void testBulk() {
         List<Contact> conList = new List<Contact>();
-        for(Integer i = 0; i < 3; i++) {
+
+        List<String> domains = new List<String>{ 'naruto.com', 'facebook.com', 'google.com'};
+        for(String domain: domains) {
             Contact c = new Contact();
-            if(i == 0) {
-                c.Email = 'swiggitySwag@naruto.com';
-            } else if(i == 1) {
-                c.Email = 'swiggitySwag@facebook.com';  
-            } else {
-                c.Email = 'swiggitySwag@google.com';
-            }
+            c.Email = 'swiggitySwag@' + domain;
             c.LastName = 'swag' + Math.random();
             conList.add(c);
         }
@@ -78,5 +68,4 @@ public class TestContactTrigger {
             }
         }
     }
-    
 }

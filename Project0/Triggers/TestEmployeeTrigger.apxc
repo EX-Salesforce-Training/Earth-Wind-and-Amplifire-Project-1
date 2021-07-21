@@ -1,0 +1,172 @@
+// @author: Zackary Frazier
+// @last modified: 7/20/2021
+// @desc : 
+//    test class for the employee trigger handler
+
+
+@isTest
+public class TestEmployeeTriggerHandler {
+    
+    @testSetup
+    public static void setup() {
+        Retailer__c retailer = new Retailer__c();
+        retailer.Name = 'MyPillow!';
+        retailer.Phone_Number__c = '(555) 555 - 5555';
+        retailer.Email_Address__c = 'pillows@pillows.com';
+        retailer.Address__c = 'Pillow street';
+        
+        insert retailer;
+        DateTime d = System.now();
+        
+        Employee__c hourlyEmp = new Employee__c();
+        hourlyEmp.RecordTypeId = EmployeeUtil.getRecordId('Hourly Employee');
+        hourlyEmp.Retailer__c = retailer.id;
+        hourlyEmp.Social_Security_Number__c = '123456789';
+        hourlyEmp.First_Name__C = 'Bob';
+        hourlyEmp.Last_Name__c = 'Bobbertson';
+        hourlyEmp.Start_Date__c = date.newinstance(d.year(), d.month(), d.day());
+        hourlyEmp.Hourly_Rate__c = 7.25;
+        
+        insert hourlyEmp;
+        
+        Employee__c salariedEmp = new Employee__c();
+        salariedEmp.RecordTypeId = EmployeeUtil.getRecordId('Salaried Employee');
+        salariedEmp.Retailer__c = retailer.id;
+        salariedEmp.Social_Security_Number__c = '123456789';
+        salariedEmp.First_Name__C = 'Rob';
+        salariedEmp.Last_Name__c = 'Robbertson';
+        salariedEmp.Start_Date__c = date.newinstance(d.year(), d.month(), d.day());
+        salariedEmp.Salary__c = 30000;
+        
+        insert salariedEmp;
+    }
+    
+    @isTest
+    static void testUpdateHourlyFail() {
+        Employee__c emp = [SELECT Hourly_Rate__c FROM Employee__C WHERE Last_Name__c = 'Bobbertson'][0];
+        emp.Hourly_Rate__c = 5.55;
+        Database.SaveResult sr = Database.update(emp, false);
+        System.assert(!sr.isSuccess());
+    }
+    
+    @isTest
+    static void testUpdateHourlyFailNoSalary() {
+        Employee__c emp = [SELECT Hourly_Rate__c FROM Employee__C WHERE Last_Name__c = 'Bobbertson'][0];
+        emp.Hourly_Rate__c = null;
+        Database.SaveResult sr = Database.update(emp, false);
+        System.assert(!sr.isSuccess());
+    }
+    
+    @isTest
+    static void testUpdateHourlySuccess() {
+        Employee__c emp = [SELECT Hourly_Rate__c FROM Employee__C WHERE Last_Name__c = 'Bobbertson'][0];
+        emp.Hourly_Rate__c = 30.00;
+        Database.SaveResult sr = Database.update(emp, false);
+        System.assert(sr.isSuccess());
+    }
+    
+    
+    @isTest
+    static void testUpdateSalariedFail() {
+        Employee__c emp = [SELECT Hourly_Rate__c FROM Employee__C WHERE Last_Name__c = 'Robbertson'][0];
+        emp.Salary__c = 5.55;
+        Database.SaveResult sr = Database.update(emp, false);
+        System.assert(!sr.isSuccess());
+    }
+    
+        @isTest
+    static void testUpdateSalariedFailNoSalary() {
+        Employee__c emp = [SELECT Hourly_Rate__c FROM Employee__C WHERE Last_Name__c = 'Robbertson'][0];
+        emp.Salary__c = null;
+        Database.SaveResult sr = Database.update(emp, false);
+        System.assert(!sr.isSuccess());
+    }
+    
+    @isTest
+    static void testUpdateSalariedSuccess() {
+        Employee__c emp = [SELECT Hourly_Rate__c FROM Employee__C WHERE Last_Name__c = 'Robbertson'][0];
+        emp.Salary__c = 100000;
+        Database.SaveResult sr = Database.update(emp, false);
+        System.assert(sr.isSuccess());
+    }
+    
+    @isTest 
+    static void testInsertFail() {
+        Retailer__c retailer = [SELECT Id FROM Retailer__c][0];
+        Employee__c emp = new Employee__c();
+        emp.RecordTypeId = EmployeeUtil.getRecordId('Hourly Employee');
+        emp.Retailer__c = retailer.id;
+        emp.Social_Security_Number__c = '123456789';
+        emp.First_Name__C = 'Bob';
+        emp.Last_Name__c = 'Bobbertson';
+        DateTime d = System.now();
+        emp.Start_Date__c = date.newinstance(d.year(), d.month(), d.day());
+        emp.Hourly_Rate__c = 5.55;
+        Database.SaveResult sr = Database.insert(emp, false);
+        System.assert(!sr.isSuccess());
+    }
+    
+    @isTest 
+    static void testInsertSalariedFail() {
+        Retailer__c retailer = [SELECT Id FROM Retailer__c][0];
+        Employee__c emp = new Employee__c();
+        emp.RecordTypeId = EmployeeUtil.getRecordId('Salaried Employee');
+        emp.Retailer__c = retailer.id;
+        emp.Social_Security_Number__c = '123456789';
+        emp.First_Name__C = 'Bob';
+        emp.Last_Name__c = 'Bobbertson';
+        DateTime d = System.now();
+        emp.Start_Date__c = date.newinstance(d.year(), d.month(), d.day());
+        emp.Salary__c = 5.55;
+        Database.SaveResult sr = Database.insert(emp, false);
+        System.assert(!sr.isSuccess());
+    }
+    
+    @isTest 
+    static void testInsertSalariedFailNoSalary() {
+        Retailer__c retailer = [SELECT Id FROM Retailer__c][0];
+        Employee__c emp = new Employee__c();
+        emp.RecordTypeId = EmployeeUtil.getRecordId('Salaried Employee');
+        emp.Retailer__c = retailer.id;
+        emp.Social_Security_Number__c = '123456789';
+        emp.First_Name__C = 'Bob';
+        emp.Last_Name__c = 'Bobbertson';
+        DateTime d = System.now();
+        emp.Start_Date__c = date.newinstance(d.year(), d.month(), d.day());
+        emp.Salary__c = null;
+        Database.SaveResult sr = Database.insert(emp, false);
+        System.assert(!sr.isSuccess());
+    }
+    
+    @isTest 
+    static void testInsertSuccess() {
+        Retailer__c retailer = [SELECT Id FROM Retailer__c][0];
+        Employee__c emp = new Employee__c();
+        emp.RecordTypeId = EmployeeUtil.getRecordId('Hourly Employee');
+        emp.Retailer__c = retailer.id;
+        emp.Social_Security_Number__c = '123456789';
+        emp.First_Name__C = 'Bob';
+        emp.Last_Name__c = 'Bobbertson';
+        DateTime d = System.now();
+        emp.Start_Date__c = date.newinstance(d.year(), d.month(), d.day());
+        emp.Hourly_Rate__c = 10.00;
+        Database.SaveResult sr = Database.insert(emp, false);
+        System.assert(sr.isSuccess());
+    }
+    
+    @isTest 
+    static void testInsertSalariedSuccess() {
+        Retailer__c retailer = [SELECT Id FROM Retailer__c][0];
+        Employee__c emp = new Employee__c();
+        emp.RecordTypeId = EmployeeUtil.getRecordId('Salaried Employee');
+        emp.Retailer__c = retailer.id;
+        emp.Social_Security_Number__c = '123456789';
+        emp.First_Name__C = 'Bob';
+        emp.Last_Name__c = 'Bobbertson';
+        DateTime d = System.now();
+        emp.Start_Date__c = date.newinstance(d.year(), d.month(), d.day());
+        emp.Salary__c = 100000;
+        Database.SaveResult sr = Database.insert(emp, false);
+        System.assert(sr.isSuccess());
+    }
+}
