@@ -1,0 +1,8 @@
+public class CustControllerContact {
+    public List<Contact> contactList {get; set;}
+    
+    public CustControllerContact(){
+        contactList = [SELECT Id, firstname, lastname, phone, email FROM Contact];
+    }
+
+}
