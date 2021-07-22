@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Guild_Member__c</fullName>
+    <externalId>false</externalId>
+    <label>Guild Member</label>
+    <referenceTo>Guild_Member__c</referenceTo>
+    <relationshipLabel>Member Assignments</relationshipLabel>
+    <relationshipName>Member_Assignments</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
