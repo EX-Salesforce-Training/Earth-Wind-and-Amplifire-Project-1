@@ -1,0 +1,21 @@
+<apex:page controller="custController" >
+    <apex:form>
+    <apex:pageBlock title ="Contacts" mode="inlineEdit">
+		    <apex:pageBlockTable value="{!contacts}" var ="con">
+                
+                <apex:column value="{!con.title}" />
+                <apex:column value="{!con.phone}" />
+                
+                <apex:column headerValue="Contact/Account name" value="{!contacts}" />
+                    <apex:outputField value="{!con.name}" >
+                		<apex:inlineEditSupport />
+                    </apex:outputField>   
+                <apex:column value="{!con.department}" />
+                 
+                <apex:commandButton value="Goto DetailPage" action="{!gottoContactDetailPage}">
+					<apex:param name="contactid" value="{!con.Id}" assignTo="{!contactId}"/>
+				</apex:commandButton>
+        </apex:pageBlockTable>
+        </apex:pageBlock>
+        </apex:form>
+</apex:page>

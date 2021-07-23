@@ -1,0 +1,14 @@
+public class custController {
+    
+    public List<Contact> contacts {get; set;}
+    public string contactId {get;set;}
+    
+    public custController() {
+        contacts = [SELECT Id, department, title, phone, name FROM Contact LIMIT 10];
+    }
+    
+    public PageReference gottoContactDetailPage(){
+        return new PageReference('apex/ContactDetailPage?id=' + contactId);
+    }
+
+}
