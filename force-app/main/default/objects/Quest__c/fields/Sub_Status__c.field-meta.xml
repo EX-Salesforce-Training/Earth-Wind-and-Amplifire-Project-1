@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Status__c</fullName>
+    <description>The sub-status of a quest&apos;s completion.</description>
+    <externalId>false</externalId>
+    <label>Sub-Status</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Never</fullName>
+                <default>false</default>
+                <label>Never</label>
+            </value>
+            <value>
+                <fullName>Gonna</fullName>
+                <default>false</default>
+                <label>Gonna</label>
+            </value>
+            <value>
+                <fullName>Give</fullName>
+                <default>false</default>
+                <label>Give</label>
+            </value>
+            <value>
+                <fullName>You</fullName>
+                <default>false</default>
+                <label>You</label>
+            </value>
+            <value>
+                <fullName>Up</fullName>
+                <default>false</default>
+                <label>Up</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
