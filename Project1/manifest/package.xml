@@ -42,6 +42,10 @@
     </types>
     <types>
         <members>*</members>
+        <name>GlobalPicklist</name>
+    </types>
+    <types>
+        <members>*</members>
         <name>Profile</members>
     </types>
 
