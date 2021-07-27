@@ -1,0 +1,13 @@
+<apex:page standardController="Guild_Hall__c">  
+    <apex:form>
+        <apex:pageBlock Title="Related Parties">
+
+        </apex:pageBlock>
+        <apex:pageBlock Title="Available Facilities">
+            
+        </apex:pageBlock>
+        <apex:pageBlock Title="Quest Board">
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

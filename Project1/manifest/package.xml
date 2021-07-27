@@ -52,7 +52,7 @@
     </types>
     <types>
         <members>*</members>
-        <name>ApexPage</members>
+        <name>ApexPage</name>
     </types>
 
     <version>52.0</version>
