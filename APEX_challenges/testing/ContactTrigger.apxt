@@ -1,3 +1,0 @@
-trigger ContactTrigger on Contact (before insert) {
-    ContactTriggerHandler.connectAccountToContact(Trigger.new);
-}
