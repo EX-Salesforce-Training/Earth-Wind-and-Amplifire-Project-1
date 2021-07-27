@@ -1,13 +1,33 @@
 <apex:page standardController="Guild_Hall__c">  
     <apex:form>
-        <apex:pageBlock Title="Related Parties">
-
-        </apex:pageBlock>
-        <apex:pageBlock Title="Available Facilities">
-            
-        </apex:pageBlock>
-        <apex:pageBlock Title="Quest Board">
-            
+        <apex:pageBlock Title="Guild Hall Page">
+            <apex:pageBlockSection title="Available Facilities">
+                <apex:pageBlockTable value="{!Guild_Hall__c.Facilities__r}" var="fac">
+                    <apex:column value="{!fac.Name}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Related Parties">
+                <apex:pageBlockTable value="{!Guild_Hall__c.Quests__r}" var="party">
+                    <apex:column value="{!party.Party__c}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Quest Board">
+                <apex:pageBlockTable value="{!Guild_Hall__c.Quests__r}" var="quest">
+                    <apex:column value="{!quest.Name}"/>
+                    <apex:column value="{!quest.Danger_Level__c}"/>
+                    <apex:column value="{!quest.Date_Opened__c}"/>
+                    <apex:column value="{!quest.Location__c}"/>
+                    <apex:column value="{!quest.Quest_City__c}"/>
+                    <apex:column value="{!quest.Quest_Country__c}"/>
+                    <apex:column value="{!quest.Quest_Postal_Code__c}"/>
+                    <apex:column value="{!quest.Quest_State__c}"/>
+                    <apex:column value="{!quest.Quest_Street__c}"/>
+                    <apex:column value="{!quest.Required_Professions__c}"/>
+                    <apex:column value="{!quest.Reward__c}"/>
+                    <apex:column value="{!quest.Status__c}"/>
+                    <apex:column value="{!quest.Requires_Party__C}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form>
-</apex:page>
+</apex:page> 
