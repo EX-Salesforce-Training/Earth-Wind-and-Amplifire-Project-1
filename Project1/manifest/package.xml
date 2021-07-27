@@ -50,10 +50,6 @@
         <members>*</members>
         <name>Profile</name>
     </types>
-    <types>
-        <members>*</members>
-        <name>ApexPage</members>
-    </types>
 
     <version>52.0</version>
 </Package>

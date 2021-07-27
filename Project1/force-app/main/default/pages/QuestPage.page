@@ -1,0 +1,13 @@
+<apex:page controller="QuestPageController" >
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:pageBlockTable value="{!quests}" var="quest" title="Quests">
+                <apex:column value="{! quest.Name }" headerValue="Name"/>
+                <apex:column value="{! quest.Danger_Level__c }" headerValue="Danger Level"/>
+                <apex:column value="{! quest.Location__c }" headerValue="Location" />
+                <apex:column value="{! quest.Requires_Party__c}" headerValue="Requires Party?" />
+                
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>
