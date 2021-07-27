@@ -449,6 +449,10 @@
         <object>Contact</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <pageAccesses>
+        <apexPage>QuestPage</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
     <tabVisibilities>
         <tab>standard-Account</tab>
         <visibility>DefaultOn</visibility>

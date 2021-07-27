@@ -431,6 +431,10 @@
         <field>Quest__c.Requires_Party__c</field>
         <readable>false</readable>
     </fieldPermissions>
+    <pageAccesses>
+        <apexPage>QuestPage</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
     <tabVisibilities>
         <tab>standard-Account</tab>
         <visibility>Hidden</visibility>
