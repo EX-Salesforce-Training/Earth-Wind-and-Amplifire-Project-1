@@ -1,0 +1,7 @@
+<apex:page controller="UserPageController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:outputText value="{!mem.Name}"></apex:outputText>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

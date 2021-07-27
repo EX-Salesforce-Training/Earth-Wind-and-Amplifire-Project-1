@@ -4,6 +4,10 @@
         <apexClass>QuestPageController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>UserPageController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
@@ -347,6 +351,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Guild_Member__c.User__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Item__c.Damage_Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -446,6 +455,10 @@
     </objectPermissions>
     <pageAccesses>
         <apexPage>QuestPage</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>UserPage</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <tabVisibilities>
