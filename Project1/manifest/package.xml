@@ -38,7 +38,11 @@
     </types>
     <types>
         <members>*</members>
-        <name>GlobalPicklist</name>
+        <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>Profile</members>
     </types>
 
     <version>52.0</version>
