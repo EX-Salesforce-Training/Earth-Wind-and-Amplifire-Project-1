@@ -33,6 +33,8 @@
         <name>StaticResource</name>
     </types>
     <types>
+        <members>Account</members>
+        <members>Contact</members>
         <members>*</members>
         <name>CustomObject</name>
     </types>
@@ -46,7 +48,7 @@
     </types>
     <types>
         <members>*</members>
-        <name>Profile</members>
+        <name>Profile</name>
     </types>
 
     <version>52.0</version>
