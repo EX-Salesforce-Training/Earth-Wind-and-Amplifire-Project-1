@@ -1,5 +1,5 @@
 <apex:page standardController="Guild_Hall__c">  
-    <apex:form>
+    <apex:form >
         <apex:pageBlock Title="Guild Hall Page">
             <apex:pageBlockSection title="Available Facilities">
                 <apex:pageBlockTable value="{!Guild_Hall__c.Facilities__r}" var="fac">
@@ -25,9 +25,9 @@
                     <apex:column value="{!quest.Required_Professions__c}"/>
                     <apex:column value="{!quest.Reward__c}"/>
                     <apex:column value="{!quest.Status__c}"/>
-                    <apex:column value="{!quest.Requires_Party__C}"/>
+                    <apex:column value="{!quest.Requires_Party__c}"/>
                 </apex:pageBlockTable>
             </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form>
-</apex:page> 
+</apex:page>
