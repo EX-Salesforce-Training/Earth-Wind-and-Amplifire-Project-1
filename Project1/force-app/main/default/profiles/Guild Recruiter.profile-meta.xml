@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
-        <apexClass>QuestPageController</apexClass>
+        <apexClass>QuestExtension</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <custom>true</custom>
@@ -429,6 +429,11 @@
         <editable>false</editable>
         <field>Quest__c.Quest_Details__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Quest__c.Required_Professions__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>

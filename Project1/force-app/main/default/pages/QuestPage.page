@@ -1,13 +1,79 @@
-<apex:page controller="QuestPageController" >
-    <apex:pageBlock >
-        <apex:pageBlockSection >
-            <apex:pageBlockTable value="{!quests}" var="quest" title="Quests">
-                <apex:column value="{! quest.Name }" headerValue="Name"/>
-                <apex:column value="{! quest.Danger_Level__c }" headerValue="Danger Level"/>
-                <apex:column value="{! quest.Location__c }" headerValue="Location" />
-                <apex:column value="{! quest.Requires_Party__c}" headerValue="Requires Party?" />
+<apex:page standardController="Quest__c" recordSetVar="quests" extensions="QuestExtension">
+    <apex:form >
+        <apex:slds />
+        <apex:pageBlock >
+            <apex:pageBlockSection >
                 
-            </apex:pageBlockTable>
-        </apex:pageBlockSection>
-    </apex:pageBlock>
+                <!-- table of quest records -->
+                <apex:pageBlockTable value="{!quests}" var="quest" title="Quests">
+                    <apex:column value="{! quest.Name }" headerValue="Name"/>
+                    <apex:column value="{! quest.Danger_Level__c }" headerValue="Danger Level"/>
+                    <apex:column value="{! quest.Location__c }" headerValue="Location" />
+                    <apex:column value="{! quest.Requires_Party__c}" headerValue="Requires Party?" />
+                    <apex:column headerValue="Info">
+                        
+                        <!-- save the questId to the back-end -->
+                        <apex:commandButton value="Show" reRender="quest-panel">
+                            <apex:param name="questId" value="{!quest.id}" assignTo="{!questId}" />
+                        </apex:commandButton>
+                        
+                    </apex:column>
+                </apex:pageBlockTable>
+                
+                
+                <!-- information panel -->
+                <apex:outputPanel id="quest-panel">
+                    <div id="quest-panel" class="slds-panel slds-panel_docked slds-panel_docked-right slds-is-open" aria-hidden="false">
+                        
+                        <!-- quest title -->
+                        <div class="slds-panel__header">
+                            <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title="Quest Panel">
+                                {!title}
+                            </h2>
+                        </div>
+                        
+                        <!-- description -->
+                        <div id="quest-info" class="slds-panel__body">
+                            <script>
+                            	insertBefore("quest-info", "{! description}");
+                            </script>
+                            <apex:commandButton rendered="{!questId != null}" value="Accept" />
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <!-- the utility bar -->
+        <footer class="slds-utility-bar_container" aria-label="Utility Bar">
+            <h2 class="slds-assistive-text">Utility Bar</h2>
+            <ul class="slds-utility-bar">
+                
+                <!-- list page number -->
+                <li class="slds-utility-bar__item slds-m-horizontal_small">
+                    <apex:outputText value="Page: {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
+                </li>
+                
+                <!-- previous -->
+                <li class="slds-utility-bar__item slds-m-horizontal_small">
+                    <apex:commandLink action="{! Previous }" value="« Previous"
+                                      rendered="{! HasPrevious }"/>
+                    
+                    <apex:outputText style="color: #ccc;" value="« Previous"
+                                     rendered="{! NOT(HasPrevious) }"/>
+                </li>
+                
+                <!-- next -->
+                <li class="slds-utility-bar__item slds-m-horizontal_small">
+                    <apex:commandLink action="{! Next }" value="Next »"
+                                      rendered="{! HasNext }"/>
+                    
+                    <apex:outputText style="color: #ccc;" value="Next »"
+                                     rendered="{! NOT(HasNext) }"/>
+                </li>
+            </ul>
+        </footer>
+    </apex:form>
+    <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>
