@@ -1,7 +1,81 @@
 <apex:page controller="UserPageController">
     <apex:form >
-        <apex:pageBlock >
-            <apex:outputText value="{!mem.Name}"></apex:outputText>
+        <apex:pageBlock title="{!member.Name}">
+            <apex:outputField value="{!member.Class__c}"></apex:outputField>
+            <apex:outputField value="{!member.Total_Level__c}"></apex:outputField>
+            <apex:pageBlockTable value="{!member}" var="lvl">
+            	<apex:column headerValue="Artificer Level">
+                    <apex:outputField value="{!lvl.Artificer_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Barbarian Level">
+                    <apex:outputField value="{!lvl.Barbarian_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Bard Level">
+                    <apex:outputField value="{!lvl.Bard_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Cleric Level">
+                    <apex:outputField value="{!lvl.Cleric_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column> 
+                <apex:column headerValue="Druid Level">
+                    <apex:outputField value="{!lvl.Druid_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Fighter Level">
+                    <apex:outputField value="{!lvl.Fighter_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Monk Level">
+                	<apex:outputField value="{!lvl.Monk_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Paladin Level">
+                    <apex:outputField value="{!lvl.Paladin_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Ranger Level">
+                    <apex:outputField value="{!lvl.Ranger_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column> 
+                <apex:column headerValue="Rogue Level">
+                    <apex:outputField value="{!lvl.Rogue_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Sorcerer Level">
+                    <apex:outputField value="{!lvl.Sorcerer_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Warlock Level">
+                    <apex:outputField value="{!lvl.Warlock_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Wizard Level">
+                    <apex:outputField value="{!lvl.Wizard_Level__c}">
+                    	<apex:inlineEditSupport />
+                    </apex:outputField>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:pageBlockTable value="{!items}" var="item">
+            	<apex:column value="{!item.Name}"/>
+                <apex:column value="{!item.Item_Type__c}"/>
+                <apex:column value="{!item.Properties__c}"/>
+            </apex:pageBlockTable>
+            <apex:commandButton value="Save" action="{!Save}"/>
         </apex:pageBlock>
     </apex:form>
 </apex:page>
