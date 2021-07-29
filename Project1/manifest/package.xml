@@ -52,15 +52,6 @@
     </types>
     <types>
         <members>*</members>
-<<<<<<< HEAD
-        <name>CustomApplication</members>
-    </types>
-    <types>
-        <members>*</members>
-        <name>CustomTab</members>
-    </types>
-
-=======
         <name>ApprovalProcess</name>
     </types>
     <types>
@@ -75,6 +66,5 @@
         <members>*</members>
         <name>CustomApplication</name>
     </types>
->>>>>>> de29b86ea3fa9ff9eedbff0e892b32c2fdfaebdf
     <version>52.0</version>
 </Package>
