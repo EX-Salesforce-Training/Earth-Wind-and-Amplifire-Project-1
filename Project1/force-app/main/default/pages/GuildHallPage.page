@@ -31,7 +31,7 @@
             </apex:pageblocktable>
            </apex:pageblocksection>
         </apex:pageBlock>
-        <apex:commandLink action="{!previous}" value="Previous" rendered="{!hasPrevious}" />
-        <apex:commandLink action="{!Next}" value="Next" rendered="{!hasNext}" />
+        <apex:commandLink action="{!previous}" value="Previous" rendered="{!hasprevious}"  />
+        <apex:commandLink action="{!Next}" value="Next" rendered="{!hasnext}" />
     </apex:form>
 </apex:page>
