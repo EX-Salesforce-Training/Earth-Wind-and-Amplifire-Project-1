@@ -51,7 +51,7 @@
         </apex:pageBlock>
         
         <!-- error message prompt -->
-        <div id="error-modal" style='height:50%; display: {! IF(hasError, "default", "none")};'>
+        <div id="error-modal" style='height:50%; display: {! IF(hasError, "initial", "none")};'>
             <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
                 <div class="slds-modal__container">
                     <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
@@ -95,9 +95,117 @@
                     <apex:outputText style="color: #ccc;" value="Next »"
                                      rendered="{! NOT(HasNext) }"/>
                 </li>
+                
+                <!-- new quest -->
+                <li class="slds-utility-bar__item slds-m-horizontal_small">
+                    <button class="slds-button" style="height: 50%" onclick="showModal(event, 'new-quest-modal')">
+                        New quest
+                    </button>
+                </li>
             </ul>
         </footer>
     </apex:form>
     
+    <!-- new quest modal -->
+    <div style='display: none;' id='new-quest-modal'>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Create a Quest</h2>
+                    <p class="slds-m-top_x-small">Following this wizard, you can create a quest in no time!</p>
+                </header>
+                
+                <form method="POST" onsubmit="submitNewQuest(event)">
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        
+                        <!-- quest name -->
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="form-element-01">Quest Name</label>
+                            <div class="slds-form-element__control">
+                                <input name="Quest Name" type="text" id="form-element-01" placeholder="Kill the dragon!" class="slds-input" />
+                            </div>
+                        </div>
+                        
+                        <!-- requires party -->
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <div class="slds-checkbox">
+                                    <input name="Requires Party" type="checkbox" id="checkbox-unique-id-73" value="checkbox-unique-id-73" checked="" />
+                                    <label class="slds-checkbox__label" for="checkbox-unique-id-73">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label">Requires Party?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- location -->
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="form-element-04">Location</label>
+                            <div class="slds-form-element__control">
+                                <input name="Location" type="text" id="form-element-04" placeholder="Runescape!" class="slds-input" />
+                            </div>
+                        </div>
+                        
+                        <!-- quest details -->
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="textarea-id-01">Quest Details</label>
+                            <div class="slds-form-element__control">
+                                <textarea name="Quest Details" id="textarea-id-01" placeholder="Kill the dragon ofc" class="slds-textarea"></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- danger level -->
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="select-01">Danger level</label>
+                            <div class="slds-form-element__control">
+                                <div class="slds-select_container">
+                                    <select name="Danger Level" class="slds-select" id="select-01">
+                                        <option>Beginner</option>
+                                        <option>Easy</option>
+                                        <option>Medium</option>
+                                        <option>Hard</option>
+                                        <option>Certain Death</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- required profession -->
+                        <fieldset class="slds-form-element">
+                            <legend class="slds-form-element__legend slds-form-element__label">Required Profession(s)</legend>
+                            <div class="slds-form-element__control">
+                                <div class="slds-checkbox_button-group">
+                                    <span class="slds-button slds-checkbox_button">
+                                        <input name="Required Profession: Adventurer" type="checkbox" id="unique-id-thursday-13" value="unique-id-thursday-13" />
+                                        <label class="slds-checkbox_button__label" for="unique-id-thursday-13">
+                                            <span class="slds-checkbox_faux">Adventurer</span>
+                                        </label>
+                                    </span>
+                                    <span class="slds-button slds-checkbox_button">
+                                        <input name="Required Profession: Craftsman" type="checkbox" id="unique-id-friday-13" value="unique-id-friday-13" />
+                                        <label class="slds-checkbox_button__label" for="unique-id-friday-13">
+                                            <span class="slds-checkbox_faux">Craftsman</span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        
+                    </div>
+                    
+                    <!-- save / cancel buttons -->
+                    <footer class="slds-modal__footer">
+                        <!-- cancel -->
+                        <button onclick="hideModal(event, 'new-quest-modal')" class="slds-button slds-button_neutral">Cancel</button>
+                        
+                        <!-- save -->
+                        <button type='submit' class="slds-button slds-button_brand">Save</button>
+                    </footer>
+                </form>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
     <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>

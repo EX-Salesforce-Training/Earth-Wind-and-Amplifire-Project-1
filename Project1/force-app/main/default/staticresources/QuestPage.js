@@ -30,6 +30,23 @@ function hideModal(event, id) {
 function showModal(event, id) {
     event.preventDefault();
     document.querySelector("#" + id)
-    .style
-    .display = 'default';
+        .style
+        .display = 'initial';
+}
+
+
+// @desc       : retrieve the parameters, save a new quest
+// @event      : <event>
+// @echo       : <func> a function to pass parameters to the action function
+// @actionFunc : <func> the action function to save a quest
+function submitNewQuest(event, echo, actionFunc) {
+    event.preventDefault();
+    console.log(event);
+    const data = Object.fromEntries(new FormData(event.target).entries());
+    
+    // set the checkbox variables
+    ['Requires Party', 'Required Profession: Adventurer', 'Required Profession: Craftsman']
+    .forEach(field => data[field] = (data[field] !== undefined));
+    // @todo: send this to an action function
+    console.log(data);
 }

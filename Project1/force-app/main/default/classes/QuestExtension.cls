@@ -60,6 +60,5 @@ public class QuestExtension {
         } finally {
         	questId = null;
         }
-    }
-    
+    } 
 }
