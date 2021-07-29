@@ -20,11 +20,6 @@
                 <apex:column value="{!q.Danger_Level__c}"/>
                 <apex:column value="{!q.Date_Opened__c}"/>
                 <apex:column value="{!q.Location__c}"/>
-                <apex:column value="{!q.Quest_City__c}"/>
-                <apex:column value="{!q.Quest_Country__c}"/>
-                <apex:column value="{!q.Quest_Postal_Code__c}"/>
-                <apex:column value="{!q.Quest_State__c}"/>
-                <apex:column value="{!q.Quest_Street__c}"/>
                 <apex:column value="{!q.Required_Professions__c}"/>
                 <apex:column value="{!q.Reward__c}"/>
                 <apex:column value="{!q.Status__c}"/>
