@@ -15,7 +15,11 @@ public with sharing class GuildExtension {
         setCon = controller;
         setCon.setPageSize(PageSize);
         currentRecordId  = ApexPages.CurrentPage().getparameters().get('id');
+        try{
         title = [SELECT Id, Name FROM Guild_Hall__c where id =:currentRecordID];
+        }catch(QueryException e){
+            e.setMessage('Page Not Found');
+        }
         if(title.isEmpty()){
             pageBlockTitle = 'None';
         } else {
@@ -45,6 +49,6 @@ public with sharing class GuildExtension {
         return questBoard;
     }
     
-    // get method for parties
+    
    
 }
