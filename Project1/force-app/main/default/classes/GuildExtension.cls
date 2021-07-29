@@ -18,6 +18,12 @@ public with sharing class GuildExtension {
         facilityName = [SELECT Id, Name FROM Facility__c LIMIT 10];
         return facilityName;
     }
+
+    // get method for guild name
+    public Guild_Hall__c getGuildName(){
+        return [SELECT Id, Name FROM Guild_Hall__c LIMIT 10];
+    }
+    
     
     // get method for quests
      public List<Quest__c> getQuest(){
