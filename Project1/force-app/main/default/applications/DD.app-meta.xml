@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>dungeonsanddragons</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>D&amp;D</label>
+    <navType>Standard</navType>
+    <tabs>Quest__c</tabs>
+    <tabs>Facility__c</tabs>
+    <tabs>Guild_Member__c</tabs>
+    <tabs>Guild_Hall__c</tabs>
+    <tabs>Item__c</tabs>
+    <tabs>Member_Assignment__c</tabs>
+    <tabs>Party__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>D_D_UtilityBar</utilityBar>
+</CustomApplication>
