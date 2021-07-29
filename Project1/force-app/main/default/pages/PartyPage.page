@@ -1,0 +1,7 @@
+<apex:page controller="PartyListPageController">
+    <apex:pageBlock id="partyBlock" title="{!currentParty.Name}">
+   		<apex:pageBlockTable value="{!currentPartyMembers}" var="member" >
+            <apex:column value="{!member.Name}" />
+        </apex:pageBlockTable> 
+    </apex:pageBlock>
+</apex:page>

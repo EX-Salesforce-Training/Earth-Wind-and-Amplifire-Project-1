@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accepting_New_Members__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check if the party is accepting new members.</description>
+    <externalId>false</externalId>
+    <label>Accepting New Members</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

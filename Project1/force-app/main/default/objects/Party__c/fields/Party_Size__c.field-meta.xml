@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Party_Size__c</fullName>
+    <description>The current number of members in the party.</description>
+    <externalId>false</externalId>
+    <label>Party Size</label>
+    <summaryForeignKey>Member_Assignment__c.Party__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>
