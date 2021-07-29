@@ -1,0 +1,43 @@
+<apex:page controller="PartyListPageController" docType="html-5.0">
+    <apex:form >
+        <apex:pageBlock id="partyBlock" title="Party List">
+            <apex:pageBlockTable value="{!parties}" var="party">
+                <apex:column >
+                    <apex:commandLink value="{!party.Name}" action="{!partyPage}" >
+                        <apex:param name="x" value="{!party.id}" assignTo="{!partyid}" />
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column value="{!party.Accepting_New_Members__c}" />
+                <apex:column value="{!party.Party_Size__c}" />
+                <apex:column value="{!party.Max_Party_Size__c}" />
+                <apex:column value="{!party.Minimum_Level_Required__c}" />
+                <apex:column value="{!party.Class_Requirements__c}" />
+            </apex:pageBlockTable>
+            <!-- Buttons for pagination actions -->
+            <apex:pageBlockButtons >
+                <apex:commandButton value="First" rerender="partyBlock" action="{!first}" disabled="{!Prv}" />
+                <apex:commandButton value="Prev" rerender="partyBlock" action="{!prev}" disabled="{!Prv}" />
+                <apex:commandButton value="Next" rerender="partyBlock" action="{!next}" disabled="{!Nxt}" />
+                <apex:commandButton value="Last" rerender="partyBlock" action="{!last}" disabled="{!Nxt}" />
+            </apex:pageBlockButtons>
+            Parties per page:
+            <apex:selectList value="{!pageSize}" size="1">
+                <apex:selectOption itemLabel="5" itemValue="5"/>
+                <apex:selectOption itemLabel="20" itemValue="20"/>
+         		<apex:actionSupport event="onchange" reRender="partyBlock"/>
+            </apex:selectList>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection id="partyWizard" title="Create a Party" >
+                <apex:inputField value="{!newParty.Name}" required="true" />
+                <apex:inputField value="{!newParty.Max_Party_Size__c}" />
+                <apex:inputField value="{!newParty.Minimum_Level_Required__c}" />
+                <apex:inputField value="{!newParty.Accepting_New_Members__c}" />
+                <apex:inputField value="{!newParty.Class_Requirements__c}" />
+                <apex:commandButton value="Create" rerender="partyWizard" action="{!createParty}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock> 
+    </apex:form>
+</apex:page>
