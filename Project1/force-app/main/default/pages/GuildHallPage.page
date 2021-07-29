@@ -1,7 +1,7 @@
 <!--page to display guild hall facilities, quests and parties-->
 <apex:page standardController="Guild_Hall__c" recordSetVar="guilds" extensions="GuildExtension" tabStyle="Guild_Hall__c">  
     <apex:form >
-        <apex:pageBlock Title="Guild Hall Page">
+        <apex:pageBlock Title="Guild Hall Page : {!guildname.name}">
             <apex:pageblocksection title="Available Facilities">
             <apex:pageblocktable value="{!Facilities}" var="f">
                 <apex:column value="{!f.name}"/>
@@ -11,6 +11,7 @@
             <apex:pageblocktable value="{!Party}" var="p">
                 <apex:column value="{!p.name}"/>
             </apex:pageblocktable>
+                 <apex:outputLink value="{!$Page.PartyListPage}">Party Page</apex:outputLink>     
            </apex:pageblocksection> 
              <apex:pageblocksection title="Quest Board">
             <apex:pageblocktable value="{!quest}" var="q">
