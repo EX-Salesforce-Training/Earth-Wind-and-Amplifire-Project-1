@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>allInternalUsers</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>Contact__c</field>
+        <field>Danger_Level__c</field>
+        <field>Requires_Party__c</field>
+        <field>Party__c</field>
+        <field>Location__c</field>
+        <field>Guild_Member__c</field>
+        <field>Guild_Hall__c</field>
+        <field>Duration__c</field>
+        <field>Date_Opened__c</field>
+        <field>Required_Professions__c</field>
+        <field>Reward__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Assignment_Arbitrators</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Assign this approval to the arbitrator queue.</description>
+        <label>Assign to Arbitrators</label>
+        <name>Assign_to_Arbitrators</name>
+    </approvalStep>
+    <description>This approval process handles applications to start a quest from a user.</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(ISPICKVAL(Status__c, &quot;New&quot;), ISPICKVAL(Sub_Status__c, &quot;Pending&quot;))</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Set_Accepted</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Set_Open</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Approve Quest Application</label>
+    <processOrder>1</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>
