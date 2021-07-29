@@ -1,4 +1,5 @@
 <!--page to display guild hall facilities, quests and parties-->
+<!-- don't know what changed -->
 <apex:page standardController="Guild_Hall__c" recordSetVar="guilds" extensions="GuildExtension" tabStyle="Guild_Hall__c">  
     <apex:form >
         <apex:pageBlock Title="Guild Hall Page : {!guildname.name}">
