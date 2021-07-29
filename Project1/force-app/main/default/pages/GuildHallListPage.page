@@ -1,0 +1,14 @@
+<apex:page standardController="Guild_Hall__c" recordSetVar="guildL" extensions="GuildExtension"  tabStyle="Guild_Hall__c" >
+    <apex:form >
+        <apex:PageBlock Title="Guild Hall List">
+            <apex:pageblocksection title="Available Guilds">
+                <apex:pageblocktable value="{!GuildList}" var="g">
+                    <apex:column value="{!g.name}"/>
+                    <apex:column headerValue="page"><apex:outputLink value="{!$Page.GuildHallPage}?id={!g.id}">Guild Hall Page</apex:outputLink></apex:column>
+                </apex:pageblocktable>
+            </apex:pageblocksection>
+            <apex:commandLink action="{!previous}" value="Previous" rendered="{!hasprevious}"  />
+            <apex:commandLink action="{!Next}" value="Next" rendered="{!hasnext}" />
+        </apex:PageBlock>
+    </apex:form>
+</apex:page>
