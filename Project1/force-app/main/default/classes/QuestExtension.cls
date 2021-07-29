@@ -3,12 +3,14 @@ public class QuestExtension {
     public String questId {get; set;}
     public transient Boolean hasError {get; set;}
     public transient String errorMessage {get; set;}
+    public QuestFormData formData {get; set;}
     
     private final String approvalProcessName = 'Approve_Quest_Application';
     
     public QuestExtension(ApexPages.StandardSetController ssc) {
         ssc.setPageSize(10);
         hasError = false;
+        formData = new QuestFormData();
     }
     
     // @desc: get the description of a quest
@@ -61,4 +63,48 @@ public class QuestExtension {
         	questId = null;
         }
     } 
+    
+    // @desc : this function allows us to dynamically create a new quest from the quest page
+    public void saveQuest() {
+        System.debug(formData);
+        
+        Quest__c newQuest = new Quest__c();
+        newQuest.Name = formData.questName;
+        newQuest.Danger_Level__c = formData.dangerLevel;
+        newQuest.Location__c = formData.location;
+        newQuest.Requires_Party__c = formData.requiresParty;
+        newQuest.Quest_Details__c = formData.questDetails;
+        newQuest.Reward__c = formData.reward;
+        
+        if(formData.requiredProfessionAdventurer && formData.requiredProfessionCraftsman) {
+            newQuest.Required_Professions__c = 'Adventurer,Craftsman';
+        } else if(formData.requiredProfessionAdventurer) {
+            newQuest.Required_Professions__c = 'Adventurer';
+        } else if(formData.requiredProfessionCraftsman) {
+            newQuest.Required_Professions__c = 'Craftsman';
+        }
+        
+        // standard stuff
+        newQuest.Status__c = 'New';
+        newQuest.Sub_Status__c = 'Pending';
+        newQuest.Date_Opened__c = Date.today();
+        
+        // deprecated, but needed for now
+        newQuest.Quest_Country__c = 'USA';
+        newQuest.Quest_City__c = 'Baltimore';
+        newQuest.Quest_Postal_Code__c = '20740';
+        newQuest.Quest_Street__c = '123 main ave';
+        newQuest.Quest_State__c = 'Maryland';
+        
+        try {
+            insert newQuest;
+        } catch(DMLException e) {
+			System.debug(e);
+        } catch(Exception e) {
+        	System.debug(e);
+        } finally {
+      	
+            formData = new QuestFormData();
+        }        
+    }
 }

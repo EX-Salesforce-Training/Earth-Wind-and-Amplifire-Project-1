@@ -1,11 +1,11 @@
-<apex:page standardController="Quest__c" recordSetVar="quests" extensions="QuestExtension">
+<apex:page standardController="Quest__c" recordSetVar="quests" extensions="QuestExtension" id="page">
     <apex:form >
         <apex:slds />
         <apex:pageBlock >
             <apex:pageBlockSection >
                 
                 <!-- table of quest records -->
-                <apex:pageBlockTable value="{!quests}" var="quest" title="Quests">
+                <apex:pageBlockTable id="record-table" value="{!quests}" var="quest" title="Quests">
                     <apex:column value="{! quest.Name }" headerValue="Name"/>
                     <apex:column value="{! quest.Danger_Level__c }" headerValue="Danger Level"/>
                     <apex:column value="{! quest.Location__c }" headerValue="Location" />
@@ -51,7 +51,7 @@
         </apex:pageBlock>
         
         <!-- error message prompt -->
-        <div id="error-modal" style='height:50%; display: {! IF(hasError, "initial", "none")};'>
+        <div id="error-modal" style='display: {! IF(hasError, "initial", "none")};'>
             <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
                 <div class="slds-modal__container">
                     <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
@@ -62,6 +62,24 @@
                     </div>
                     <footer class="slds-modal__footer slds-theme_default">
                         <button class="slds-button slds-button_neutral" onclick="hideModal(event, 'error-modal')">Got It</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+        
+        <!-- dynamic error message prompt -->
+        <div id="dynamic-error-modal" style='display: none;'>
+            <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                        <h2 class="slds-text-heading_medium" id="prompt-heading-id">Service unavailable</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                        <!-- content -->
+                    </div>
+                    <footer class="slds-modal__footer slds-theme_default">
+                        <button class="slds-button slds-button_neutral" onclick="hideErrorModal(event, 'dynamic-error-modal')">Got It</button>
                     </footer>
                 </div>
             </section>
@@ -115,7 +133,7 @@
                     <p class="slds-m-top_x-small">Following this wizard, you can create a quest in no time!</p>
                 </header>
                 
-                <form method="POST" onsubmit="submitNewQuest(event)">
+                <form method="POST" onsubmit="submitNewQuest(event, saveQuest)">
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                         
                         <!-- quest name -->
@@ -192,6 +210,13 @@
                             </div>
                         </fieldset>
                         
+                        <!-- reward -->
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="form-element-reward">Reward</label>
+                            <div class="slds-form-element__control">
+                                <input name="Reward" type="text" id="form-element-reward" placeholder="1000.00" class="slds-input" />
+                            </div>
+                        </div> 
                     </div>
                     
                     <!-- save / cancel buttons -->
@@ -207,5 +232,20 @@
         </section>
         <div class="slds-backdrop slds-backdrop_open"></div>
     </div>
+	
+    <!-- generate the javascript function to save a quest -->
+    <apex:form >
+        <apex:actionFunction name="saveQuest" action="{! saveQuest }" reRender="dynamic-error-modal">
+            <apex:param name="questName" value="" assignTo="{! formData.questName }" />
+            <apex:param name="questDetails" value="" assignTo="{! formData.questDetails }" />
+            <apex:param name="location" value="" assignTo="{! formData.location }" />
+            <apex:param name="requiresParty" value="" assignTo="{! formData.requiresParty }" />
+            <apex:param name="dangerLevel" value="" assignTo="{! formData.dangerLevel }" />
+            <apex:param name="requiredProfessionAdventurer" value="" assignTo="{! formData.requiredProfessionAdventurer }" />
+            <apex:param name="requiredProfessionCraftsman" value="" assignTo="{! formData.requiredProfessionCraftsman }" />
+            <apex:param name="reward" value="" assignTo="{! formData.reward }" />
+        </apex:actionFunction>
+    </apex:form>
+    
     <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>

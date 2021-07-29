@@ -113,6 +113,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>QuestFormData</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>UserPageController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
