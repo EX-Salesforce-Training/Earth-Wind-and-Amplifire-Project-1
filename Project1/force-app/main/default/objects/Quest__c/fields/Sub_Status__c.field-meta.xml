@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Sub_Status__c</fullName>
-    <description>The sub-status of a quest&apos;s completion.</description>
     <externalId>false</externalId>
     <label>Sub-Status</label>
     <required>true</required>
@@ -12,29 +11,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Never</fullName>
+                <fullName>Pending</fullName>
                 <default>false</default>
-                <label>Never</label>
+                <label>Pending</label>
             </value>
             <value>
-                <fullName>Gonna</fullName>
+                <fullName>Accepted</fullName>
                 <default>false</default>
-                <label>Gonna</label>
+                <label>Accepted</label>
             </value>
             <value>
-                <fullName>Give</fullName>
+                <fullName>Completed</fullName>
                 <default>false</default>
-                <label>Give</label>
+                <label>Completed</label>
             </value>
             <value>
-                <fullName>You</fullName>
+                <fullName>Failed</fullName>
                 <default>false</default>
-                <label>You</label>
-            </value>
-            <value>
-                <fullName>Up</fullName>
-                <default>false</default>
-                <label>Up</label>
+                <label>Failed</label>
             </value>
         </valueSetDefinition>
     </valueSet>

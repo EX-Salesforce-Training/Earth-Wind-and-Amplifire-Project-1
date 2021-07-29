@@ -11,19 +11,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Complete</fullName>
+                <fullName>New</fullName>
                 <default>false</default>
-                <label>Complete</label>
+                <label>New</label>
             </value>
             <value>
-                <fullName>In Progress</fullName>
+                <fullName>Open</fullName>
                 <default>false</default>
-                <label>In Progress</label>
+                <label>Open</label>
             </value>
             <value>
-                <fullName>Not Started</fullName>
+                <fullName>Closed</fullName>
                 <default>false</default>
-                <label>Not Started</label>
+                <label>Closed</label>
             </value>
         </valueSetDefinition>
     </valueSet>

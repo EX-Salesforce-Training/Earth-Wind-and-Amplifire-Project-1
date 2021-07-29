@@ -50,6 +50,14 @@
         <members>*</members>
         <name>Profile</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>CustomApplication</members>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomTab</members>
+    </types>
 
     <version>52.0</version>
 </Package>
