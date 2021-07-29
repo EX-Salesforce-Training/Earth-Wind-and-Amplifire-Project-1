@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Supported_Skills__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>What does this facility enable people to do?</inlineHelpText>
+    <label>Supported Skills</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Skills</valueSetName>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

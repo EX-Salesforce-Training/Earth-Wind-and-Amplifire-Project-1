@@ -30,6 +30,36 @@
                 <default>false</default>
                 <label>Failed</label>
             </value>
+            <value>
+                <fullName>Give</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Give</label>
+            </value>
+            <value>
+                <fullName>Gonna</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Gonna</label>
+            </value>
+            <value>
+                <fullName>Never</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Never</label>
+            </value>
+            <value>
+                <fullName>Up</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Up</label>
+            </value>
+            <value>
+                <fullName>You</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>You</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

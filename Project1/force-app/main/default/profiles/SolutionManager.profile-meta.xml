@@ -113,6 +113,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>QuestPageController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>UserPageController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -409,6 +413,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Guild_Hall__c.Guild_Cut__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Guild_Member__c.Active__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -465,11 +474,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Guild_Member__c.Guild_Hall__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Guild_Member__c.Level__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
