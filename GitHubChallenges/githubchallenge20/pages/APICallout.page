@@ -1,0 +1,9 @@
+<apex:page Controller= "RestAPI">
+    <apex:form>
+    	<apex:pageBlock>
+        <apex:outputText>
+            {!norrisQuotes}
+            </apex:outputText> 
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
