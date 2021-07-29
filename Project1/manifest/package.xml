@@ -70,5 +70,14 @@
         <members>*</members>
         <name>ContentAsset</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>Workflow</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>WorkflowFieldUpdate</name>
+    </types>
+
     <version>52.0</version>
 </Package>
