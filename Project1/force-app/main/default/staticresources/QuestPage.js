@@ -14,3 +14,22 @@ function insertBefore(id, HTMLString, index=0) {
         throw new Error("Insert before: no element was found with id of " + id);
     }
 }
+
+// @desc: hide a modal given its id
+// @id  : <string>
+function hideModal(event, id) {
+    event.preventDefault();
+    document
+    	.querySelector("#" + id)
+    	.style
+    	.display = 'none';
+}
+
+// @desc: set a modal to visible given its id
+// @id  : <string>
+function showModal(event, id) {
+    event.preventDefault();
+    document.querySelector("#" + id)
+    .style
+    .display = 'default';
+}

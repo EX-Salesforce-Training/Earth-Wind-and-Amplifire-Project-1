@@ -2,6 +2,11 @@
 <Queue xmlns="http://soap.sforce.com/2006/04/metadata">
     <doesSendEmailToMembers>false</doesSendEmailToMembers>
     <name>Assignment Arbitrators</name>
+    <queueMembers>
+        <users>
+            <user>zackary.frazier@creative-impala-p7jq12.com</user>
+        </users>
+    </queueMembers>
     <queueSobject>
         <sobjectType>Quest__c</sobjectType>
     </queueSobject>

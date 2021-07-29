@@ -10,10 +10,11 @@
                     <apex:column value="{! quest.Danger_Level__c }" headerValue="Danger Level"/>
                     <apex:column value="{! quest.Location__c }" headerValue="Location" />
                     <apex:column value="{! quest.Requires_Party__c}" headerValue="Requires Party?" />
+                    <apex:column value="{! quest.Status__c }" />
                     <apex:column headerValue="Info">
                         
                         <!-- save the questId to the back-end -->
-                        <apex:commandButton value="Show" reRender="quest-panel">
+                        <apex:commandButton value="Show" reRender="quest-panel,quest-desc">
                             <apex:param name="questId" value="{!quest.id}" assignTo="{!questId}" />
                         </apex:commandButton>
                         
@@ -23,7 +24,7 @@
                 
                 <!-- information panel -->
                 <apex:outputPanel id="quest-panel">
-                    <div id="quest-panel" class="slds-panel slds-panel_docked slds-panel_docked-right slds-is-open" aria-hidden="false">
+                    <div class="slds-panel slds-panel_docked slds-panel_docked-right slds-is-open" aria-hidden="false">
                         
                         <!-- quest title -->
                         <div class="slds-panel__header">
@@ -34,16 +35,38 @@
                         
                         <!-- description -->
                         <div id="quest-info" class="slds-panel__body">
+                            <!--
+                                insertBefore actually adds the description via DOM manipulation
+                                but on the page, this is where it will appear
+                            -->
                             <script>
-                            	insertBefore("quest-info", "{! description}");
+                            	insertBefore("quest-info", "{! description }");
                             </script>
-                            <apex:commandButton rendered="{!questId != null}" value="Accept" />
+                            <apex:commandButton rendered="{! questId != null}" action="{!submitForApproval}" value="Accept" />
                         </div>
                     </div>
                 </apex:outputPanel>
                 
             </apex:pageBlockSection>
         </apex:pageBlock>
+        
+        <!-- error message prompt -->
+        <div id="error-modal" style='height:50%; display: {! IF(hasError, "default", "none")};'>
+            <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                        <h2 class="slds-text-heading_medium" id="prompt-heading-id">Service unavailable</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                        <p>{!errorMessage}</p>
+                    </div>
+                    <footer class="slds-modal__footer slds-theme_default">
+                        <button class="slds-button slds-button_neutral" onclick="hideModal(event, 'error-modal')">Got It</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
         
         <!-- the utility bar -->
         <footer class="slds-utility-bar_container" aria-label="Utility Bar">
@@ -75,5 +98,6 @@
             </ul>
         </footer>
     </apex:form>
+    
     <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>

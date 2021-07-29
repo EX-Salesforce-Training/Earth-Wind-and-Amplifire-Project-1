@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
-    <active>false</active>
+    <active>true</active>
     <allowRecall>false</allowRecall>
     <allowedSubmitters>
         <type>allInternalUsers</type>
@@ -51,7 +51,7 @@
     <finalApprovalRecordLock>true</finalApprovalRecordLock>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
     <label>Approve Quest Application</label>
-    <processOrder>0</processOrder>
+    <processOrder>1</processOrder>
     <recordEditability>AdminOnly</recordEditability>
     <showApprovalHistory>false</showApprovalHistory>
 </ApprovalProcess>
