@@ -82,3 +82,16 @@ function submitNewQuest(event, actionFunc) {
     	hideModal(null, 'new-quest-modal');
 	}, 2000)
 }
+    
+function handleNewAssignment(event, actionFunc) {
+    event?.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target).entries());
+    
+    actionFunc(data['Assignee Email']);
+    
+    
+    // success should lead to a redirect, if not, then this modal will pop up
+    setTimeout(() => {
+    	showErrorModal(null, 'dynamic-error-modal', 'Unable to approve ' + data['Assignee Email'] + ' for this quest, it may have already been accepted.');
+	}, 2000)
+}

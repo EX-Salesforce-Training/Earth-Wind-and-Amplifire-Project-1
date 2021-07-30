@@ -1,73 +1,75 @@
 public class QuestExtension {
     
     public String questId {get; set;}
-    public transient Boolean hasError {get; set;}
-    public transient String errorMessage {get; set;}
     public QuestFormData formData {get; set;}
+    public transient String assigneeEmail {get;set;}
     
     private final String approvalProcessName = 'Approve_Quest_Application';
     
     public QuestExtension(ApexPages.StandardSetController ssc) {
         ssc.setPageSize(10);
-        hasError = false;
         formData = new QuestFormData();
     }
     
     // @desc: get the description of a quest
     public String getDescription() {
-        if(questId == null) {
-        	return 'Select a quest from the left to see its information here';
+        String details = 'Select a quest from the left to see its information here';
+        if(questId == null) return details;
+        
+
+        try {
+        	Quest__c q = [SELECT Quest_Details__c From Quest__c WHERE Id = :questId];
+            details = q.Quest_Details__c;
+        } catch(Exception e) {
+            // move on
         }
         
-        Quest__c q = [SELECT Quest_Details__c From Quest__c WHERE Id = :questId];
-        return q.Quest_Details__c;
+        return details;
     }
     
     // @desc: get the title of a quest
     public String getTitle() {
+        String title = 'Quest Panel';
         if(questId == null) {
-            return 'Quest Panel';
+            return title;
         }
         
-        Quest__c q = [SELECT Name From Quest__c WHERE Id = :questId];
-        return q.Name;
+        try {
+        	Quest__c q = [SELECT Name From Quest__c WHERE Id = :questId];
+            title = q.Name;
+        } catch(Exception e) {
+            // invalid id
+        }
+        return title;
     }
     
     // @desc: submit a quest for approval
     public PageReference submitForApproval() {
         if(questId == null) return null;
-        
+        if(assigneeEmail == null || assigneeEmail == '') return null;
+
         Approval.ProcessSubmitRequest questApprovalRequest = new Approval.ProcessSubmitRequest();
         questApprovalRequest.setObjectId(questId);
         questApprovalRequest.submitterid = UserInfo.getUserId();
         questApprovalRequest.setProcessDefinitionNameOrId(approvalProcessName);
+        Contact con;
+        Quest__c q;
+        try {
+            con = [SELECT Email FROM Contact WHERE Email = :assigneeEmail];
+            q = [SELECT Contact__c FROM Quest__c WHERE Id = :questId];
+        } catch(Exception e) {
+            return null;
+        }
         
         PageReference nextPage = null;
         try {
         	Approval.process(questApprovalRequest);
+            q.Contact__c = con.Id;
+            update q;
             nextPage = Page.QuestPageSuccessfulSubmission;
         } catch(Exception e) {
             System.debug(e);
-            hasError = true;
-            // query for the quest and figure out why we failed
-            Quest__c q = [SELECT Status__c, Sub_Status__c FROM Quest__c WHERE Id = :questId ];
-            System.debug(q);
-            
-            // if the quest has already been accepted by some player
-            if(q.Status__c == 'Open' && q.Sub_Status__c == 'Accepted') {
-                errorMessage = 'This quest has already been accepted by some user. Please try another quest.';
-            } 
-            
-            // if someone has already applied for this quest
-            else if(q.Status__c == 'Open' && q.Sub_Status__c == 'Pending') {
-                errorMessage = 'This quest already has a pending submission. Maybe try again later.';
-            }
-            
-            // if something else happened
-            else {
-            	errorMessage = 'Unable to submit quest for approval. Please try another quest.';
-            }
-            
+            // do nothing and move on
         } finally {
         	questId = null;
         }
@@ -86,7 +88,7 @@ public class QuestExtension {
         newQuest.Reward__c = formData.reward;
         
         if(formData.requiredProfessionAdventurer && formData.requiredProfessionCraftsman) {
-            newQuest.Required_Professions__c = 'Adventurer,Craftsman';
+            newQuest.Required_Professions__c = 'Adventurer;Craftsman';
         } else if(formData.requiredProfessionAdventurer) {
             newQuest.Required_Professions__c = 'Adventurer';
         } else if(formData.requiredProfessionCraftsman) {

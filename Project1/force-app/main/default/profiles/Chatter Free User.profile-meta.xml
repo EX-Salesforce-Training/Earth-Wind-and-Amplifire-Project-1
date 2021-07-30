@@ -121,6 +121,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TestQuestPage</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>UserPageController</apexClass>
         <enabled>false</enabled>
     </classAccesses>

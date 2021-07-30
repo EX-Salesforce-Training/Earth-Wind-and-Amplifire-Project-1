@@ -1,9 +1,10 @@
 <apex:page standardController="Quest__c" recordSetVar="quests" extensions="QuestExtension" id="page">
     <apex:form >
         <apex:slds />
-        <apex:pageBlock >
-            <apex:pageBlockSection >
-                
+    </apex:form>
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:form >
                 <!-- table of quest records -->
                 <apex:pageBlockTable id="record-table" value="{!quests}" var="quest" title="Quests">
                     <apex:column value="{! quest.Name }" headerValue="Name"/>
@@ -20,75 +21,85 @@
                         
                     </apex:column>
                 </apex:pageBlockTable>
-                
-                
-                <!-- information panel -->
-                <apex:outputPanel id="quest-panel">
-                    <div class="slds-panel slds-panel_docked slds-panel_docked-right slds-is-open" aria-hidden="false">
-                        
-                        <!-- quest title -->
-                        <div class="slds-panel__header">
-                            <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title="Quest Panel">
-                                {!title}
-                            </h2>
-                        </div>
-                        
-                        <!-- description -->
-                        <div id="quest-info" class="slds-panel__body">
-                            <!--
-                                insertBefore actually adds the description via DOM manipulation
-                                but on the page, this is where it will appear
-                            -->
+            </apex:form>
+            
+            
+            <!-- information panel -->
+            <apex:outputPanel id="quest-panel">
+                <div class="slds-panel slds-panel_docked slds-panel_docked-right slds-is-open" aria-hidden="false">
+                    
+                    <!-- quest title -->
+                    <div class="slds-panel__header">
+                        <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title="Quest Panel">
+                            {!title}
+                        </h2>
+                    </div>
+                    
+                    <!-- description -->
+                    <div id="quest-info" class="slds-panel__body info-panel">
+                        <!--
+                            insertBefore actually adds the description via DOM manipulation
+                            but on the page, this is where it will appear
+                        -->
+                        <apex:outputText >
                             <script>
-                            	insertBefore("quest-info", "{! description }");
+                                insertBefore("quest-info", "{! description }");
                             </script>
-                            <apex:commandButton rendered="{! questId != null}" action="{!submitForApproval}" value="Accept" />
-                        </div>
+                        </apex:outputText>
+                        
+                        
+                        
+                        <apex:outputText rendered="{!questId != null}">
+                            <form onsubmit="handleNewAssignment(event, submitForApproval)">
+                                
+                                <!-- email address -->
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-email-accept">Contact Email Address</label>
+                                    <div class="slds-form-element__control">
+                                        <input name="Assignee Email" type="email" id="form-element-email-accept" placeholder="YeetTheDragon@runescape.com" class="slds-input" />
+                                    </div>
+                                </div> 
+                                
+                                <p>
+                                    <em>If you want to assign a contact to this quest, enter their email here.</em>
+                                </p>
+                                
+                                <div class="w-100 d-flex justify-content-center mt-3">
+                                    <button type="submit" class="slds-button slds-button_neutral slds-button_brand w-100" >
+                                        Accept
+                                    </button>
+                                </div>
+                            </form>
+                        </apex:outputText>
                     </div>
-                </apex:outputPanel>
-                
-            </apex:pageBlockSection>
-        </apex:pageBlock>
-        
-        <!-- error message prompt -->
-        <div id="error-modal" style='display: {! IF(hasError, "initial", "none")};'>
-            <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
-                <div class="slds-modal__container">
-                    <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
-                        <h2 class="slds-text-heading_medium" id="prompt-heading-id">Service unavailable</h2>
-                    </header>
-                    <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
-                        <p>{!errorMessage}</p>
-                    </div>
-                    <footer class="slds-modal__footer slds-theme_default">
-                        <button class="slds-button slds-button_neutral" onclick="hideModal(event, 'error-modal')">Got It</button>
-                    </footer>
                 </div>
-            </section>
-            <div class="slds-backdrop slds-backdrop_open"></div>
-        </div>
-        
-        <!-- dynamic error message prompt -->
-        <div id="dynamic-error-modal" style='display: none;'>
-            <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
-                <div class="slds-modal__container">
-                    <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
-                        <h2 class="slds-text-heading_medium" id="prompt-heading-id">Service unavailable</h2>
-                    </header>
-                    <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
-                        <!-- content -->
-                    </div>
-                    <footer class="slds-modal__footer slds-theme_default">
-                        <button class="slds-button slds-button_neutral" onclick="hideErrorModal(event, 'dynamic-error-modal')">Got It</button>
-                    </footer>
+            </apex:outputPanel>
+            
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+    <!-- dynamic error message prompt -->
+    <div id="dynamic-error-modal" style='display: none;'>
+        <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                    <h2 class="slds-text-heading_medium" id="prompt-heading-id">Service unavailable</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                    <!-- content -->
                 </div>
-            </section>
-            <div class="slds-backdrop slds-backdrop_open"></div>
-        </div>
-        
-        <!-- the utility bar -->
-        <footer class="slds-utility-bar_container" aria-label="Utility Bar">
-            <h2 class="slds-assistive-text">Utility Bar</h2>
+                <footer class="slds-modal__footer slds-theme_default">
+                    <button class="slds-button slds-button_neutral" onclick="hideErrorModal(event, 'dynamic-error-modal')">Got It</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    
+    <!-- the utility bar -->
+    <footer class="slds-utility-bar_container" aria-label="Utility Bar">
+        <h2 class="slds-assistive-text">Utility Bar</h2>
+        <apex:form >
             <ul class="slds-utility-bar">
                 
                 <!-- list page number -->
@@ -121,8 +132,8 @@
                     </button>
                 </li>
             </ul>
-        </footer>
-    </apex:form>
+		</apex:form>
+    </footer>
     
     <!-- new quest modal -->
     <div style='display: none;' id='new-quest-modal'>
@@ -241,9 +252,9 @@
         </section>
         <div class="slds-backdrop slds-backdrop_open"></div>
     </div>
-	
-    <!-- generate the javascript function to save a quest -->
+    
     <apex:form >
+        <!-- generate the javascript function to save a quest -->
         <apex:actionFunction name="saveQuest" action="{! saveQuest }" reRender="dynamic-error-modal">
             <apex:param name="questName" value="" assignTo="{! formData.questName }" />
             <apex:param name="questDetails" value="" assignTo="{! formData.questDetails }" />
@@ -255,6 +266,13 @@
             <apex:param name="reward" value="" assignTo="{! formData.reward }" />
             <apex:param name="email" value="" assignTo="{! formData.email }" />
         </apex:actionFunction>
+        
+        <!-- generate javascript function to submit quest for approval -->
+        <apex:actionFunction name="submitForApproval" action="{! submitForApproval }" reRender="">
+            <apex:param name="assigneeEmail" value="" assignTo="{! assigneeEmail }" />
+        </apex:actionFunction>
+        
+        <apex:stylesheet value="{!$Resource.Style}"/>
     </apex:form>
     
     <apex:includeScript value="{!$Resource.QuestPage}"/>
