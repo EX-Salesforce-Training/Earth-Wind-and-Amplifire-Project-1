@@ -1,0 +1,64 @@
+<apex:page label="GuildMemberListPage" standardController="Guild_Member__c" recordSetVar="memberList" extensions="GuildMemberExtension">
+    <apex:form >              
+        <apex:pageBlock id="memberBlock">
+            <apex:pageBlockSection title="Guild Members">                
+                <apex:selectList value="{!Skills}" multiselect="true" readonly="true" size="4">
+                    <apex:selectOptions value="{!Skills}"/>
+                </apex:selectList><p/>
+                <apex:pageBlockTable value="{!memberList}" var="gm" title="Guild Members" id="GMs">
+                    <apex:column headerValue="Name">
+                        <apex:outputLink value="{!$Page.UserPage}">
+                            {!gm.Name}
+                        </apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!gm.Total_Level__c}" headerValue="Level"/>
+                    <apex:column value="{!gm.Class__c}" headerValue="Class"/>
+                    <apex:column value="{!gm.Skills__c}" headerValue="Skills"/>
+                    <apex:column headerValue="Party"> 
+                        <apex:dataTable value="{!gm.Member_Assignments__r}" var="Party">
+                            <apex:column value="{!Party.Party__c}"/>
+                        </apex:dataTable>   
+                    </apex:column>
+                    <apex:column value="{!gm.Guild_Hall__r.Name}" headerValue="Guild Hall"/>
+                    <apex:column headerValue="Options">
+                        <apex:outputLink value="{! URLFOR($Action.Guild_Member__c.Edit, gm.Id) }">
+                            Edit
+                        </apex:outputLink>
+                        <apex:outputLink value="{! URLFOR($Action.Guild_Member__c.Delete, gm.Id) }">
+                            Delete
+                        </apex:outputLink>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <footer class="slds-utility-bar_container" aria-label="Utility Bar">
+            <h2 class="slds-assistive-text">Utility Bar</h2>
+            <ul class="slds-utility-bar">
+                
+                <!-- list page number -->
+                <li class="slds-utility-bar__item slds-m-horizontal_small">
+                    <apex:outputText value="Page: {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
+                </li>
+                
+                <!-- previous -->
+                <li class="slds-utility-bar__item slds-m-horizontal_small">
+                    <apex:commandLink action="{! Previous }" value="« Previous"
+                                      rendered="{! HasPrevious }"/>
+                    
+                    <apex:outputText style="color: #ccc;" value="« Previous"
+                                     rendered="{! NOT(HasPrevious) }"/>
+                </li>
+                
+                <!-- next -->
+                <li class="slds-utility-bar__item slds-m-horizontal_small">
+                    <apex:commandLink action="{! Next }" value="Next »"
+                                      rendered="{! HasNext }"/>
+                    
+                    <apex:outputText style="color: #ccc;" value="Next »"
+                                     rendered="{! NOT(HasNext) }"/>
+                </li>
+            </ul>
+        </footer>
+    </apex:form>
+</apex:page>
