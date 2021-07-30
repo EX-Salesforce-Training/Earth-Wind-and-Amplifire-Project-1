@@ -110,6 +110,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>GuildExtensionTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>PartyListPageController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
