@@ -100,11 +100,6 @@
         <default>false</default>
         <visible>true</visible>
     </applicationVisibilities>
-    <applicationVisibilities>
-        <application>standard__Work</application>
-        <default>true</default>
-        <visible>true</visible>
-    </applicationVisibilities>
     <classAccesses>
         <apexClass>ContactTriggerHandler</apexClass>
         <enabled>false</enabled>

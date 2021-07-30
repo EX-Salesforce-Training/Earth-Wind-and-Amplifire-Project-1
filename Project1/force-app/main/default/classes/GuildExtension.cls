@@ -47,8 +47,6 @@ public with sharing class GuildExtension {
         questBoard = [SELECT Id, Name, Danger_Level__c, Date_Opened__c, Location__c, 
                       Required_Professions__c, Reward__c, Status__c, Requires_Party__c, Quest_Details__c, Guild_Hall__c, Party__c FROM Quest__c where Guild_Hall__c = :title];
         return questBoard;
-    }
-    
-    
+    }    
    
 }
