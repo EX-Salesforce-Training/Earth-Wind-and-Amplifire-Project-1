@@ -7,4 +7,5 @@ public class QuestFormData {
     public Boolean requiredProfessionAdventurer {get;set;}
     public Boolean requiredProfessionCraftsman {get;set;}
     public Double reward {get;set;}
+    public String email {get;set;}
 }

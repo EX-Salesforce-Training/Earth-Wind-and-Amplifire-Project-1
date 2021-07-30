@@ -136,6 +136,14 @@
                 <form method="POST" onsubmit="submitNewQuest(event, saveQuest)">
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                         
+                        <!-- email address -->
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="form-element-email">Contact Email Address</label>
+                            <div class="slds-form-element__control">
+                                <input name="Email" type="email" id="form-element-email" placeholder="YeetTheDragon@runescape.com" class="slds-input" />
+                            </div>
+                        </div> 
+                        
                         <!-- quest name -->
                         <div class="slds-form-element">
                             <label class="slds-form-element__label" for="form-element-01">Quest Name</label>
@@ -217,6 +225,7 @@
                                 <input name="Reward" type="text" id="form-element-reward" placeholder="1000.00" class="slds-input" />
                             </div>
                         </div> 
+                        
                     </div>
                     
                     <!-- save / cancel buttons -->
@@ -244,6 +253,7 @@
             <apex:param name="requiredProfessionAdventurer" value="" assignTo="{! formData.requiredProfessionAdventurer }" />
             <apex:param name="requiredProfessionCraftsman" value="" assignTo="{! formData.requiredProfessionCraftsman }" />
             <apex:param name="reward" value="" assignTo="{! formData.reward }" />
+            <apex:param name="email" value="" assignTo="{! formData.email }" />
         </apex:actionFunction>
     </apex:form>
     

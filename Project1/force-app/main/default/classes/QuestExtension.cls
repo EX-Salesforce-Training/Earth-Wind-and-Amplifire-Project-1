@@ -34,40 +34,49 @@ public class QuestExtension {
     }
     
     // @desc: submit a quest for approval
-    public void submitForApproval() {
-        if(questId == null) return;
+    public PageReference submitForApproval() {
+        if(questId == null) return null;
         
         Approval.ProcessSubmitRequest questApprovalRequest = new Approval.ProcessSubmitRequest();
         questApprovalRequest.setObjectId(questId);
         questApprovalRequest.submitterid = UserInfo.getUserId();
         questApprovalRequest.setProcessDefinitionNameOrId(approvalProcessName);
-         
+        
+        PageReference nextPage = null;
         try {
         	Approval.process(questApprovalRequest);
+            nextPage = Page.QuestPageSuccessfulSubmission;
         } catch(Exception e) {
             System.debug(e);
             hasError = true;
             // query for the quest and figure out why we failed
             Quest__c q = [SELECT Status__c, Sub_Status__c FROM Quest__c WHERE Id = :questId ];
+            System.debug(q);
             
             // if the quest has already been accepted by some player
             if(q.Status__c == 'Open' && q.Sub_Status__c == 'Accepted') {
                 errorMessage = 'This quest has already been accepted by some user. Please try another quest.';
             } 
             
+            // if someone has already applied for this quest
+            else if(q.Status__c == 'Open' && q.Sub_Status__c == 'Pending') {
+                errorMessage = 'This quest already has a pending submission. Maybe try again later.';
+            }
+            
             // if something else happened
             else {
             	errorMessage = 'Unable to submit quest for approval. Please try another quest.';
             }
+            
         } finally {
         	questId = null;
         }
+        
+        return nextPage;
     } 
     
     // @desc : this function allows us to dynamically create a new quest from the quest page
-    public void saveQuest() {
-        System.debug(formData);
-        
+    public PageReference saveQuest() {
         Quest__c newQuest = new Quest__c();
         newQuest.Name = formData.questName;
         newQuest.Danger_Level__c = formData.dangerLevel;
@@ -84,6 +93,19 @@ public class QuestExtension {
             newQuest.Required_Professions__c = 'Craftsman';
         }
         
+        String email = formData.email;
+        
+		// we're done with form data, reset it        
+        formData = new QuestFormData();
+		
+        try {        
+        	Contact con = [SELECT Id FROM Contact WHERE Email = :email];
+            newQuest.Contact__c = con.id;
+        } catch(Exception e) {
+            return null;
+        }
+        
+        
         // standard stuff
         newQuest.Status__c = 'New';
         newQuest.Sub_Status__c = 'Pending';
@@ -98,13 +120,10 @@ public class QuestExtension {
         
         try {
             insert newQuest;
-        } catch(DMLException e) {
-			System.debug(e);
         } catch(Exception e) {
-        	System.debug(e);
-        } finally {
-      	
-            formData = new QuestFormData();
-        }        
+			return null;
+        }
+        
+        return Page.QuestPageSuccessfulSubmission;
     }
 }

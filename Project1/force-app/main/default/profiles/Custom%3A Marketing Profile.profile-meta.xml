@@ -101,6 +101,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>ContactTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>GuildExtension</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -693,6 +697,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>QuestPage</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>QuestPageSuccessfulSubmission</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>

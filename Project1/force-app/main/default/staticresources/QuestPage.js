@@ -50,40 +50,6 @@ function hideErrorModal(event, id) {
     content.innerText = '';
     elem.style.display='none';
 }
-
-// @desc : validate the parameters of the form data prior to submitting a new quest
-// @note : I hate to do it this way, but Apex makes it so the actionFunction component requires
-//       : a reRender component, meaning  I can't use hasError and errorMessage because the page
-//       : won't rerender as a whole. It's really awful.
-// @data : <object> the form data passed in 
-function validateParams(data) {
-    if(data['Required Profession: Adventurer'] === false && data['Required Profession: Craftsman'] === false) {
-    	return false;
-	}
-    
-    if(data['Quest Name'] === '') {
-    	return false;
-	}
-    
-    if(data['Location'] === '') {
-    	return false;
-	}
-    
-    if(data['Quest Details'].length < 10) {
-    	return false;
-	}
-    
-    const validDangerLevels = ['Certain Death', 'Hard', 'Medium', 'Easy', 'Beginner'];
-    if(!validDangerLevels.includes(data['Danger Level'])) {
-    	return false;
-	}
-    
-    if(data['Reward'] === NaN || data['Reward'] < 0) {
-    	return false;
-	}
-    
-    return true;
-}
     
 // @desc       : retrieve the parameters, save a new quest
 // @event      : <event>
@@ -97,12 +63,6 @@ function submitNewQuest(event, actionFunc) {
     ['Requires Party', 'Required Profession: Adventurer', 'Required Profession: Craftsman']
     .forEach(field => data[field] = (data[field] !== undefined));
     data['Reward'] = Number(data['Reward']);
-
-    if(!validateParams(data)) {
-    	showErrorModal(null, 'dynamic-error-modal', 'Unable to create quest, check your entered values.');
-    	hideModal(null, 'new-quest-modal');
-    	return;
-	}
 	
     actionFunc(
         data['Quest Name'],
@@ -112,7 +72,13 @@ function submitNewQuest(event, actionFunc) {
         data['Danger Level'],
         data['Required Profession: Adventurer'],
         data['Required Profession: Craftsman'],
-        data['Reward']
+        data['Reward'],
+        data['Email']
     );
-    hideModal(null, 'new-quest-modal');
+    
+    // success should lead to a redirect, if not, then this modal will pop up
+    setTimeout(() => {
+    	showErrorModal(null, 'dynamic-error-modal', 'Something went wrong. Double-check your submission and try again.');
+    	hideModal(null, 'new-quest-modal');
+	}, 2000)
 }
