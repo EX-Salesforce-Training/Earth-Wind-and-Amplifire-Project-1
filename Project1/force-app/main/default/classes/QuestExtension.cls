@@ -47,26 +47,32 @@ public class QuestExtension {
     public PageReference submitForApproval() {
         if(questId == null) return null;
         if(assigneeEmail == null || assigneeEmail == '') return null;
+        
+        
+        assigneeEmail = assigneeEmail.toLowerCase();
 
         Approval.ProcessSubmitRequest questApprovalRequest = new Approval.ProcessSubmitRequest();
         questApprovalRequest.setObjectId(questId);
         questApprovalRequest.submitterid = UserInfo.getUserId();
         questApprovalRequest.setProcessDefinitionNameOrId(approvalProcessName);
-        Contact con;
+        
+        Guild_Member__c guildMem;
         Quest__c q;
         try {
-            con = [SELECT Email FROM Contact WHERE Email = :assigneeEmail];
+            guildMem = [SELECT Member_Email__c FROM Guild_Member__c WHERE Member_Email__c = :assigneeEmail];
             q = [SELECT Contact__c FROM Quest__c WHERE Id = :questId];
         } catch(Exception e) {
+            System.debug(e);
             return null;
         }
         
         PageReference nextPage = null;
         try {
         	Approval.process(questApprovalRequest);
-            q.Contact__c = con.Id;
-            update q;
             nextPage = Page.QuestPageSuccessfulSubmission;
+            
+            // if the guild member gets rejected, this will still be here, not exactly elegant
+            q.Guild_Member__c = guildMem.id;
         } catch(Exception e) {
             System.debug(e);
             // do nothing and move on

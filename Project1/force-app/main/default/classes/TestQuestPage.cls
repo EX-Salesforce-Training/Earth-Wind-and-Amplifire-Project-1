@@ -4,14 +4,19 @@ public class TestQuestPage {
     public static void setup() {
         Contact con = new Contact();
         con.LastName = 'Flay';
-        con.Email = 'dummy@email.com';
+        con.Email = 'dummy@contact.com';
         insert con;
+        
+        Guild_Member__c guildMem = new Guild_Member__c();
+        guildMem.Name = 'Steve';
+        guildMem.Member_Email__c = 'dummy@guildMember.com';
+        insert guildMem;
     }
     
     // positive single test
     @isTest
     public static void testSingleCreateQuest01() {
-        Contact con = [SELECT LastName, Email FROM Contact WHERE Email = 'dummy@email.com'];
+        Contact con = [SELECT LastName, Email FROM Contact WHERE Email = 'dummy@contact.com'];
         Quest__c q = new Quest__c();
         q.Contact__c = con.Id;
         
@@ -22,8 +27,6 @@ public class TestQuestPage {
         q.Quest_Details__c = 'There\'s a chicken ravaging Edgeville!';
         q.Reward__c = 800;
         q.Required_Professions__c = 'Adventurer;Craftsman';
-        
-        
         
         // standard stuff
         q.Status__c = 'New';
@@ -77,7 +80,7 @@ public class TestQuestPage {
     @isTest
     public static void testMassCreateQuest01() {
         List<Quest__c> questList = new List<Quest__c>();
-        Contact con = [SELECT LastName, Email FROM Contact WHERE Email = 'dummy@email.com'];
+        Contact con = [SELECT LastName, Email FROM Contact WHERE Email = 'dummy@contact.com'];
         for(Integer i = 0; i < 50; i++) {
             Quest__c q = new Quest__c();
             q.Contact__c = con.Id;
@@ -159,7 +162,7 @@ public class TestQuestPage {
         ApexPages.StandardSetController ssc = new ApexPages.StandardSetController(new List<Quest__c>());
         QuestExtension ext = new QuestExtension(ssc);
         
-        final String dummyEmail = 'dummy@email.com';
+        final String dummyContactEmail = 'dummy@contact.com';
         
         ext.formData.questName = 'Kill the Chicken!';
         ext.formData.questDetails = 'There\'s a chicken ravaging Edgeville!';
@@ -169,7 +172,7 @@ public class TestQuestPage {
         ext.formData.requiredProfessionAdventurer = false;
         ext.formData.requiredProfessionCraftsman = true;
         ext.formData.reward = 500;
-        ext.formData.email = dummyEmail;
+        ext.formData.email = dummyContactEmail;
         
             
         System.assertNotEqualS(ext.saveQuest(), null);
@@ -181,7 +184,7 @@ public class TestQuestPage {
         ApexPages.StandardSetController ssc = new ApexPages.StandardSetController(new List<Quest__c>());
         QuestExtension ext = new QuestExtension(ssc);
         
-        final String dummyEmail = 'dummy1@email.com';
+        final String dummyEmail = 'dummy1@contact.com';
         
         ext.formData.questName = 'Kill the Chicken!';
         ext.formData.questDetails = 'There\'s a chicken ravaging Edgeville!';
@@ -204,7 +207,7 @@ public class TestQuestPage {
         QuestExtension ext = new QuestExtension(ssc);
         
         for(Integer i = 0; i < 50; i++) {
-            final String dummyEmail = 'dummy@email.com';
+            final String dummyEmail = 'dummy@contact.com';
             
             ext.formData.questName = 'Kill the Chicken!';
             ext.formData.questDetails = 'There\'s a chicken ravaging Edgeville!';
@@ -228,7 +231,7 @@ public class TestQuestPage {
         QuestExtension ext = new QuestExtension(ssc);
         
         for(Integer i = 0; i < 50; i++) {
-            final String dummyEmail = 'dummy1@email.com';
+            final String dummyEmail = 'dummy1@contact.com';
             
             ext.formData.questName = 'Kill the Chicken!';
             ext.formData.questDetails = 'There\'s a chicken ravaging Edgeville!';
@@ -261,7 +264,7 @@ public class TestQuestPage {
         System.assertEquals(ext.getTitle(), 'Quest Panel');
         
         // ensure it succeeds when it should
-        final String dummyEmail = 'dummy@email.com';
+        final String dummyEmail = 'dummy@contact.com';
         
         ext.formData.questName = 'Kill the Chicken!';
         ext.formData.questDetails = 'There is a chicken ravaging Edgeville!';
@@ -288,7 +291,8 @@ public class TestQuestPage {
         QuestExtension ext = new QuestExtension(ssc);
         System.assertEquals(ext.submitForApproval(), null);
         
-        final String dummyEmail = 'dummy@email.com';
+        final String dummyContactEmail = 'dummy@contact.com';
+        final String dummyGuildMemberEmail = 'dummy@guildmember.com';
         final String questName = 'Kill the Chicken!';
         
         ext.formData.questName = questName;
@@ -299,11 +303,11 @@ public class TestQuestPage {
         ext.formData.requiredProfessionAdventurer = true;
         ext.formData.requiredProfessionCraftsman = true;
         ext.formData.reward = 500;
-        ext.formData.email = dummyEmail;
+        ext.formData.email = dummyContactEmail;
         
         System.assertNotEquals(ext.saveQuest(), null);
         Quest__c q = [SELECT Id FROM Quest__c WHERE Name = :questName];
-        ext.assigneeEmail = 'dummy@email.com';
+        ext.assigneeEmail = dummyGuildMemberEmail;
         System.assertEquals(ext.submitForApproval(), null);
         
         ext.questId = q.Id;
@@ -317,7 +321,8 @@ public class TestQuestPage {
         QuestExtension ext = new QuestExtension(ssc);
         System.assertEquals(ext.submitForApproval(), null);
         
-        final String dummyEmail = 'dummy@email.com';
+        final String dummyContactEmail = 'dummy@contact.com';
+        final String dummyGuildMemEmail = 'dummy1@guildMember.com';
         final String questName = 'Kill the Chicken!';
         
         ext.formData.questName = questName;
@@ -328,13 +333,13 @@ public class TestQuestPage {
         ext.formData.requiredProfessionAdventurer = true;
         ext.formData.requiredProfessionCraftsman = true;
         ext.formData.reward = 500;
-        ext.formData.email = dummyEmail;
+        ext.formData.email = dummyContactEmail;
         
         System.assertNotEquals(ext.saveQuest(), null);
         Quest__c q = [SELECT Id FROM Quest__c WHERE Name = :questName];
         
         // email that DNE
-        ext.assigneeEmail = 'dummy1@email.com';
+        ext.assigneeEmail = dummyGuildMemEmail;
         System.assertEquals(ext.submitForApproval(), null);
         
         ext.questId = q.Id;

@@ -54,14 +54,14 @@
                                 
                                 <!-- email address -->
                                 <div class="slds-form-element">
-                                    <label class="slds-form-element__label" for="form-element-email-accept">Contact Email Address</label>
+                                    <label class="slds-form-element__label" for="form-element-email-accept">Guild Member Email Address</label>
                                     <div class="slds-form-element__control">
                                         <input name="Assignee Email" type="email" id="form-element-email-accept" placeholder="YeetTheDragon@runescape.com" class="slds-input" />
                                     </div>
                                 </div> 
                                 
                                 <p>
-                                    <em>If you want to assign a contact to this quest, enter their email here.</em>
+                                    <em>If you want to assign a guild member to this quest, enter their email here.</em>
                                 </p>
                                 
                                 <div class="w-100 d-flex justify-content-center mt-3">
