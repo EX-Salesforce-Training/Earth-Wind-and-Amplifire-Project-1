@@ -109,6 +109,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>GuildMemberExtension</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>PartyListPageController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -118,6 +122,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>QuestFormData</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>QuestPageController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>QuestTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -670,7 +682,15 @@
         <readable>false</readable>
     </fieldPermissions>
     <pageAccesses>
+        <apexPage>GuildHallListPage</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>GuildHallPage</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>GuildMemberListPage</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
