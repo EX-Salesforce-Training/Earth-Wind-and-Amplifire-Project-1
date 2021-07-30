@@ -12,6 +12,16 @@
         <reevaluateOnChange>false</reevaluateOnChange>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>Set_New</fullName>
+        <field>Status__c</field>
+        <literalValue>New</literalValue>
+        <name>Set New</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Set_Open</fullName>
         <description>set the quest&apos;s status to open</description>
         <field>Status__c</field>

@@ -106,6 +106,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>ContactTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>GuildExtension</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -118,7 +122,11 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>QuestPageController</apexClass>
+        <apexClass>QuestFormData</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TestQuestPage</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -765,6 +773,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>QuestPage</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>QuestPageSuccessfulSubmission</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>

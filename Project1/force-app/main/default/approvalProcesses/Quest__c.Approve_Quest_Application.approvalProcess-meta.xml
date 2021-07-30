@@ -43,13 +43,21 @@
             <name>Set_Accepted</name>
             <type>FieldUpdate</type>
         </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Set_New</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
         <action>
             <name>Set_Open</name>
             <type>FieldUpdate</type>
         </action>
-    </finalApprovalActions>
-    <finalApprovalRecordLock>true</finalApprovalRecordLock>
-    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    </initialSubmissionActions>
     <label>Approve Quest Application</label>
     <processOrder>1</processOrder>
     <recordEditability>AdminOnly</recordEditability>
