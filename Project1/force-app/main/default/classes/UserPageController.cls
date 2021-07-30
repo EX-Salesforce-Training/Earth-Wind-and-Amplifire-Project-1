@@ -1,4 +1,4 @@
-public class UserPageController {
+public with sharing class UserPageController {
     public Guild_Member__c member{get;set;}
     public List<Item__c> items{get;set;}
     public List<Quest__c> quests{get;set;}
@@ -15,7 +15,7 @@ public class UserPageController {
                   (SELECT Quest__c.ID FROM Quests__r),
                   (SELECT Member_Assignment__c.ID FROM Member_Assignments__r)
                   FROM Guild_Member__c
-                  //WHERE Guild_Member__c.User__r.ID =: UserInfo.getUserId()
+                  WHERE Guild_Member__c.User__r.ID =: UserInfo.getUserId()
                   LIMIT 1];
         
         items = [SELECT ID, Name, Item_Type__c, Properties__c, Value__c 
@@ -39,4 +39,6 @@ public class UserPageController {
     public void save(){
         update member;
     }
+    
+
 }
