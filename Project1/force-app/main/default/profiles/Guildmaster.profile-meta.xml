@@ -114,6 +114,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>GuildMemberExtension</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>PartyListPageController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -761,6 +765,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>GuildHallPage</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>GuildMemberListPage</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
