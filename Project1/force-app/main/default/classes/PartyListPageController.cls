@@ -1,4 +1,4 @@
-public class PartyListPageController {
+public with sharing class PartyListPageController {
     
     private integer numRecords;
     private integer pageSize;
@@ -39,11 +39,11 @@ public class PartyListPageController {
                 filterByMinimumLevelRequired = value;
             }}}
     public string filterByMinLvlReqComparisonOp {get;set;}
-    public List<string> filterByClassRequirements {get;set;}
+    public List<string> filterByClassRequirements {get;set;}   
     
-    
-    
-    
+    public boolean confirmation {get;set;}
+    public boolean failure {get;set;}
+        
     public string partyid {get;set;}
     public Party__c currentParty {get;set;}
     public List<Guild_Member__c> currentPartyMembers{get;set;}
@@ -56,6 +56,8 @@ public class PartyListPageController {
 		newParty = new Party__c();
         orderBy = 'Name';
         ascending = true;
+        confirmation = false;
+        failure = false;
     }
     
     public List<Party__c> getParties() {
@@ -66,7 +68,7 @@ public class PartyListPageController {
         }
         boolean whereAnd = false;
         if (filterByName != null) {
-            query += 'Name LIKE \'%' +filterByName + '%\' ';
+            query += 'Name LIKE \'%' + string.escapeSingleQuotes(filterByName) + '%\' ';
             whereAnd = true;
         }
         if (filterByAcceptingNewMembers == 'true') {
@@ -129,7 +131,6 @@ public class PartyListPageController {
         }
         query += ' NULLS LAST ';
         query += 'LIMIT :pageSize OFFSET :offset';
-        system.debug(query);
         return database.query(query);
     }
     
@@ -229,22 +230,56 @@ public class PartyListPageController {
         offset = 0;
     }
     
+    /* 
+     * Dynamically grabs the current set of classes from the Party object's schema
+     * and generates a list of select options from it.
+     */
     public List<SelectOption> getClassList() {
         List<SelectOption> classes = new List<SelectOption>();
-        classes.add(new SelectOption('Artificer', 'Artificer'));
-        classes.add(new SelectOption('Barbarian', 'Barbarian'));
-        classes.add(new SelectOption('Bard', 'Bard'));
-        classes.add(new SelectOption('Cleric', 'Cleric'));
-        classes.add(new SelectOption('Druid', 'Druid'));
-        classes.add(new SelectOption('Fighter', 'Fighter'));
-        classes.add(new SelectOption('Monk', 'Monk'));
-        classes.add(new SelectOption('Paladin', 'Paladin'));
-        classes.add(new SelectOption('Ranger', 'Ranger'));
-        classes.add(new SelectOption('Rogue', 'Rogue'));
-        classes.add(new SelectOption('Sorcerer', 'Sorcerer'));
-        classes.add(new SelectOption('Warlock', 'Warlock'));
-        classes.add(new SelectOption('Wizard', 'Wizard'));
+        Schema.DescribeFieldResult describeResult = Party__c.Class_Requirements__c.getDescribe();
+        List<Schema.PicklistEntry> picklistEntries = describeResult.getPickListValues();
+        for (Schema.PicklistEntry pe : picklistEntries) {
+            classes.add(new SelectOption(pe.getValue(), pe.getLabel()));
+        }
         return classes;
+    }
+    
+    public PageReference Wizard() {
+        stopConfirmation();
+        stopFailure();
+        newParty = new Party__c();
+        return Page.PartyWizardPage;
+    }    
+    
+    public void createParty() {
+        try {
+            insert newParty;
+            partyid = newParty.id;
+            showConfirmation();
+        }
+        catch (DMLException e) {
+            showFailure();
+        }
+    }
+    
+    public PageReference listPage() {
+        return Page.PartyListPage;
+    }
+    
+    public void showConfirmation() {
+        confirmation = true;
+    }
+    
+    public void stopConfirmation() {
+        confirmation = false;
+    }
+    
+    public void showFailure() {
+        failure = true;
+    }
+    
+    public void stopFailure() {
+        failure = false;
     }
     
     public PageReference partyPage() {
@@ -257,17 +292,8 @@ public class PartyListPageController {
         return Page.PartyPage;
     }
     
-    public void createParty() {
-        try {
-            insert newParty;
-        }
-        catch (DMLException e) {
-            
-        }
-        finally {
-            newParty = new Party__c();
-        }
-        
+    public PageReference userPage() {
+        return Page.UserPage;
     }
 
 }

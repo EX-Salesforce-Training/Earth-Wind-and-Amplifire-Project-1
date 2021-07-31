@@ -1,7 +1,15 @@
 <apex:page controller="PartyListPageController">
-    <apex:pageBlock id="partyBlock" title="{!currentParty.Name}">
-   		<apex:pageBlockTable value="{!currentPartyMembers}" var="member" >
-            <apex:column value="{!member.Name}" />
-        </apex:pageBlockTable> 
-    </apex:pageBlock>
+    <apex:form >
+        <apex:pageBlock id="partyBlock" title="{!currentParty.Name}">
+            <apex:pageBlockTable value="{!currentPartyMembers}" var="member" >
+                <apex:column >
+                    <apex:commandLink value="{!member.Name}" action="{!userPage}" />
+                </apex:column>
+                <apex:column value="{!member.Name}" />
+                <apex:column value="{!member.Name}" />
+                <apex:column value="{!member.Name}" />
+                <apex:column value="{!member.Name}" />
+            </apex:pageBlockTable> 
+        </apex:pageBlock>
+    </apex:form>
 </apex:page>
