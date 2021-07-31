@@ -288,7 +288,7 @@ public with sharing class PartyListPageController {
         for (Member_Assignment__c ma : currentParty.Member_Assignments__r) {
             ids.add(ma.Guild_Member__c);
         }
-        currentPartyMembers = [SELECT Name FROM Guild_Member__c WHERE id IN :ids];
+        currentPartyMembers = [SELECT Name, Class__c, Race__c, Active__c FROM Guild_Member__c WHERE id IN :ids];
         return Page.PartyPage;
     }
     

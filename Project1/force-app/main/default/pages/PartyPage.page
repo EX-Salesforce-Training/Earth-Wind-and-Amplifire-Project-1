@@ -2,13 +2,14 @@
     <apex:form >
         <apex:pageBlock id="partyBlock" title="{!currentParty.Name}">
             <apex:pageBlockTable value="{!currentPartyMembers}" var="member" >
-                <apex:column >
-                    <apex:commandLink value="{!member.Name}" action="{!userPage}" />
+                <apex:column headerValue="{!$ObjectType.Guild_Member__c.fields.Name.label}" >
+                    <apex:outputLink value="/{!member.id}" >
+                    	{!member.Name}
+                    </apex:outputLink>
                 </apex:column>
-                <apex:column value="{!member.Name}" />
-                <apex:column value="{!member.Name}" />
-                <apex:column value="{!member.Name}" />
-                <apex:column value="{!member.Name}" />
+                <apex:column value="{!member.Class__c}" />
+                <apex:column value="{!member.Race__c}" />
+                <apex:column value="{!member.Active__c}" />
             </apex:pageBlockTable> 
         </apex:pageBlock>
     </apex:form>
