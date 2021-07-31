@@ -1,64 +1,86 @@
 <apex:page controller="PartyListPageController" docType="html-5.0">
     <apex:form >
         <apex:pageBlock id="partyBlock" title="Party List">
-            Search:
-            <apex:inputText label="Search" value="{!filterByName}" >
-                <apex:actionSupport event="onchange" reRender="partyBlock"/>
-            </apex:inputText>
-            Filter:
-            <apex:selectList value="{!filterByAcceptingNewMembers}" size="1">
-                <apex:selectOption itemLabel="---" itemValue="{!null}" />
-                <apex:selectOption itemLabel="Accepting New Members" itemValue="true"/>
-                <apex:selectOption itemLabel="Not Accepting New Members" itemValue="false"/>
-                <apex:actionSupport event="onchange" reRender="partyBlock" />
-            </apex:selectList>
-            Filter Party Size:
-            <apex:selectList value="{!filterByPartySizeComparisonOp}" size="1">
-                <apex:selectOption itemLabel="---" itemValue="{!null}" />
-                <apex:selectOption itemLabel="Equals" itemValue="=" />
-                <apex:selectOption itemLabel="Greater Than" itemValue=">" />
-                <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
-                <apex:selectOption itemLabel="Less Than" itemValue="<" />
-                <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
-                <apex:actionSupport event="onchange" reRender="partyBlock" />
-            </apex:selectList>
-            Party Size:
-            <apex:inputText label="Party Size" value="{!filterByPartySize}" >
-            	<apex:actionSupport event="onchange" reRender="partyBlock" />
-            </apex:inputText>
-            Filter Max Party Size:
-            <apex:selectList value="{!filterByMaxPartySizeComparisonOp}" size="1">
-                <apex:selectOption itemLabel="---" itemValue="{!null}" />
-                <apex:selectOption itemLabel="Equals" itemValue="=" />
-                <apex:selectOption itemLabel="Greater Than" itemValue=">" />
-                <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
-                <apex:selectOption itemLabel="Less Than" itemValue="<" />
-                <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
-                <apex:actionSupport event="onchange" reRender="partyBlock" />
-            </apex:selectList>
-            Max Party Size:
-            <apex:inputText label="Max Party Size" value="{!filterByMaxPartySize}" >
-            	<apex:actionSupport event="onchange" reRender="partyBlock" />
-            </apex:inputText>
-            Filter Min Lvl:
-            <apex:selectList value="{!filterByMinLvlReqComparisonOp}" size="1">
-                <apex:selectOption itemLabel="---" itemValue="{!null}" />
-                <apex:selectOption itemLabel="Equals" itemValue="=" />
-                <apex:selectOption itemLabel="Greater Than" itemValue=">" />
-                <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
-                <apex:selectOption itemLabel="Less Than" itemValue="<" />
-                <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
-                <apex:actionSupport event="onchange" reRender="partyBlock" />
-            </apex:selectList>
-            MinLvl:
-            <apex:inputText label="Min Lvl" value="{!filterByMinimumLevelRequired}" >
-            	<apex:actionSupport event="onchange" reRender="partyBlock" />
-            </apex:inputText>
-            Filter Class:
-            <apex:selectList value="{!filterByClassRequirements}" multiselect="true" size="3" >
-                <apex:selectOptions value="{!classList}" />
-                <apex:actionSupport event="onchange" reRender="partyBlock" />
-            </apex:selectList>
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        Search:
+                        <apex:inputText label="Search" value="{!filterByName}" >
+                            <apex:actionSupport event="onchange" reRender="partyBlock"/>
+                        </apex:inputText>
+                    </td>
+                    <td>
+                        Filter Accept Members:
+                        <apex:selectList value="{!filterByAcceptingNewMembers}" size="1" >
+                            <apex:selectOption itemLabel="---" itemValue="{!null}" />
+                            <apex:selectOption itemLabel="Accepting New Members" itemValue="true"/>
+                            <apex:selectOption itemLabel="Not Accepting New Members" itemValue="false"/>
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                    <td>
+                        Filter Party Size:
+                        <apex:selectList value="{!filterByPartySizeComparisonOp}" size="1">
+                            <apex:selectOption itemLabel="---" itemValue="{!null}" />
+                            <apex:selectOption itemLabel="Equals" itemValue="=" />
+                            <apex:selectOption itemLabel="Greater Than" itemValue=">" />
+                            <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
+                            <apex:selectOption itemLabel="Less Than" itemValue="<" />
+                            <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                    <td>
+                        Party Size:
+                        <apex:inputText label="Party Size" value="{!filterByPartySize}" >
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:inputText>
+                    </td>
+                    <td>
+                        Filter Max Party Size:
+                        <apex:selectList value="{!filterByMaxPartySizeComparisonOp}" size="1">
+                            <apex:selectOption itemLabel="---" itemValue="{!null}" />
+                            <apex:selectOption itemLabel="Equals" itemValue="=" />
+                            <apex:selectOption itemLabel="Greater Than" itemValue=">" />
+                            <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
+                            <apex:selectOption itemLabel="Less Than" itemValue="<" />
+                            <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                    <td>
+                        Max Party Size:
+                        <apex:inputText label="Max Party Size" value="{!filterByMaxPartySize}" >
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:inputText>
+                    </td>
+                    <td>
+                        Filter Min Lvl:
+                        <apex:selectList value="{!filterByMinLvlReqComparisonOp}" size="1">
+                            <apex:selectOption itemLabel="---" itemValue="{!null}" />
+                            <apex:selectOption itemLabel="Equals" itemValue="=" />
+                            <apex:selectOption itemLabel="Greater Than" itemValue=">" />
+                            <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
+                            <apex:selectOption itemLabel="Less Than" itemValue="<" />
+                            <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                    <td>
+                        MinLvl:
+                        <apex:inputText label="Min Lvl" value="{!filterByMinimumLevelRequired}" >
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:inputText>
+                    </td>
+                    <td>
+                        Filter Class:
+                        <apex:selectList value="{!filterByClassRequirements}" multiselect="true" size="3" >
+                            <apex:selectOptions value="{!classList}" />
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                </tr>
+            </table>
             <apex:pageBlockTable value="{!parties}" var="party">
                 <apex:column >
                     <apex:facet name="header">
@@ -116,16 +138,9 @@
                 </tr>
             </table>
         </apex:pageBlock>
-    </apex:form>
-    <apex:form >
         <apex:pageBlock >
             <apex:pageBlockSection id="partyWizard" title="Create a Party" >
-                <apex:inputField value="{!newParty.Name}" required="true" />
-                <apex:inputField value="{!newParty.Max_Party_Size__c}" />
-                <apex:inputField value="{!newParty.Minimum_Level_Required__c}" />
-                <apex:inputField value="{!newParty.Accepting_New_Members__c}" />
-                <apex:inputField value="{!newParty.Class_Requirements__c}" />
-                <apex:commandButton value="Create" rerender="partyWizard" action="{!createParty}" />
+                <apex:commandLink value="Create" action="{!Wizard}" />
             </apex:pageBlockSection>
         </apex:pageBlock> 
     </apex:form>
