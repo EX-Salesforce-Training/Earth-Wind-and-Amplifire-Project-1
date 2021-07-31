@@ -1,5 +1,18 @@
 /* QuestPageSuccess */
 
+:root {
+    --gun-metal: #202C39;
+    --gun-metal-light: #34475B;
+    --deep-champagne: #F2D492;
+    --sage: #B8B08D;
+    --dark-charcoal: #283845;
+    --independence: #3C5168;
+    --rich-black: #161E27;
+	--light-black: #1D2834;
+    --cultured: #f2f5f8;
+    --alice-blue: #E4EBF1;
+}
+
 .success-page-wrapper {  
     margin: 4rem;
 }
@@ -10,10 +23,89 @@
     line-height: 1.5rem;
 }
 
+/* header + navigation  */
+body {
+    background-color: var(--gun-metal);
+}    
 
+.header {
+    display: flex;
+    justify-content: center;
+    background-color: var(--gun-metal);
+}
 
+.header-text {
+    font-size: 3rem !important;
+    color: var(--sage);
+    font-family: 'Brush Script MT', cursive !important;
+}
+                                
+.nav-bar {
+	background-color: var(--dark-charcoal);                                   
+}
+                                        
+.nav-bar-links {
+	display: flex-column;
+    justify-content: space-around;                            
+}
 
-/* util */
+.nav-bar-link-wrapper {
+	height: 1.8rem;
+    display: flex;
+    align-items: center;
+	transition: background-color 0.8s;
+}
+
+.nav-bar-link-wrapper:hover {
+    background-color: var(--light-black);
+    cursor: pointer;
+   	transition: background-color 0.8s;
+}
+                                        
+.nav-bar-link {
+	margin: 1.4rem;
+	color: rgba(228,235,241,0.8) !important;
+}
+
+.nav-bar-button {
+	border: none;
+	background-color: var(--light-black);
+	margin: 1.4rem;
+	color: rgba(228,235,241,0.8) !important;                                                
+}
+
+.nav-bar-header {
+	width: 100%;
+	background-color: var(--rich-black);
+	color: #7d9cb5;
+	display: flex;
+	justify-content: center;
+	padding: 0.3rem 0;
+}
+
+.nav-bar-link:hover {
+	text-decoration: none !important;     
+}
+ 
+/* page content */
+.container {
+	display: grid;
+    grid-template-columns: 1.5fr 8.5fr;
+	justify-content: center;
+    background-color: var(--gun-metal-light);
+}
+                                        
+.container-content {
+    grid-template-rows: 2fr 8fr;                                          
+}
+
+.content-max-height {
+	overflow-y: auto;
+	height: 82vh;
+}      
+
+/* util */                                                              
+                                                                    
 .w-100 {
     width: 100%;
 }

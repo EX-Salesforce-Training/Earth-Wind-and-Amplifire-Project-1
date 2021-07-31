@@ -75,12 +75,12 @@ function submitNewQuest(event, actionFunc) {
         data['Reward'],
         data['Email']
     );
-    
-    // success should lead to a redirect, if not, then this modal will pop up
-    setTimeout(() => {
-    	showErrorModal(null, 'dynamic-error-modal', 'Something went wrong. Double-check your submission and try again.');
-    	hideModal(null, 'new-quest-modal');
-	}, 5000)
+}
+
+// @desc : if the submit new quest succeeds, you'll be redirected. If it fails, you'll see an error modal
+function onCompleteSaveQuest() {
+    showErrorModal(null, 'dynamic-error-modal', 'Something went wrong. Double-check your submission and try again.');
+    hideModal(null, 'new-quest-modal');
 }
 
 // @desc: passes the assignee email value to the action function to assign a quest
@@ -91,10 +91,14 @@ function handleNewAssignment(event, actionFunc) {
     const data = Object.fromEntries(new FormData(event.target).entries());
     
     actionFunc(data['Assignee Email']);
+}
+
+function onCompleteHandleNewAssignment() {
+	showErrorModal(null, 'dynamic-error-modal', 'Unable to approve user for this quest, it may have already been accepted.');
+}
     
-    
-    // success should lead to a redirect, if not, then this modal will pop up
-    setTimeout(() => {
-    	showErrorModal(null, 'dynamic-error-modal', 'Unable to approve ' + data['Assignee Email'] + ' for this quest, it may have already been accepted.');
-	}, 5000)
+// @desc : onclick event handler, clicks first child of event
+// @event: <event>
+function clickFirstChild(event) {
+    event.target.children[0].click();
 }
