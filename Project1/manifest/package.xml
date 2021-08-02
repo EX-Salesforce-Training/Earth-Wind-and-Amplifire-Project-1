@@ -47,7 +47,11 @@
         <name>GlobalPicklist</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Admin</members>
+        <members>Adventurer</members>
+        <members>Guild Recruiter</members>
+        <members>Guildmaster</members>
+        <members>Quest Handler</members>
         <name>Profile</name>
     </types>
     <types>
