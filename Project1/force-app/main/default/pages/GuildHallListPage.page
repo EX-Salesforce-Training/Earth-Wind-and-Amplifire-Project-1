@@ -1,16 +1,101 @@
 <apex:page standardController="Guild_Hall__c" recordSetVar="guildL" extensions="GuildExtension"  tabStyle="Guild_Hall__c" >
+    
     <apex:form >
-        <!--send user to specific guild hall-->
-        <apex:PageBlock Title="Guild Hall List">
-            <apex:pageblocksection title="Available Guilds">
-                <apex:pageblocktable value="{!GuildList}" var="g">
-                    <apex:column value="{!g.name}"/>
-                    <apex:column headerValue="page"><apex:outputLink value="{!$Page.GuildHallPage}?id={!g.id}">Guild Hall Page</apex:outputLink></apex:column>
-                </apex:pageblocktable>
-            </apex:pageblocksection>
-            <!-- links to paginate records-->
-            <apex:commandLink action="{!previous}" value="Previous" rendered="{!hasprevious}"  />
-            <apex:commandLink action="{!Next}" value="Next" rendered="{!hasnext}" />
-        </apex:PageBlock>
+        <apex:slds />
     </apex:form>
+    
+    <div class="container">
+        <div class="nav-bar">
+            <ul class="nav-bar-links">
+                <!-- navigation component -->
+                <li class="nav-bar-header">
+                    <p>
+                        Navigation
+                    </p>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.GuildHallListPage}">
+                        Guild Halls
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.QuestPage}">
+                        Quests
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.PartyPage}">
+                        Parties
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{$Page.GuildMemberListPage}">
+                        Guild Members
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+        
+        <div class="container-content">
+            <div class="header">
+                <h1 class="header-text">
+                    Dungeons &amp; Dragons
+                </h1>
+            </div>
+            
+            <div class="content-max-height">
+                <apex:form >
+                    <!--send user to specific guild hall-->
+                    <apex:PageBlock Title="Guild Hall List">
+                        <apex:pageblocksection title="Available Guilds">
+                            <apex:pageblocktable value="{!GuildList}" var="g">
+                                <apex:column value="{!g.name}"/>
+                                <apex:column headerValue="page"><apex:outputLink value="{!$Page.GuildHallPage}?id={!g.id}">Guild Hall Page</apex:outputLink></apex:column>
+                            </apex:pageblocktable>
+                        </apex:pageblocksection>
+                    </apex:PageBlock>
+                    <apex:stylesheet value="{!$Resource.Style}"/>
+                </apex:form>            
+            </div>
+        </div>
+    </div>
+    
+    <!-- the utility bar -->
+    <footer class="slds-utility-bar_container" aria-label="Utility Bar">
+        <h2 class="slds-assistive-text">Utility Bar</h2>
+        <ul class="slds-utility-bar">
+            
+            <!-- list page number -->
+            <li class="slds-utility-bar__item slds-m-horizontal_small">
+                <apex:form >
+                    <apex:outputText value="Page: {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
+                </apex:form>
+            </li>
+            
+            <!-- previous -->
+            <li class="slds-utility-bar__item slds-m-horizontal_small">
+                <apex:form >
+                    <apex:commandLink action="{! Previous }" value="« Previous"
+                                      rendered="{! HasPrevious }"/>
+                    
+                    <apex:outputText style="color: #ccc;" value="« Previous"
+                                     rendered="{! NOT(HasPrevious) }"/>
+                </apex:form>
+            </li>
+            
+            <!-- next -->
+            <li class="slds-utility-bar__item slds-m-horizontal_small">
+                <apex:form >
+                    <apex:commandLink action="{! Next }" value="Next »"
+                                      rendered="{! HasNext }"/>
+                    
+                    <apex:outputText style="color: #ccc;" value="Next »"
+                                     rendered="{! NOT(HasNext) }"/>
+                </apex:form>
+            </li>
+            
+        </ul>
+    </footer>
+    <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>
