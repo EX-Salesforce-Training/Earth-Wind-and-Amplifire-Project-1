@@ -25,9 +25,7 @@
 		<name>ApprovalProcess</name>
 	</types>
 	<types>
-		<members>Case.Assign cases to appropriate handlers</members>
-		<members>Case.Standard</members>
-		<members>Lead.Standard</members>
+		<members>*</members>
 		<name>AssignmentRule</name>
 	</types>
 	<types>
@@ -39,7 +37,7 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
-		<members>Case.Respond to new Cases</members>
+		<members>*</members>
 		<name>AutoResponseRule</name>
 	</types>
 	<types>
@@ -64,8 +62,7 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
-		<members>Case.Cases sitting too long</members>
-		<members>Case.Standard</members>
+		<members>*</members>
 		<name>EscalationRule</name>
 	</types>
 	<types>
