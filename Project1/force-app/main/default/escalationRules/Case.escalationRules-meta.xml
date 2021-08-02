@@ -11,12 +11,12 @@
                 <value>New</value>
             </criteriaItems>
             <escalationAction>
-                <assignedTo>jawilkerson94@playful-raccoon-jy1hje.com</assignedTo>
+                <assignedTo>Assignment_Arbitrators</assignedTo>
                 <assignedToTemplate>unfiled$public/SupportEscalatedCaseNotification</assignedToTemplate>
-                <assignedToType>User</assignedToType>
+                <assignedToType>Queue</assignedToType>
                 <minutesToEscalation>2880</minutesToEscalation>
-                <notifyCaseOwner>true</notifyCaseOwner>
-                <notifyTo>sdfasd@email.com</notifyTo>
+                <notifyCaseOwner>false</notifyCaseOwner>
+                <notifyTo>integration@00d5e000003ud4weag.com</notifyTo>
                 <notifyToTemplate>unfiled$public/SupportEscalatedCaseNotification</notifyToTemplate>
             </escalationAction>
             <escalationStartTime>CaseCreation</escalationStartTime>
