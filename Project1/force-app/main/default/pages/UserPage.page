@@ -19,77 +19,101 @@
                 
             	
             </apex:pageBlockSection>
-                    
-            <apex:pageBlockSection title="Level: {!member.Total_Level__c}">
-                
-            	<apex:pageBlockTable value="{!member}" var="lvl">
-            		<apex:column headerValue="Artificer Level" rendered="{!contains(member.Class__c, "Artificer")}">
-                    	<apex:outputField value="{!lvl.Artificer_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Barbarian Level" rendered="{!contains(member.Class__c, "Barbarian")}">
-                    	<apex:outputField value="{!lvl.Barbarian_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Bard Level" rendered="{!contains(member.Class__c, "Bard")}">
-                    	<apex:outputField value="{!lvl.Bard_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Cleric Level" rendered="{!contains(member.Class__c, "Cleric")}">
-                    	<apex:outputField value="{!lvl.Cleric_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column> 
-                	<apex:column headerValue="Druid Level" rendered="{!contains(member.Class__c, "Druid")}">
-                    	<apex:outputField value="{!lvl.Druid_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Fighter Level" rendered="{!contains(member.Class__c, "Fighter")}">
-                    	<apex:outputField value="{!lvl.Fighter_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Monk Level" rendered="{!contains(member.Class__c, "Monk")}">
-                		<apex:outputField value="{!lvl.Monk_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Paladin Level" rendered="{!contains(member.Class__c, "Paladin")}">
-                    	<apex:outputField value="{!lvl.Paladin_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Ranger Level" rendered="{!contains(member.Class__c, "Ranger")}">
-                    	<apex:outputField value="{!lvl.Ranger_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column> 
-                	<apex:column headerValue="Rogue Level" rendered="{!contains(member.Class__c, "Rogue")}">
-                    	<apex:outputField value="{!lvl.Rogue_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Sorcerer Level" rendered="{!contains(member.Class__c, "Sorcerer")}">
-                    	<apex:outputField value="{!lvl.Sorcerer_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Warlock Level" rendered="{!contains(member.Class__c, "Warlock")}">
-                    	<apex:outputField value="{!lvl.Warlock_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>
-                	<apex:column headerValue="Wizard Level" rendered="{!contains(member.Class__c, "Wizard")}">
-                    	<apex:outputField value="{!lvl.Wizard_Level__c}">
-                    		<apex:inlineEditSupport />
-                    	</apex:outputField>
-                	</apex:column>  
-				</apex:pageBlockTable>
-        	</apex:pageBlockSection>
+            <div id="level-table" onchange="tableChangeHandler()">
+            	<apex:pageBlockSection title="Level: -">
+                    <apex:pageBlockTable value="{!member}" var="lvl">
+                        <apex:column headerValue="Artificer Level" rendered="{!contains(member.Class__c, "Artificer")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Artificer_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Barbarian Level" rendered="{!contains(member.Class__c, "Barbarian")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Barbarian_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Bard Level" rendered="{!contains(member.Class__c, "Bard")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Bard_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Cleric Level" rendered="{!contains(member.Class__c, "Cleric")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Cleric_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column> 
+                        <apex:column headerValue="Druid Level" rendered="{!contains(member.Class__c, "Druid")}">
+                            <apex:outputField value="{!lvl.Druid_Level__c}">
+                                <apex:inlineEditSupport />
+                            </apex:outputField>
+                        </apex:column>
+                        <apex:column headerValue="Fighter Level" rendered="{!contains(member.Class__c, "Fighter")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Fighter_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Monk Level" rendered="{!contains(member.Class__c, "Monk")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Monk_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Paladin Level" rendered="{!contains(member.Class__c, "Paladin")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Paladin_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Ranger Level" rendered="{!contains(member.Class__c, "Ranger")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Ranger_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column> 
+                        <apex:column headerValue="Rogue Level" rendered="{!contains(member.Class__c, "Rogue")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Rogue_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Sorcerer Level" rendered="{!contains(member.Class__c, "Sorcerer")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Sorcerer_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Warlock Level" rendered="{!contains(member.Class__c, "Warlock")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Warlock_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>
+                        <apex:column headerValue="Wizard Level" rendered="{!contains(member.Class__c, "Wizard")}">
+                            <div id="level-value">
+                                <apex:outputField value="{!lvl.Wizard_Level__c}">
+                                    <apex:inlineEditSupport />
+                                </apex:outputField>
+                            </div>
+                        </apex:column>  
+                    </apex:pageBlockTable>
+            	</apex:pageBlockSection>
+            </div>
             
         	<apex:pageBlockSection title="Inventory" rendered="{!items.size>0}">
             	<apex:pageBlockTable value="{!items}" var="item">
@@ -115,4 +139,5 @@
             </center>
         </apex:pageBlock>
     </apex:form>
+    <apex:includeScript value="{!$Resource.UserPage}"/>
 </apex:page>
