@@ -1,0 +1,147 @@
+<apex:page controller="PartyListPageController" docType="html-5.0">
+    <apex:form >
+        <apex:pageBlock id="partyBlock" title="Party List">
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        Search:
+                        <apex:inputText label="Search" value="{!filterByName}" >
+                            <apex:actionSupport event="onchange" reRender="partyBlock"/>
+                        </apex:inputText>
+                    </td>
+                    <td>
+                        Filter Accept Members:
+                        <apex:selectList value="{!filterByAcceptingNewMembers}" size="1" >
+                            <apex:selectOption itemLabel="---" itemValue="{!null}" />
+                            <apex:selectOption itemLabel="Accepting New Members" itemValue="true"/>
+                            <apex:selectOption itemLabel="Not Accepting New Members" itemValue="false"/>
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                    <td>
+                        Filter Party Size:
+                        <apex:selectList value="{!filterByPartySizeComparisonOp}" size="1">
+                            <apex:selectOption itemLabel="---" itemValue="{!null}" />
+                            <apex:selectOption itemLabel="Equals" itemValue="=" />
+                            <apex:selectOption itemLabel="Greater Than" itemValue=">" />
+                            <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
+                            <apex:selectOption itemLabel="Less Than" itemValue="<" />
+                            <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                    <td>
+                        Party Size:
+                        <apex:inputText label="Party Size" value="{!filterByPartySize}" >
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:inputText>
+                    </td>
+                    <td>
+                        Filter Max Party Size:
+                        <apex:selectList value="{!filterByMaxPartySizeComparisonOp}" size="1">
+                            <apex:selectOption itemLabel="---" itemValue="{!null}" />
+                            <apex:selectOption itemLabel="Equals" itemValue="=" />
+                            <apex:selectOption itemLabel="Greater Than" itemValue=">" />
+                            <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
+                            <apex:selectOption itemLabel="Less Than" itemValue="<" />
+                            <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                    <td>
+                        Max Party Size:
+                        <apex:inputText label="Max Party Size" value="{!filterByMaxPartySize}" >
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:inputText>
+                    </td>
+                    <td>
+                        Filter Min Lvl:
+                        <apex:selectList value="{!filterByMinLvlReqComparisonOp}" size="1">
+                            <apex:selectOption itemLabel="---" itemValue="{!null}" />
+                            <apex:selectOption itemLabel="Equals" itemValue="=" />
+                            <apex:selectOption itemLabel="Greater Than" itemValue=">" />
+                            <apex:selectOption itemLabel="Greater Than or Equal To" itemValue=">=" />
+                            <apex:selectOption itemLabel="Less Than" itemValue="<" />
+                            <apex:selectOption itemLabel="Less Than or Equal To" itemValue="<=" />
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                    <td>
+                        MinLvl:
+                        <apex:inputText label="Min Lvl" value="{!filterByMinimumLevelRequired}" >
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:inputText>
+                    </td>
+                    <td>
+                        Filter Class:
+                        <apex:selectList value="{!filterByClassRequirements}" multiselect="true" size="3" >
+                            <apex:selectOptions value="{!classList}" />
+                            <apex:actionSupport event="onchange" reRender="partyBlock" />
+                        </apex:selectList>
+                    </td>
+                </tr>
+            </table>
+            <apex:pageBlockTable value="{!parties}" var="party">
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink value="{!$ObjectType.Party__c.fields.Name.label}" action="{!orderByPartyName}" reRender="partyBlock" />
+                    </apex:facet>
+                    <apex:commandLink value="{!party.Name}" action="{!partyPage}" >
+                        <apex:param name="x" value="{!party.id}" assignTo="{!partyid}" />
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column value="{!party.Accepting_New_Members__c}" />
+                <apex:column value="{!party.Party_Size__c}" >
+                	<apex:facet name="header">
+                        <apex:commandLink value="{!$ObjectType.Party__c.fields.Party_Size__c.label}" action="{!orderByPartySize}" reRender="partyBlock" />
+                    </apex:facet>
+                </apex:column>
+                <apex:column value="{!party.Max_Party_Size__c}" >
+                	<apex:facet name="header" >
+                        <apex:commandLink value="{!$ObjectType.Party__c.fields.Max_Party_Size__c.label}" action="{!orderByMaxPartySize}" reRender="partyBlock" />
+                    </apex:facet>
+                </apex:column>
+                <apex:column value="{!party.Minimum_Level_Required__c}" >
+                	<apex:facet name="header">
+                    	<apex:commandLink value="{!$ObjectType.Party__c.fields.Minimum_Level_Required__c.label}" action="{!orderByMinimumLevelRequired}" reRender="partyBlock"/>
+                    </apex:facet>
+                </apex:column>
+                <apex:column value="{!party.Class_Requirements__c}" />
+            </apex:pageBlockTable>
+            <!-- Pagination controls -->
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        Page: <apex:outputText value="{!pageNumber} of {!CEILING(numRecords/pageSize)}" />
+                    </td>
+                    <td align="center">                        
+                        <apex:commandLink value="<< First" rerender="partyBlock" action="{!first}" rendered="{!Prv}" />
+                        <apex:outputText style="color: #ccc" value="<< First" rendered="{!!Prv}" />
+                        &nbsp;&nbsp;
+                        <apex:commandLink value="< Prev" rerender="partyBlock" action="{!prev}" rendered="{!Prv}" />
+                        <apex:outputText style="color: #ccc" value="< Prev" rendered="{!!Prv}" />
+                        &nbsp;&nbsp;
+                        <apex:commandLink value="Next >" rerender="partyBlock" action="{!next}" rendered="{!Nxt}" />
+                        <apex:outputText style="color: #ccc" value="Next >" rendered="{!!Nxt}" />
+                        &nbsp;&nbsp;
+                        <apex:commandLink value="Last >>" rerender="partyBlock" action="{!last}" rendered="{!Nxt}" />
+                        <apex:outputText style="color: #ccc" value="Last >>" rendered="{!!Nxt}" />
+                    </td>
+                    <td align="right">
+                        Parties per page:
+                        <apex:selectList value="{!pageSize}" size="1">
+                            <apex:selectOption itemLabel="5" itemValue="5"/>
+                            <apex:selectOption itemLabel="20" itemValue="20"/>
+                            <apex:actionSupport event="onchange" reRender="partyBlock"/>
+                        </apex:selectList>
+                    </td>
+                </tr>
+            </table>
+        </apex:pageBlock>
+        <apex:pageBlock >
+            <apex:pageBlockSection id="partyWizard" title="Create a Party" >
+                <apex:commandLink value="Create" action="{!Wizard}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock> 
+    </apex:form>
+</apex:page>
