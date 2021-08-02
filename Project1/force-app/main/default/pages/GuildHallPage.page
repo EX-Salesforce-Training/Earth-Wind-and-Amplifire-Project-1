@@ -116,6 +116,13 @@
                 </apex:form>
             </li>
             
+            <li class="slds-utility-bar__item slds-m-horizontal_small">
+                <!-- go back to guild hall list-->
+                <apex:form >
+                    <apex:outputLink value="{!$Page.GuildHallListPage}">Back to Guild Hall List Page</apex:outputLink>
+                </apex:form>
+            </li>
+            
         </ul>
     </footer>
     <apex:includeScript value="{!$Resource.QuestPage}"/>
