@@ -25,89 +25,89 @@
                         <apex:column headerValue="Artificer Level" rendered="{!contains(member.Class__c, "Artificer")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Artificer_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Barbarian Level" rendered="{!contains(member.Class__c, "Barbarian")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Barbarian_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Bard Level" rendered="{!contains(member.Class__c, "Bard")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Bard_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Cleric Level" rendered="{!contains(member.Class__c, "Cleric")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Cleric_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column> 
                         <apex:column headerValue="Druid Level" rendered="{!contains(member.Class__c, "Druid")}">
                             <apex:outputField value="{!lvl.Druid_Level__c}">
-                                <apex:inlineEditSupport />
+                                <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                             </apex:outputField>
                         </apex:column>
                         <apex:column headerValue="Fighter Level" rendered="{!contains(member.Class__c, "Fighter")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Fighter_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Monk Level" rendered="{!contains(member.Class__c, "Monk")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Monk_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Paladin Level" rendered="{!contains(member.Class__c, "Paladin")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Paladin_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Ranger Level" rendered="{!contains(member.Class__c, "Ranger")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Ranger_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column> 
                         <apex:column headerValue="Rogue Level" rendered="{!contains(member.Class__c, "Rogue")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Rogue_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Sorcerer Level" rendered="{!contains(member.Class__c, "Sorcerer")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Sorcerer_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Warlock Level" rendered="{!contains(member.Class__c, "Warlock")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Warlock_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>
                         <apex:column headerValue="Wizard Level" rendered="{!contains(member.Class__c, "Wizard")}">
                             <div id="level-value">
                                 <apex:outputField value="{!lvl.Wizard_Level__c}">
-                                    <apex:inlineEditSupport />
+                                    <apex:inlineEditSupport resetFunction="tableChangeHandler()" />
                                 </apex:outputField>
                             </div>
                         </apex:column>  
