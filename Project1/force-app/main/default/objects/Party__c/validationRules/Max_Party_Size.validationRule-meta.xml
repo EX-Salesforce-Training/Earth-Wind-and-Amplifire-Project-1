@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Max_Party_Size</fullName>
+    <active>true</active>
+    <description>Cannot have more members than the max party size.</description>
+    <errorConditionFormula>Party_Size__c  &gt;  Max_Party_Size__c</errorConditionFormula>
+    <errorMessage>The party is already full.</errorMessage>
+</ValidationRule>
