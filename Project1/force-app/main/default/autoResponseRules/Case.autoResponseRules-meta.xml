@@ -2,7 +2,7 @@
 <AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
     <autoResponseRule>
         <fullName>Respond to new Cases</fullName>
-        <active>false</active>
+        <active>true</active>
         <ruleEntry>
             <criteriaItems>
                 <field>Case.Status</field>
