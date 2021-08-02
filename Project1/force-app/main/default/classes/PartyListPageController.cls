@@ -254,6 +254,7 @@ public with sharing class PartyListPageController {
     public void createParty() {
         try {
             insert newParty;
+            numRecords++;
             partyid = newParty.id;
             showConfirmation();
         }
@@ -282,18 +283,40 @@ public with sharing class PartyListPageController {
         failure = false;
     }
     
-    public PageReference partyPage() {
+    public void updateCurrentParty() {
         currentParty = [SELECT Name, Party_Size__c, Max_Party_Size__c, Accepting_New_Members__c, Minimum_Level_Required__c, Class_Requirements__c, (SELECT Guild_Member__c FROM Member_Assignments__r) FROM Party__c WHERE id = :partyid];
         Set<string> ids = new Set<string>();
         for (Member_Assignment__c ma : currentParty.Member_Assignments__r) {
             ids.add(ma.Guild_Member__c);
         }
         currentPartyMembers = [SELECT Name, Class__c, Race__c, Active__c FROM Guild_Member__c WHERE id IN :ids];
+    }
+    
+    public PageReference partyPage() {
+        updateCurrentParty();
         return Page.PartyPage;
     }
     
     public PageReference userPage() {
         return Page.UserPage;
+    }
+    
+    public void joinParty() {
+        string userid = UserInfo.getUserId();
+        List<Guild_Member__c> gm = [SELECT Name, Class__c, Race__c, Active__c FROM Guild_Member__c WHERE User__c = :userid LIMIT 1];
+        if (gm.isEmpty()) {
+            return;
+        }
+        Member_Assignment__c ma = new Member_Assignment__c();
+        ma.Guild_Member__c = gm[0].id;
+        ma.Party__c = currentParty.id;
+        try {
+            insert ma;
+            updateCurrentParty();
+        }
+        catch (DMLException e) {
+            ApexPages.addMessage(new ApexPages.message(ApexPages.SEVERITY.FATAL, e.getMessage()));
+        }
     }
 
 }
