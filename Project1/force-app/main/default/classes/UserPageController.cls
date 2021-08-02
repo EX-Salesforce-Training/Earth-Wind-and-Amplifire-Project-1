@@ -15,7 +15,7 @@ public with sharing class UserPageController {
                   (SELECT Quest__c.ID FROM Quests__r),
                   (SELECT Member_Assignment__c.ID FROM Member_Assignments__r)
                   FROM Guild_Member__c
-                  WHERE Guild_Member__c.User__r.ID =: UserInfo.getUserId()
+                  WHERE Guild_Member__c.ID =: ApexPages.currentPage().getParameters().get('id')
                   LIMIT 1];
         
         items = [SELECT ID, Name, Item_Type__c, Properties__c, Value__c 
