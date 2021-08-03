@@ -59,6 +59,10 @@
 		<name>FlexiPage</name>
 	</types>
 	<types>
+        <members>Public_Folder</members>
+        <name>DashboardFolder</name>
+    </types>
+	<types>
 		<members>*</members>
 		<name>LightningComponentBundle</name>
 	</types>
