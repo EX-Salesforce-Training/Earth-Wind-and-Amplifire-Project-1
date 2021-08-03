@@ -1,7 +1,8 @@
-/* Name: Guild Member Page Controller
+/* Name: User Page Controller
  * Author: Blake Prescott
  * Description: This is the page controller for the Guild Member Page/User Page
  * User Page is a misnomer
+ * Last Modified Date: 8/3/21
  */
 public with sharing class UserPageController {
     public Guild_Member__c member{get;set;}
