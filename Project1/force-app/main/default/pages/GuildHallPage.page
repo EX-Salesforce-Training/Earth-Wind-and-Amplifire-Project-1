@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.PartyPage}">
+                    <a class="nav-bar-link" href="{!$Page.PartyListPage}">
                         Parties
                     </a>
                 </li>
