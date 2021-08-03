@@ -10,6 +10,7 @@ public class TestQuestPage {
         Guild_Member__c guildMem = new Guild_Member__c();
         guildMem.Name = 'Steve';
         guildMem.Member_Email__c = 'dummy@guildMember.com';
+        guildMem.Artificer_Level__c = 1;
         insert guildMem;
     }
     
