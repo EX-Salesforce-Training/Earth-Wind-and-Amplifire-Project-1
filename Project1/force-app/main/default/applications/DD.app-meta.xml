@@ -30,5 +30,4 @@
     <tabs>Party__c</tabs>
     <tabs>Guild_Info</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>D_D_UtilityBar</utilityBar>
 </CustomApplication>
