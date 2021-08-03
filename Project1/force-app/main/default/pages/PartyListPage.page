@@ -1,3 +1,11 @@
+<!-- 
+Name: PartyListPage
+Authors: Gregory Mannerberg (gregory.mannerber@revature.net), Zackary Frazier (zackary.frazier@revature.net)
+Last Modified Date: 8/3/2021
+Description: Displays a list of the parties in the org. The list can be sorted and filtered by each of its 
+			 fields. The list is paginated. Clicking a party's name links to a page for that party. Offers
+			 a link to party creation wizard.
+-->
 <apex:page controller="PartyListPageController" docType="html-5.0">
     <apex:slds />
     

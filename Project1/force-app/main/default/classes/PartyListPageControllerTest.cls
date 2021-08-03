@@ -1,8 +1,15 @@
+/* 
+ * Name: PartyListPageControllerTest
+ * Authors: Gregory Mannerberg (gregory.mannerberg@revature.net)
+ * Last Modified Date: 8/3/2021
+ * Description: Tests the controller for the PartyListPage, PartyPage, PartyWizardPage
+ */
 @isTest
 public class PartyListPageControllerTest {
     
     private static string partyid;
     
+    // Sets up a party with a single member
     private static void singleSetup() {
         Party__c testParty = new Party__c();
         testParty.Name = 'test';
@@ -26,6 +33,7 @@ public class PartyListPageControllerTest {
         insert ma;
     }
     
+    // Sets up a party with a single member that is not accepting more members
     private static void singleNotAcceptingSetup() {
         Party__c testParty = new Party__c();
         testParty.Name = 'test';
@@ -48,6 +56,7 @@ public class PartyListPageControllerTest {
         insert ma;
     }
     
+    // Sets up multiple parties
     private static void multiSetup() {
         List<Party__c> parties = new List<Party__c>();
         for (integer i=0; i<10; i++) {

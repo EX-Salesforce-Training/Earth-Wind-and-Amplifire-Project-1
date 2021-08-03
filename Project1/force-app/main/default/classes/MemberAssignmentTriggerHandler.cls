@@ -1,5 +1,17 @@
+/* 
+ * Name: MemberAssignmentTriggerHandler
+ * Authors: Gregory Mannerberg (gregory.mannerberg@revature.net)
+ * Last Modified Date: 8/3/2021
+ * Description: Handles the logic for MemberAssignmentTrigger
+ */
 public class MemberAssignmentTriggerHandler {
     
+    /* 
+     * If the party a guild member is trying to join has any class requirements,
+     * check that the guild member has at least one class that matches
+     * the party's class requirements. Reject members that don't meet party
+     * class requirements.
+     */
     public static void validateClass(List<Member_Assignment__c> assignments) {
         for (Member_Assignment__c ma : assignments) {
             boolean match = false;

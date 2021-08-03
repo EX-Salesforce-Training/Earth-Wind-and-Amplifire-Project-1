@@ -1,11 +1,20 @@
+/* 
+ * Name: PartyListPageController
+ * Authors: Gregory Mannerberg (gregory.mannerberg@revature.net)
+ * Last Modified Date: 8/3/2021
+ * Description: Controller for the PartyListPage, PartyPage, PartyWizardPage
+ */
 public with sharing class PartyListPageController {
     
+    // Pagination variables
     private integer numRecords;
     private integer pageSize;
     private integer offset;
     public integer pageNumber {get{return offset/pageSize + 1;}}
+    // Sorting variables
     @testVisible private string orderBy;
     @testVisible private boolean ascending;
+    // Filter variables
     public string filterByName {get;set;}
     public string filterByAcceptingNewMembers {get;set;}
     public integer filterByPartySize {
@@ -40,14 +49,14 @@ public with sharing class PartyListPageController {
             }}}
     public string filterByMinLvlReqComparisonOp {get;set;}
     public List<string> filterByClassRequirements {get;set;}   
-    
+    // Party record creation variables
     public boolean confirmation {get;set;}
     public boolean failure {get;set;}
-        
-    public string partyid {get;set;}
-    public Party__c currentParty {get;set;}
-    public List<Guild_Member__c> currentPartyMembers{get;set;}
-    public Party__c newParty {get;set;}
+    // Controller state variables    
+    public string partyid {get;set;}							// id of currentParty
+    public Party__c currentParty {get;set;}						// Party to display on PartyPage
+    public List<Guild_Member__c> currentPartyMembers{get;set;}	// currentParty's guild members
+    public Party__c newParty {get;set;}							// Party to insert on PartyWizardPage
     
     public PartyListPageController() {
         setNumRecords();
@@ -60,6 +69,11 @@ public with sharing class PartyListPageController {
         failure = false;
     }
     
+    /*
+     * Returns a Party__c list to be displayed on the PartyListPage.
+     * Dynamically builds a SOQL query using the page size, sorting, filtering options
+     * selected by a user on the PartyListPage.
+     */
     public List<Party__c> getParties() {
         string query = 'SELECT Name, Party_Size__c, Max_Party_Size__c, Accepting_New_Members__c, Minimum_Level_Required__c, Class_Requirements__c ' +
             'FROM Party__c ';
@@ -155,18 +169,22 @@ public with sharing class PartyListPageController {
         return offset;
     }
     
+    // Set the offset for getting the next page.
     public void next() {
         offset += pageSize;
     }
     
+    // Set the offset for getting the previous page.
     public void prev() {
         offset -= pageSize;
     }
     
+    // Set the offset for getting the first page.
     public void first() {
         offset = 0;
     }
     
+    // Set the offset for getting the last page.
     public void last() {
         if (Math.mod(numRecords, pageSize) == 0) {
             offset = (numRecords/pageSize - 1)*pageSize;
@@ -244,6 +262,7 @@ public with sharing class PartyListPageController {
         return classes;
     }
     
+    // For switching to the PartyWizardPage
     public PageReference Wizard() {
         stopConfirmation();
         stopFailure();
@@ -251,6 +270,7 @@ public with sharing class PartyListPageController {
         return Page.PartyWizardPage;
     }    
     
+    // Insert a new party from the PartyWizardPage
     public void createParty() {
         try {
             insert newParty;
@@ -263,6 +283,7 @@ public with sharing class PartyListPageController {
         }
     }
     
+    // For switching to the PartyListPage
     public PageReference listPage() {
         return Page.PartyListPage;
     }
@@ -283,6 +304,7 @@ public with sharing class PartyListPageController {
         failure = false;
     }
     
+    // Gets the most recent version of current party and its members
     public void updateCurrentParty() {
         currentParty = [SELECT Name, Party_Size__c, Max_Party_Size__c, Accepting_New_Members__c, Minimum_Level_Required__c, Class_Requirements__c, (SELECT Guild_Member__c FROM Member_Assignments__r) FROM Party__c WHERE id = :partyid];
         Set<string> ids = new Set<string>();
@@ -292,15 +314,24 @@ public with sharing class PartyListPageController {
         currentPartyMembers = [SELECT Name, Class__c, Race__c, Active__c FROM Guild_Member__c WHERE id IN :ids];
     }
     
+    // For switching to the PartyPage
     public PageReference partyPage() {
         updateCurrentParty();
         return Page.PartyPage;
     }
     
+    // For switching to the User Page
+    // Not tested.
+    /*
     public PageReference userPage() {
         return Page.UserPage;
     }
+	*/
     
+    /*
+     * If the current user has an associated guild member record,
+     * add that guild member to the current party.
+     */
     public void joinParty() {
         string userid = UserInfo.getUserId();
         List<Guild_Member__c> gm = [SELECT Name, Class__c, Race__c, Active__c FROM Guild_Member__c WHERE User__c = :userid LIMIT 1];
