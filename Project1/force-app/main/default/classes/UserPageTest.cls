@@ -1,6 +1,13 @@
+/* Name: User Page Tests
+ * Author: Blake Prescott
+ * Description: This is the test class for the Guild Member Page/User Page
+ * User Page is a misnomer
+ * Last Modified Date: 8/3/21
+ */
 @isTest
 public class UserPageTest {
 	@testSetup
+    //creates test data
     public static void setup(){
         Guild_Hall__c th = new Guild_Hall__c();
         th.Name = 'Test Hall';
@@ -52,6 +59,7 @@ public class UserPageTest {
         insert ma;
     }
     
+    //if they chenge their level, it should update the total level
     @isTest
     public static void levelUpTest(){
         Guild_Member__c gm = [SELECT ID, Artificer_Level__c, Bard_Level__c 
@@ -68,6 +76,7 @@ public class UserPageTest {
         system.assertEquals(3, lvl.Total_Level__c);
     }
     
+    //they shouldn't be able to have levels be negative or have their total level be 0
     @isTest
     public static void levelFailureTest(){
         Guild_Member__c gm = [SELECT ID, Artificer_Level__c, Total_Level__c 
@@ -84,6 +93,7 @@ public class UserPageTest {
        	System.assert(!sr2.isSuccess());
     }
     
+    //They should be able to change guild halls
     @isTest
     public static void guildHallChangeTest(){
         Guild_Member__c gm = [SELECT ID, Guild_Hall__c
@@ -104,6 +114,7 @@ public class UserPageTest {
         system.assertEquals(gh2.id, hall.Guild_Hall__c);
     }
     
+    //tests to make sure it renders the page
     @isTest
     public static void testUserPageController(){
         UserPageController uCon = new UserPageController();
@@ -114,6 +125,7 @@ public class UserPageTest {
         system.assertEquals('testy' ,uCon.member.Name);
     }
     
+    //test for the save function
     @isTest
     public static void testControllerSave(){
         UserPageController uCon = new UserPageController();
@@ -131,6 +143,7 @@ public class UserPageTest {
         system.assertEquals(3 ,gm2.Total_Level__c);
     }
     
+    //save should fail if it breaks validation rules
     @isTest
     public static void testControllerSaveFailure(){
         UserPageController uCon = new UserPageController();

@@ -1,3 +1,9 @@
+<!-- 	Name: User Page
+ 		Author: Blake Prescott
+ 		Description: This is the page for the Guild Members
+ 		User Page is a misnomer
+		Last Modified Date: 8/3/21
+-->
 <apex:page controller="UserPageController">
     <apex:slds />
     
@@ -21,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.PartyListPage}">
+                    <a class="nav-bar-link" href="{!$Page.PartyPage}">
                         Parties
                     </a>
                 </li>
@@ -62,6 +68,7 @@
                             
                             
                         </apex:pageBlockSection>
+                        <!--These levels are set to only be visible if they have the corresponding class-->
                         <div id="level-table" onchange="tableChangeHandler()">
                             <apex:pageBlockSection title="Level: -">
                                 <apex:pageBlockTable value="{!member}" var="lvl">
@@ -158,6 +165,7 @@
                             </apex:pageBlockSection>
                         </div>
                         
+                        <!--If they don't have any items then this field won't render-->
                         <apex:pageBlockSection title="Inventory" rendered="{!items.size>0}">
                             <apex:pageBlockTable value="{!items}" var="item">
                                 <apex:column value="{!item.Name}"/>
@@ -167,17 +175,20 @@
                             </apex:pageBlockTable>
                         </apex:pageBlockSection>
                         
+                        <!--If they don't have any quests then this field won't render-->
                         <apex:pageBlockSection title="Quests" rendered="{!quests.size>0}">
                             <apex:pageBlockTable value="{!quests}" var="quest">
                                 <apex:column value="{!quest.Name}"/>
                             </apex:pageBlockTable>
                         </apex:pageBlockSection>
                         
+                        <!--If they don't have a party then this field won't render-->
                         <apex:pageBlockSection title="Party" rendered="{!party!=null}">
                             <apex:outputField rendered="{!party!=null}" value="{!party.party__r.Name}"/>
                         </apex:pageBlockSection>
                         
                         <center>
+                            <!--Updates the record in the database-->
                             <apex:commandButton value="Save" action="{!Save}"/>
                         </center>
                     </apex:pageBlock>
