@@ -1,7 +1,12 @@
+<!-- 
+	@Author: Zackary Frazier
+	@Last modified project: Project 1
+	@desc: displays information about quests, provides 
+	       ability to create quests and assign users to quests 
+-->
+
 <apex:page standardController="Quest__c" recordSetVar="quests" extensions="QuestExtension" id="page">
-    <apex:form >
-        <apex:slds />
-    </apex:form>
+    <apex:slds />
     
     <div class="container">
         <div class="nav-bar">
@@ -23,7 +28,7 @@
                     </a>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.PartyPage}">
+                    <a class="nav-bar-link" href="{!$Page.PartyListPage}">
                         Parties
                     </a>
                 </li>
@@ -327,8 +332,8 @@
             <apex:param name="assigneeEmail" value="" assignTo="{! assigneeEmail }" />
         </apex:actionFunction>
         
-        <apex:stylesheet value="{!$Resource.Style}"/>
     </apex:form>
     
+    <apex:stylesheet value="{!$Resource.Style}"/>
     <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>

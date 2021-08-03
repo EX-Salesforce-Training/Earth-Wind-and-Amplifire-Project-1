@@ -26,7 +26,7 @@ Description: Displays a form for inputing data to add a new party to the org.
                     </a>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.PartyPage}">
+                    <a class="nav-bar-link" href="{!$Page.PartyListPage}">
                         Parties
                     </a>
                 </li>
