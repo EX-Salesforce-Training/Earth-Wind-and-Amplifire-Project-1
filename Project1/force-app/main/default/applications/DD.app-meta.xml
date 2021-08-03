@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>Home</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
     <brand>
         <headerColor>#0070D2</headerColor>
         <logo>dungeonsanddragons</logo>
@@ -12,7 +20,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>D&amp;D</label>
     <navType>Standard</navType>
-    <tabs>Home</tabs>
+    <tabs>standard-home</tabs>
     <tabs>Quest__c</tabs>
     <tabs>Facility__c</tabs>
     <tabs>Guild_Member__c</tabs>
@@ -20,6 +28,7 @@
     <tabs>Item__c</tabs>
     <tabs>Member_Assignment__c</tabs>
     <tabs>Party__c</tabs>
+    <tabs>Guild_Info</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>D_D_UtilityBar</utilityBar>
 </CustomApplication>
