@@ -1,3 +1,8 @@
+/* Name: Guild Member Page Controller
+ * Author: Blake Prescott
+ * Description: This is the page controller for the Guild Member Page/User Page
+ * User Page is a misnomer
+ */
 public with sharing class UserPageController {
     public Guild_Member__c member{get;set;}
     public List<Item__c> items{get;set;}
@@ -5,8 +10,8 @@ public with sharing class UserPageController {
     public Member_Assignment__c party{get;set;}
     
     public UserPageController(){
-        
-        //maybe just make the class with sharing so we don't have to add that where clause
+        //if the user navigates to this page from another visualforce page it will get the guild member's id from that page
+        //if they don't it will grab the guild member related to the user.
         if(ApexPages.currentPage().getParameters().get('id') != null){
             member = [SELECT Age__c, Class__c, Guild_Hall__c, Name, Race__c, Skills__c, Date_Hired__c,
                       Artificer_Level__c, Barbarian_Level__c, Bard_Level__c, Cleric_Level__c, Druid_Level__c, 
@@ -31,14 +36,17 @@ public with sharing class UserPageController {
                       LIMIT 1];
         }
         
+        //Query for the member's items
         items = [SELECT ID, Name, Item_Type__c, Properties__c, Value__c 
                 FROM Item__c 
                 WHERE ID IN: member.Items__r];
         
+        //Query for the member's quests
         quests = [SELECT ID, Name 
                 FROM Quest__c 
                 WHERE ID IN: member.Quests__r];
         
+        //if they have an assignment to a party, it will query for that party's name.
         try{
         	party = [SELECT ID, Party__r.Name
                 	FROM Member_Assignment__c
@@ -49,6 +57,7 @@ public with sharing class UserPageController {
         }
     }
     
+    //updates the record in the database
     public void save(){
         update member;
     }
