@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
     <backgroundEndColor>#FFFFFF</backgroundEndColor>
     <backgroundFadeDirection>Diagonal</backgroundFadeDirection>
@@ -20,9 +20,10 @@
                 <drillToDetailEnabled>false</drillToDetailEnabled>
                 <enableHover>false</enableHover>
                 <expandOthers>false</expandOthers>
-                <groupingSortProperties/>
+                <groupingSortProperties />
                 <header>Quest Levels that Failed Report</header>
-                <report>unfiled$public/Quest_Levels_that_Failed_Report_OJ5</report>
+                <report
+        >unfiled$public/Quest_Levels_that_Failed_Report_OJ5</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -44,9 +45,10 @@
                 <drillToDetailEnabled>false</drillToDetailEnabled>
                 <enableHover>false</enableHover>
                 <expandOthers>false</expandOthers>
-                <groupingSortProperties/>
+                <groupingSortProperties />
                 <header>Business Type with Danger Level</header>
-                <report>unfiled$public/Business_Type_with_Danger_Level_Avw</report>
+                <report
+        >unfiled$public/Business_Type_with_Danger_Level_Avw</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -68,7 +70,7 @@
                 <drillToDetailEnabled>false</drillToDetailEnabled>
                 <enableHover>false</enableHover>
                 <expandOthers>false</expandOthers>
-                <groupingSortProperties/>
+                <groupingSortProperties />
                 <header>Party Quest History</header>
                 <report>unfiled$public/Party_Quest_History_BVL</report>
                 <showPercentage>false</showPercentage>
@@ -92,7 +94,7 @@
                 <drillToDetailEnabled>false</drillToDetailEnabled>
                 <enableHover>false</enableHover>
                 <expandOthers>false</expandOthers>
-                <groupingSortProperties/>
+                <groupingSortProperties />
                 <header>Guild Members Quest History</header>
                 <report>unfiled$public/Guild_Members_Quest_History_mfe</report>
                 <showPercentage>false</showPercentage>
@@ -110,7 +112,7 @@
     <dashboardType>SpecifiedUser</dashboardType>
     <description>Reports on the various going ons</description>
     <isGridLayout>true</isGridLayout>
-    <runningUser>jawilkerson94@playful-raccoon-jy1hje.com</runningUser>
+    <runningUser>zackary.frazier@mindful-shark-4jn6ak.com</runningUser>
     <textColor>#000000</textColor>
     <title>Guild Business</title>
     <titleColor>#000000</titleColor>
