@@ -10,6 +10,7 @@ public class MemberAssignmentTriggerTest {
         Guild_Member__c member = new Guild_Member__c();
         member.Name = 'Bob';
         member.Member_Email__c = 'bob@bob.bob';
+        member.Artificer_Level__c = 1;
         insert member;
     }
     
@@ -24,6 +25,7 @@ public class MemberAssignmentTriggerTest {
         member.Name = 'Tom';
         member.Member_Email__c = 'bob@bob.bob';
         member.Class__c = 'Druid';
+        member.Artificer_Level__c = 1;
         insert member;
     }
 	
