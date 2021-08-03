@@ -36,3 +36,8 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+
+# Auto-response, Escalation, Assignment Rules
+force-app/main/default/autoResponseRules/*
+force-app/main/default/escalationRules/*
+force-app/main/default/assignmentRules/*
