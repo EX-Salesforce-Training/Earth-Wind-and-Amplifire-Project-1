@@ -15,6 +15,7 @@ public class PartyListPageControllerTest {
         testMember.Name = 'bob';
         testMember.Member_Email__c = 'bob@bob.bob';
         testMember.class__c = 'Fighter';
+        testMember.Artificer_Level__c = 1;
         insert testMember;
         testParty = [SELECT id FROM Party__c LIMIT 1];
         partyid = testParty.id;
@@ -186,6 +187,7 @@ public class PartyListPageControllerTest {
         gm.Name = 'Tom';
         gm.Member_Email__c = 'tom@tom.tom';
         gm.class__c = 'Cleric';
+        gm.Artificer_Level__c = 1;
         insert gm;
         plpc.joinParty();
         Party__c party = [SELECT Party_Size__c, (SELECT Guild_Member__c FROM Member_Assignments__r) FROM Party__c LIMIT 1];
