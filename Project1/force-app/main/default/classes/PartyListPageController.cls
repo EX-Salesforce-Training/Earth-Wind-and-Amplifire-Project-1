@@ -4,8 +4,8 @@ public with sharing class PartyListPageController {
     private integer pageSize;
     private integer offset;
     public integer pageNumber {get{return offset/pageSize + 1;}}
-    private string orderBy;
-    private boolean ascending;
+    @testVisible private string orderBy;
+    @testVisible private boolean ascending;
     public string filterByName {get;set;}
     public string filterByAcceptingNewMembers {get;set;}
     public integer filterByPartySize {
