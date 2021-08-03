@@ -1,34 +1,84 @@
 <apex:page >
     <apex:slds />
-    <div class="success-page-wrapper">
-        <article class="slds-card">
-            <div class="slds-card__header slds-grid">
-                <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div class="slds-media__figure">
-                        <span class="slds-icon_container slds-icon-utility-announcement" title="Success Icon">
-                            <svg class="slds-icon slds-icon-text-success" aria-hidden="true">
-                                <use href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#announcement')}"></use>
-                            </svg>
-                            <span class="slds-assistive-text">Success Icon</span>
-                        </span>
-                    </div>
-                    <div class="slds-media__body">
-                        <h2 class="slds-card__header-title">
-                            <span>Success!</span>
-                        </h2>
-                    </div>
-                </header>
+  
+    <div class="container">
+        <div class="nav-bar">
+            <ul class="nav-bar-links">
+                <!-- navigation component -->
+                <li class="nav-bar-header">
+                    <p>
+                        Navigation
+                    </p>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.GuildHallListPage}">
+                        Guild Halls
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.QuestPage}">
+                        Quests
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.PartyPage}">
+                        Parties
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.GuildMemberListPage}">
+                        Guild Members
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+        
+        <div class="container-content">
+            <div class="header">
+                <h1 class="header-text">
+                    Dungeons &amp; Dragons
+                </h1>
             </div>
-            <div class="slds-card__body slds-card__body_inner">
-                Submitted successfully! Click below to return to the quest page.
+            
+            <div class="content-max-height">
+                <div class="success-page-wrapper">
+                    <article class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-utility-announcement" title="Success Icon">
+                                        <svg class="slds-icon slds-icon-text-success" aria-hidden="true">
+                                            <use href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#announcement')}"></use>
+                                        </svg>
+                                        <span class="slds-assistive-text">Success Icon</span>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span>Success!</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            Submitted successfully! Click below to return to the quest page.
+                        </div>
+                        <footer class="slds-card__footer">
+                            <a class="slds-card__footer-action" href="{!$Page.QuestPage}">Return
+                                <span class="slds-assistive-text">Click here to return to the quest page</span>
+                            </a>
+                        </footer>
+                    </article>
+                </div>
             </div>
-            <footer class="slds-card__footer">
-                <a class="slds-card__footer-action" href="{!$Page.QuestPage}">Return
-                    <span class="slds-assistive-text">Click here to return to the quest page</span>
-                </a>
-            </footer>
-        </article>
+            
+        </div>
     </div>
     
-    <apex:stylesheet value="{!$Resource.Style}"/>
+    <apex:form >
+        <apex:stylesheet value="{!$Resource.Style}"/>
+    </apex:form>
+    
+    <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>

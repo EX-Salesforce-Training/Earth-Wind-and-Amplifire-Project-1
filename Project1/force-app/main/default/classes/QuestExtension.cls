@@ -73,6 +73,7 @@ public class QuestExtension {
             
             // if the guild member gets rejected, this will still be here, not exactly elegant
             q.Guild_Member__c = guildMem.id;
+            update q;
         } catch(Exception e) {
             System.debug(e);
             // do nothing and move on

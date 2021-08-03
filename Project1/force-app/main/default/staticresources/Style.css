@@ -41,7 +41,8 @@ body {
 }
                                 
 .nav-bar {
-	background-color: var(--dark-charcoal);                                   
+	background-color: var(--dark-charcoal);
+    min-width: 140px;
 }
                                         
 .nav-bar-links {
