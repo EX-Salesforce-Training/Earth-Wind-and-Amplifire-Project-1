@@ -55,6 +55,10 @@
 		<name>GlobalValueSet</name>
 	</types>
 	<types>
+		<members>Home</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>LightningComponentBundle</name>
 	</types>
