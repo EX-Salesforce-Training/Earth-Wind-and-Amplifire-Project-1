@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Levels_Cannot_Be_Negative</fullName>
+    <active>true</active>
+    <errorConditionFormula>Artificer_Level__c &lt; 0 ||  Barbarian_Level__c &lt; 0 || Bard_Level__c &lt; 0 ||  Cleric_Level__c &lt; 0 ||  Druid_Level__c &lt; 0||  Fighter_Level__c &lt; 0 ||  Monk_Level__c &lt; 0 ||  Paladin_Level__c &lt; 0 ||  Ranger_Level__c &lt; 0 ||  Rogue_Level__c &lt; 0 ||  Sorcerer_Level__c &lt; 0 ||  Warlock_Level__c &lt; 0 ||  Wizard_Level__c &lt; 0</errorConditionFormula>
+    <errorMessage>You can&apos;t have negative levels!</errorMessage>
+</ValidationRule>
