@@ -799,10 +799,6 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>StdPartyPage</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>UserPage</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
