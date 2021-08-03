@@ -1,4 +1,8 @@
-/* QuestPageSuccess */
+/* 
+@author: Zackary Frazier
+@desc: the styling for the pages in the org
+@last modified project: Project 1
+*/
 
 :root {
     --gun-metal: #202C39;
@@ -31,6 +35,9 @@ body {
 .header {
     display: flex;
     justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
     background-color: var(--gun-metal);
 }
 
@@ -106,7 +113,7 @@ body {
 	overflow-y: auto;
 }      
 
-/* util */                                                              
+/* utilities */                                                              
                                                                     
 .w-100 {
     width: 100%;

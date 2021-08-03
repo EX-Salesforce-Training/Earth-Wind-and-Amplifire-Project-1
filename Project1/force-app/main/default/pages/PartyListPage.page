@@ -115,7 +115,7 @@
                         </div>
                         
                         <!-- max party size -->
-                        <div class="slds-form-element">
+                        <div style="padding: 0.5rem;" class="slds-form-element">
                             <label class="slds-form-element__label" for="text-input-id-max-party-size">Max Party Size:</label>
                             <div class="slds-form-element__control">
                                 <apex:inputText styleClass="slds-input" id="text-input-id-max-party-size" label="Party Size" value="{!filterByMaxPartySize}" >

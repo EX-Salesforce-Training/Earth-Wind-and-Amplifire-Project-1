@@ -1,3 +1,9 @@
+// @created by: Zackary Frazier
+// @last modified project: Project 1
+// @desc: extension for the quest page, 
+//        allows creating new quests, assigning guild members to quests
+//        and tracks the current questId selected on the page
+
 public class QuestExtension {
     
     public String questId {get; set;}

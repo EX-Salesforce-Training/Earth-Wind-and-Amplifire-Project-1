@@ -1,3 +1,9 @@
+// @created by: Zackary Frazier
+// @last modified project: Project 1
+// @desc : collection of utilites for QuestPage
+// @note : really this should be a util class and a quest page class
+//       : as some of these methods are used throughout the pages 
+
 
 // @desc 		: insert an HTML string to an element's child given an id
 // @id   		: <string> the id of the element this will be attached to
@@ -15,8 +21,9 @@ function insertBefore(id, HTMLString, index=0) {
     }
 }
 
-// @desc: hide a modal given its id
-// @id  : <string>
+// @desc  : hide a modal given its id
+// @event : <event>
+// @id    : <string>
 function hideModal(event, id) {
     event?.preventDefault();
     document
@@ -25,15 +32,19 @@ function hideModal(event, id) {
     	.display = 'none';
 }
 
-// @desc: set a modal to visible given its id
-// @id  : <string>
-function showModal(event, id, message) {
+// @desc    : set a modal to visible given its id
+// @event   : <event>
+// @id      : <string>
+function showModal(event, id) {
     event?.preventDefault();
     const elem = document.querySelector("#" + id);
     elem.style.display = 'initial';
 }
     
-// @desc: because VF is weird, need a special function for this error modal
+// @desc    : display an error modal with a message
+// @event   : <event>
+// @id      : <string>
+// @message : <string> message to be displayed on the modal 
 function showErrorModal(event, id, message) {
     event?.preventDefault();
     const elem = document.querySelector("#" + id);
@@ -42,7 +53,9 @@ function showErrorModal(event, id, message) {
     elem.style.display='initial';
 }
     
-// @desc: because VF is weird, need a special function for this error modal
+// @desc  : because VF is weird, need a special function for this error modal
+// @event : <event>
+// @id    : <string>
 function hideErrorModal(event, id) {
     event?.preventDefault();
     const elem = document.querySelector("#" + id);
@@ -53,7 +66,6 @@ function hideErrorModal(event, id) {
     
 // @desc       : retrieve the parameters, save a new quest
 // @event      : <event>
-// @echo       : <func> a function to pass parameters to the action function
 // @actionFunc : <func> the action function to save a quest
 function submitNewQuest(event, actionFunc) {
     event?.preventDefault();
@@ -93,6 +105,8 @@ function handleNewAssignment(event, actionFunc) {
     actionFunc(data['Assignee Email']);
 }
 
+// @desc: oncomplete handler for assigning guild members to quests
+//      : triggers a modal when the assignment fails
 function onCompleteHandleNewAssignment() {
 	showErrorModal(null, 'dynamic-error-modal', 'Unable to approve user for this quest, it may have already been accepted.');
 }
