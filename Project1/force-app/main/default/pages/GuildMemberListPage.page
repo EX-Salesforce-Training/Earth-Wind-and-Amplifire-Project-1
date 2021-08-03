@@ -1,128 +1,153 @@
-<apex:page label="GuildMemberListPage" standardController="Guild_Member__c" recordSetVar="memberList" extensions="GuildMemberExtension">
-    <apex:slds />
-  
-    <div class="container">
-        <div class="nav-bar">
-            <ul class="nav-bar-links">
-                <!-- navigation component -->
-                <li class="nav-bar-header">
-                    <p>
-                        Navigation
-                    </p>
-                </li>
-                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.GuildHallListPage}">
-                        Guild Halls
-                    </a>
-                </li>
-                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.QuestPage}">
-                        Quests
-                    </a>
-                </li>
-                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.PartyListPage}">
-                        Parties
-                    </a>
-                </li>
-                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.GuildMemberListPage}">
-                        Guild Members
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
-        
-        <div class="container-content">
-            <div class="header">
-                <h1 class="header-text">
-                    Dungeons &amp; Dragons
-                </h1>
-            </div>
-            
-            <div class="content-max-height">
-                <apex:form >
-                    <apex:pageBlock id="memberBlock">
-                        <apex:pageBlockSection title="Guild Members">                
-                            <apex:panelGrid columns="2">
-                                <apex:outputLabel value="Class Filter:"/>
-                                <apex:selectList value="{!filterId}" size="1">
-                                    <apex:actionSupport event="onchange" rerender="GMs"/>
-                                    <apex:selectOptions value="{!listviewoptions}"/>
-                                </apex:selectList>
-                            </apex:panelGrid>
-                            <apex:pageBlockTable value="{!memberList}" var="gm" title="Guild Members" id="GMs">
-                                <apex:column headerValue="Name">
-                                    <apex:outputLink value="{!$Page.UserPage}?id={!gm.id}">
-                                        {!gm.Name}
-                                    </apex:outputLink>
-                                </apex:column>
-                                <apex:column value="{!gm.Total_Level__c}" headerValue="Level"/>
-                                <apex:column value="{!gm.Class__c}" headerValue="Class"/>
-                                <apex:column value="{!gm.Skills__c}" headerValue="Skills"/>
-                                <apex:column headerValue="Party"> 
-                                    <apex:dataTable value="{!gm.Member_Assignments__r}" var="Party">
-                                        <apex:column value="{!Party.Party__c}"/>
-                                    </apex:dataTable>   
-                                </apex:column>
-                                <apex:column value="{!gm.Guild_Hall__r.Name}" headerValue="Guild Hall"/>
-                                <apex:column headerValue="Options">
-                                    <apex:outputLink value="{! URLFOR($Action.Guild_Member__c.Edit, gm.Id) }">
-                                        Edit
-                                    </apex:outputLink>
-                                    <apex:outputLink value="{! URLFOR($Action.Guild_Member__c.Delete, gm.Id) }">
-                                        Delete
-                                    </apex:outputLink>
-                                </apex:column>
-                            </apex:pageBlockTable>
-                        </apex:pageBlockSection>
-                    </apex:pageBlock>
-                </apex:form>
-            </div>
-        </div>
+<apex:page
+  label="GuildMemberListPage"
+  standardController="Guild_Member__c"
+  recordSetVar="memberList"
+  extensions="GuildMemberExtension"
+>
+  <apex:slds />
+
+  <div class="container">
+    <div class="nav-bar">
+      <ul class="nav-bar-links">
+        <!-- navigation component -->
+        <li class="nav-bar-header">
+          <p>Navigation</p>
+        </li>
+        <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+          <a class="nav-bar-link" href="{!$Page.GuildHallListPage}">
+            Guild Halls
+          </a>
+        </li>
+        <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+          <a class="nav-bar-link" href="{!$Page.QuestPage}"> Quests </a>
+        </li>
+        <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+          <a class="nav-bar-link" href="{!$Page.PartyListPage}"> Parties </a>
+        </li>
+        <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+          <a class="nav-bar-link" href="{!$Page.GuildMemberListPage}">
+            Guild Members
+          </a>
+        </li>
+      </ul>
     </div>
-    
-    <!-- the utility bar -->
-    <footer class="slds-utility-bar_container" aria-label="Utility Bar">
-        <h2 class="slds-assistive-text">Utility Bar</h2>
-        <ul class="slds-utility-bar">
-            
-            <!-- list page number -->
-            <li class="slds-utility-bar__item slds-m-horizontal_small">
-                <apex:form >
-                    <apex:outputText value="Page: {!PageNumber} of {! CEILING(ResultSize / PageSize) }"/>
-                </apex:form>
-            </li>
-            
-            <!-- previous -->
-            <li class="slds-utility-bar__item slds-m-horizontal_small">
-                <apex:form >
-                    <apex:commandLink action="{! Previous }" value="« Previous"
-                                      rendered="{! HasPrevious }"/>
-                    
-                    <apex:outputText style="color: #ccc;" value="« Previous"
-                                     rendered="{! NOT(HasPrevious) }"/>
-                </apex:form>
-            </li>
-            
-            <!-- next -->
-            <li class="slds-utility-bar__item slds-m-horizontal_small">
-                <apex:form >
-                    <apex:commandLink action="{! Next }" value="Next »"
-                                      rendered="{! HasNext }"/>
-                    
-                    <apex:outputText style="color: #ccc;" value="Next »"
-                                     rendered="{! NOT(HasNext) }"/>
-                </apex:form>
-            </li>
-            
-        </ul>
-    </footer>
-    
-    
-    <apex:form >
-        <apex:stylesheet value="{!$Resource.Style}"/>
-        <apex:includeScript value="{!$Resource.QuestPage}"/>
-    </apex:form>
+
+    <div class="container-content">
+      <div class="header">
+        <h1 class="header-text">Dungeons &amp; Dragons</h1>
+      </div>
+
+      <div class="content-max-height">
+        <apex:form>
+          <apex:pageBlock id="memberBlock">
+            <apex:pageBlockSection title="Guild Members">
+              <apex:panelGrid columns="2">
+                <apex:outputLabel value="Class Filter:" />
+                <apex:selectList value="{!filterId}" size="1">
+                  <apex:actionSupport event="onchange" rerender="GMs" />
+                  <apex:selectOptions value="{!listviewoptions}" />
+                </apex:selectList>
+              </apex:panelGrid>
+
+              <br />
+
+              <apex:pageBlockTable
+                value="{!memberList}"
+                var="gm"
+                title="Guild Members"
+                id="GMs"
+              >
+                <apex:column headerValue="Name">
+                  <apex:outputLink value="{!$Page.UserPage}?id={!gm.id}">
+                    {!gm.Name}
+                  </apex:outputLink>
+                </apex:column>
+                <apex:column value="{!gm.Total_Level__c}" headerValue="Level" />
+                <apex:column value="{!gm.Class__c}" headerValue="Class" />
+                <apex:column value="{!gm.Skills__c}" headerValue="Skills" />
+                <apex:column headerValue="Party">
+                  <apex:dataTable
+                    value="{!gm.Member_Assignments__r}"
+                    var="Party"
+                  >
+                    <apex:column value="{!Party.Party__c}" />
+                  </apex:dataTable>
+                </apex:column>
+                <apex:column
+                  value="{!gm.Guild_Hall__r.Name}"
+                  headerValue="Guild Hall"
+                />
+                <apex:column headerValue="Options">
+                  <apex:outputLink
+                    value="{! URLFOR($Action.Guild_Member__c.Edit, gm.Id) }"
+                  >
+                    Edit
+                  </apex:outputLink>
+                  <apex:outputLink
+                    value="{! URLFOR($Action.Guild_Member__c.Delete, gm.Id) }"
+                  >
+                    Delete
+                  </apex:outputLink>
+                </apex:column>
+              </apex:pageBlockTable>
+            </apex:pageBlockSection>
+          </apex:pageBlock>
+        </apex:form>
+      </div>
+    </div>
+  </div>
+
+  <!-- the utility bar -->
+  <footer class="slds-utility-bar_container" aria-label="Utility Bar">
+    <h2 class="slds-assistive-text">Utility Bar</h2>
+    <ul class="slds-utility-bar">
+      <!-- list page number -->
+      <li class="slds-utility-bar__item slds-m-horizontal_small">
+        <apex:form>
+          <apex:outputText
+            value="Page: {!PageNumber} of {! CEILING(ResultSize / PageSize) }"
+          />
+        </apex:form>
+      </li>
+
+      <!-- previous -->
+      <li class="slds-utility-bar__item slds-m-horizontal_small">
+        <apex:form>
+          <apex:commandLink
+            action="{! Previous }"
+            value="« Previous"
+            rendered="{! HasPrevious }"
+          />
+
+          <apex:outputText
+            style="color: #ccc"
+            value="« Previous"
+            rendered="{! NOT(HasPrevious) }"
+          />
+        </apex:form>
+      </li>
+
+      <!-- next -->
+      <li class="slds-utility-bar__item slds-m-horizontal_small">
+        <apex:form>
+          <apex:commandLink
+            action="{! Next }"
+            value="Next »"
+            rendered="{! HasNext }"
+          />
+
+          <apex:outputText
+            style="color: #ccc"
+            value="Next »"
+            rendered="{! NOT(HasNext) }"
+          />
+        </apex:form>
+      </li>
+    </ul>
+  </footer>
+
+  <apex:form>
+    <apex:stylesheet value="{!$Resource.Style}" />
+    <apex:includeScript value="{!$Resource.QuestPage}" />
+  </apex:form>
 </apex:page>
