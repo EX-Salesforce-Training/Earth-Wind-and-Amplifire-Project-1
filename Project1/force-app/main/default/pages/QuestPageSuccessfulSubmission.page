@@ -11,24 +11,24 @@
                     </p>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.GuildHallListPage}">
+                    <apex:outputLink styleClass="nav-bar-link" value="{!$Page.GuildHallListPage}">
                         Guild Halls
-                    </a>
+                    </apex:outputLink>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.QuestPage}">
+                    <apex:outputLink styleClass="nav-bar-link" value="{!$Page.QuestPage}">
                         Quests
-                    </a>
+                    </apex:outputLink>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.PartyListPage}">
+                    <apex:outputLink styleClass="nav-bar-link" value="{!$Page.PartyListPage}">
                         Parties
-                    </a>
+                    </apex:outputLink>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{!$Page.GuildMemberListPage}">
+                    <apex:outputLink styleClass="nav-bar-link" value="{!$Page.GuildMemberListPage}">
                         Guild Members
-                    </a>
+                    </apex:outputLink>
                 </li>
                 
             </ul>
