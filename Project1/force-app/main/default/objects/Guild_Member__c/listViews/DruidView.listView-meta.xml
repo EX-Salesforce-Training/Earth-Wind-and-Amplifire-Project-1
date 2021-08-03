@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DruidView</fullName>
+    <columns>NAME</columns>
+    <columns>Class__c</columns>
+    <columns>Total_Level__c</columns>
+    <columns>Druid_Level__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Class__c</field>
+        <operation>includes</operation>
+        <value>Druid</value>
+    </filters>
+    <label>DruidView</label>
+</ListView>

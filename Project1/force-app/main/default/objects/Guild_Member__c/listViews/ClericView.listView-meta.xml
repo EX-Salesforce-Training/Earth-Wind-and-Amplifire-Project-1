@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ClericView</fullName>
+    <columns>NAME</columns>
+    <columns>Class__c</columns>
+    <columns>Total_Level__c</columns>
+    <columns>Cleric_Level__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Class__c</field>
+        <operation>includes</operation>
+        <value>Cleric</value>
+    </filters>
+    <label>ClericView</label>
+</ListView>

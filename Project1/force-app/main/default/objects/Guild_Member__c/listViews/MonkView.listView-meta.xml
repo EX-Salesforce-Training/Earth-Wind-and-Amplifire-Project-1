@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MonkView</fullName>
+    <columns>NAME</columns>
+    <columns>Class__c</columns>
+    <columns>Total_Level__c</columns>
+    <columns>Monk_Level__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Class__c</field>
+        <operation>includes</operation>
+        <value>Monk</value>
+    </filters>
+    <label>MonkView</label>
+</ListView>

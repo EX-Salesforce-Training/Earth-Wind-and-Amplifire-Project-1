@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RogueView</fullName>
+    <columns>NAME</columns>
+    <columns>Class__c</columns>
+    <columns>Total_Level__c</columns>
+    <columns>Rogue_Level__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Class__c</field>
+        <operation>includes</operation>
+        <value>Rogue</value>
+    </filters>
+    <label>RogueView</label>
+</ListView>
