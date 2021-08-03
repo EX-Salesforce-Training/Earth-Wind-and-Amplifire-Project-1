@@ -4,7 +4,7 @@
  		User Page is a misnomer
 		Last Modified Date: 8/3/21
 -->
-<apex:page controller="UserPageController">
+<apex:page controller="UserPageController" showHeader="false">
     <apex:slds />
     
     <div class="container">

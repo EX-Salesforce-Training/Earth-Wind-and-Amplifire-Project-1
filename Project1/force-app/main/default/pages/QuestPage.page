@@ -5,7 +5,7 @@
 	       ability to create quests and assign users to quests 
 -->
 
-<apex:page standardController="Quest__c" recordSetVar="quests" extensions="QuestExtension" id="page">
+<apex:page standardController="Quest__c" recordSetVar="quests" extensions="QuestExtension" id="page" showHeader="false">
     <apex:slds />
     
     <div class="container">
@@ -145,7 +145,7 @@
                         <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
                             <h2 class="slds-text-heading_medium" id="prompt-heading-id">Service unavailable</h2>
                         </header>
-                        <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                        <div class="slds-modal__content slds-p-around_medium modal-height" id="prompt-message-wrapper">
                             <!-- content -->
                         </div>
                         <footer class="slds-modal__footer slds-theme_default">
@@ -205,7 +205,7 @@
                 </header>
                 
                 <form method="POST" onsubmit="submitNewQuest(event, saveQuest)">
-                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-modal__content slds-p-around_medium modal-height" id="modal-content-id-1">
                         
                         <!-- email address -->
                         <div class="slds-form-element">

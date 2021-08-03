@@ -1,4 +1,4 @@
-<apex:page label="GuildMemberListPage" standardController="Guild_Member__c" recordSetVar="memberList" extensions="GuildMemberExtension">
+<apex:page showHeader="false" label="GuildMemberListPage" standardController="Guild_Member__c" recordSetVar="memberList" extensions="GuildMemberExtension">
     <apex:slds />
   
     <div class="container">

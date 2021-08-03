@@ -94,7 +94,11 @@ body {
 .nav-bar-link:hover {
 	text-decoration: none !important;     
 }
- 
+                                                                
+.modal-height {
+	max-height: 60vh;
+	overflow-y: auto;
+} 
 /* page content */
 .container {
 	display: grid;

@@ -6,7 +6,7 @@ Description: Displays a list of a party's members. If the party is accepting new
 			 visible to join. Joining adds the current user to the party if that user has a guild 
 			 member record that meets all party requirements.
 -->
-<apex:page controller="PartyListPageController">
+<apex:page controller="PartyListPageController" showHeader="false">
     
     <apex:slds />
     

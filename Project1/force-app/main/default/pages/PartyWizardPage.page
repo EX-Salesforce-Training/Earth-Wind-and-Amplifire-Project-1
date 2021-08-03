@@ -4,7 +4,7 @@ Authors: Gregory Mannerberg (gregory.mannerber@revature.net), Zackary Frazier (z
 Last Modified Date: 8/3/2021
 Description: Displays a form for inputing data to add a new party to the org.
 -->
-<apex:page controller="PartyListPageController" >
+<apex:page controller="PartyListPageController" showHeader="false">
     <apex:slds />
     <div class="container">
         <div class="nav-bar">
