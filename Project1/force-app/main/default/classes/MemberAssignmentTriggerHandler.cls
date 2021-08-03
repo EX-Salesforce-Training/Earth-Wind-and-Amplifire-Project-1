@@ -10,7 +10,7 @@ public class MemberAssignmentTriggerHandler {
             }
             List<string> partyClasses = new List<string>();
             if (parties[0].class_requirements__c != null && parties[0].class_requirements__c != '') {
-                parties[0].class_requirements__c.split(';');
+                partyClasses = parties[0].class_requirements__c.split(';');
             }
             else {
                 match = true;
@@ -22,8 +22,10 @@ public class MemberAssignmentTriggerHandler {
             }
             List<string> memberClasses = new List<string>();
             if (members[0].class__c != null && members[0].class__c != '') {
-                members[0].class__c.split(';');
+                memberClasses = members[0].class__c.split(';');
             }
+            system.debug('Party Classes: ' + partyClasses);
+            system.debug('Member Classes: ' + memberClasses);
             for (string partyClass : partyClasses) {
                 for (string memberClass : memberClasses) {
                     if (partyClass == memberClass) {
