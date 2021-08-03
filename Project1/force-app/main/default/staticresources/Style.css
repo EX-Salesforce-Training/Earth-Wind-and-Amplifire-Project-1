@@ -99,6 +99,7 @@ body {
 .container-content {
     grid-template-rows: 2fr 8fr;
     height: 100vh;
+    overflow-y: auto;
 }
 
 .content-max-height {

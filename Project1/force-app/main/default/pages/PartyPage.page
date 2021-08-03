@@ -1,23 +1,71 @@
 <apex:page controller="PartyListPageController">
-    <apex:form >
-        <apex:pageMessages />
-        <apex:pageBlock id="partyBlock" title="{!currentParty.Name}">
-            <apex:pageBlockTable value="{!currentPartyMembers}" var="member" >
-                <apex:column headerValue="{!$ObjectType.Guild_Member__c.fields.Name.label}" >
-                    <apex:outputLink value="/{!member.id}" >
-                        {!member.Name}
-                    </apex:outputLink>
-                </apex:column>
-                <apex:column value="{!member.Class__c}" />
-                <apex:column value="{!member.Race__c}" />
-                <apex:column value="{!member.Active__c}" />
-            </apex:pageBlockTable> 
-            <apex:pageBlockSection title="Join Party" >
-                <apex:outputText value="Not recruiting at this time." rendered="{!!currentParty.Accepting_New_Members__c}"/>
-                <apex:commandLink value="Join" action="{!joinParty}" reRender="partyBlock" rendered="{!currentParty.Accepting_New_Members__c}"/>
-                &nbsp;&nbsp;
-                <apex:commandLink value="Party List" action="{!listPage}" />
-            </apex:pageBlockSection>
-        </apex:pageBlock>
-    </apex:form>
+    
+    <apex:slds />
+    
+    <div class="container">
+        <div class="nav-bar">
+            <ul class="nav-bar-links">
+                <!-- navigation component -->
+                <li class="nav-bar-header">
+                    <p>
+                        Navigation
+                    </p>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.GuildHallListPage}">
+                        Guild Halls
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.QuestPage}">
+                        Quests
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.PartyPage}">
+                        Parties
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.GuildMemberListPage}">
+                        Guild Members
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="container-content">
+            <div class="header">
+                <h1 class="header-text">
+                    Dungeons &amp; Dragons
+                </h1>
+            </div>
+            
+            <div class="content-max-height">
+                <apex:form >
+                    <apex:pageMessages />
+                    <apex:pageBlock id="partyBlock" title="{!currentParty.Name}">
+                        <apex:pageBlockTable value="{!currentPartyMembers}" var="member" >
+                            <apex:column headerValue="{!$ObjectType.Guild_Member__c.fields.Name.label}" >
+                                <apex:outputLink value="/{!member.id}" >
+                                    {!member.Name}
+                                </apex:outputLink>
+                            </apex:column>
+                            <apex:column value="{!member.Class__c}" />
+                            <apex:column value="{!member.Race__c}" />
+                            <apex:column value="{!member.Active__c}" />
+                        </apex:pageBlockTable> 
+                        <apex:pageBlockSection title="Join Party" >
+                            <apex:outputText value="Not recruiting at this time." rendered="{!!currentParty.Accepting_New_Members__c}"/>
+                            <apex:commandLink value="Join" action="{!joinParty}" reRender="partyBlock" rendered="{!currentParty.Accepting_New_Members__c}"/>
+                            &nbsp;&nbsp;
+                            <apex:commandLink value="Party List" action="{!listPage}" />
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                </apex:form>
+            </div>
+        </div>
+    </div>
+    <apex:stylesheet value="{!$Resource.Style}"/>
+    <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>
