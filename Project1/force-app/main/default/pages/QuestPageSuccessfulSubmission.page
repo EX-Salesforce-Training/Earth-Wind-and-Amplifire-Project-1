@@ -76,9 +76,7 @@
         </div>
     </div>
     
-    <apex:form >
-        <apex:stylesheet value="{!$Resource.Style}"/>
-    </apex:form>
     
+    <apex:stylesheet value="{!$Resource.Style}"/>
     <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>

@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
-                    <a class="nav-bar-link" href="{$Page.GuildMemberListPage}">
+                    <a class="nav-bar-link" href="{!$Page.GuildMemberListPage}">
                         Guild Members
                     </a>
                 </li>

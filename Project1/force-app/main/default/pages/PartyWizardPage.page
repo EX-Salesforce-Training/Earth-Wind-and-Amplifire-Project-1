@@ -1,43 +1,94 @@
-<apex:page controller="PartyListPageController" >   
-    <apex:pageBlock >
-        <apex:form >
-            <apex:actionRegion >
-                <apex:pageBlockSection id="partyWizard" title="Create a Party" columns="1">
-                    <apex:inputField value="{!newParty.Name}" required="true" />
-                    <apex:inputField value="{!newParty.Max_Party_Size__c}" />
-                    <apex:inputField value="{!newParty.Minimum_Level_Required__c}" />
-                    <apex:inputField value="{!newParty.Accepting_New_Members__c}" />
-                    <apex:inputField value="{!newParty.Class_Requirements__c}" />
-                    <apex:commandLink value="Create" action="{!createParty}" reRender="confirm_panel,failure_panel" />
-                </apex:pageBlockSection>
-            </apex:actionRegion>
-        </apex:form>
-        <apex:form >
-            <apex:actionRegion >
-                <apex:PageBlockSection id="return_to_list" columns="1">
-                    <apex:commandLink value="Cancel" action="{!listPage}" />
-                </apex:PageBlockSection>
-            </apex:actionRegion>
-        </apex:form>        
-    </apex:pageBlock>
-    <apex:form >
-        <apex:outputPanel id="confirm_panel">
-            <apex:outputPanel rendered="{!confirmation}" layout="block" >
-                <apex:outputText value="The party {!newParty.Name} was successfully created."/>
-                <br/>
-                <apex:commandLink value="Party List" action="{!listPage}"/>
-                &nbsp;
-                <apex:commandLink value="{!newParty.Name}" action="{!partyPage}"/>
-            </apex:outputPanel>
-        </apex:outputPanel>
-        <apex:outputPanel id="failure_panel">
-            <apex:outputPanel rendered="{!failure}" layout="block" >
-                <apex:outputText value="Something went wrong. We failed to create your party."/>
-                <br/>
-                <apex:commandLink value="Party List" action="{!listPage}"/>
-                &nbsp;
-                <apex:commandLink value="Return" action="{!stopFailure}" reRender="failure_panel"/>
-            </apex:outputPanel>
-        </apex:outputPanel>
-    </apex:form>   
+<apex:page controller="PartyListPageController" >
+    <apex:slds />
+    <div class="container">
+        <div class="nav-bar">
+            <ul class="nav-bar-links">
+                <!-- navigation component -->
+                <li class="nav-bar-header">
+                    <p>
+                        Navigation
+                    </p>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.GuildHallListPage}">
+                        Guild Halls
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.QuestPage}">
+                        Quests
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.PartyPage}">
+                        Parties
+                    </a>
+                </li>
+                <li class="nav-bar-link-wrapper" onclick="clickFirstChild(event)">
+                    <a class="nav-bar-link" href="{!$Page.GuildMemberListPage}">
+                        Guild Members
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+        
+        <div class="container-content">
+            <div class="header">
+                <h1 class="header-text">
+                    Dungeons &amp; Dragons
+                </h1>
+            </div>
+            
+            <div class="content-max-height">
+                <div>
+                    <apex:pageBlock >
+                        <apex:form >
+                            <apex:actionRegion >
+                                <apex:pageBlockSection id="partyWizard" title="Create a Party" columns="1">
+                                    <apex:inputField value="{!newParty.Name}" required="true" />
+                                    <apex:inputField value="{!newParty.Max_Party_Size__c}" />
+                                    <apex:inputField value="{!newParty.Minimum_Level_Required__c}" />
+                                    <apex:inputField value="{!newParty.Accepting_New_Members__c}" />
+                                    <apex:inputField value="{!newParty.Class_Requirements__c}" />
+                                    <apex:commandLink value="Create" action="{!createParty}" reRender="confirm_panel,failure_panel" />
+                                </apex:pageBlockSection>
+                            </apex:actionRegion>
+                        </apex:form>
+                        <apex:form >
+                            <apex:actionRegion >
+                                <apex:PageBlockSection id="return_to_list" columns="1">
+                                    <apex:commandLink value="Cancel" action="{!listPage}" />
+                                </apex:PageBlockSection>
+                            </apex:actionRegion>
+                        </apex:form>        
+                    </apex:pageBlock>
+                    <apex:form >
+                        <apex:outputPanel id="confirm_panel">
+                            <apex:outputPanel rendered="{!confirmation}" layout="block" >
+                                <apex:outputText value="The party {!newParty.Name} was successfully created."/>
+                                <br/>
+                                <apex:commandLink value="Party List" action="{!listPage}"/>
+                                &nbsp;
+                                <apex:commandLink value="{!newParty.Name}" action="{!partyPage}"/>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                        <apex:outputPanel id="failure_panel">
+                            <apex:outputPanel rendered="{!failure}" layout="block" >
+                                <apex:outputText value="Something went wrong. We failed to create your party."/>
+                                <br/>
+                                <apex:commandLink value="Party List" action="{!listPage}"/>
+                                &nbsp;
+                                <apex:commandLink value="Return" action="{!stopFailure}" reRender="failure_panel"/>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <apex:stylesheet value="{!$Resource.Style}"/>
+    <apex:includeScript value="{!$Resource.QuestPage}"/>
 </apex:page>
