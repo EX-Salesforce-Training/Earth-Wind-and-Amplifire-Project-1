@@ -1,6 +1,13 @@
+/* 
+ * Name: MemberAssignmentTriggerTest
+ * Authors: Gregory Mannerberg (gregory.mannerberg@revature.net)
+ * Last Modified Date: 8/3/2021
+ * Description: Tests for MemberAssignmentTriggerHandler
+ */
 @isTest
 public class MemberAssignmentTriggerTest {
     
+    // Sets up a party with no class requirements
     private static void singleNoClassSetup() {
         Party__c party = new Party__c();
         party.Name = 'adventurers';
@@ -14,6 +21,7 @@ public class MemberAssignmentTriggerTest {
         insert member;
     }
     
+    // Sets up a party with class requirements
     private static void singleClassSetup() {
         Party__c party = new Party__c();
         party.Name = 'Drarluid';
@@ -29,6 +37,7 @@ public class MemberAssignmentTriggerTest {
         insert member;
     }
 	
+    // Test that a member can join a party that has no requirements
     @isTest
     public static void singleTest() {
         singleNoClassSetup();
@@ -43,6 +52,7 @@ public class MemberAssignmentTriggerTest {
         system.assertEquals(party.id, newma.party__c);
     }
     
+    // Test that a member can join a party that has requirements
     @isTest static void classTest() {
         singleClassSetup();
         Party__c party = [SELECT id FROM Party__c WHERE Name = 'Drarluid' LIMIT 1];
