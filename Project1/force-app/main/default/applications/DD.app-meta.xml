@@ -12,6 +12,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>D&amp;D</label>
     <navType>Standard</navType>
+    <tabs>Home</tabs>
     <tabs>Quest__c</tabs>
     <tabs>Facility__c</tabs>
     <tabs>Guild_Member__c</tabs>
