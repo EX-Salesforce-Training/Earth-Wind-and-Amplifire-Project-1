@@ -12,4 +12,4 @@ function tableChangeHandler() {
     }, 300);
 }
     
-window.onload = tableChangeHandler;
+tableChangeHandler();
