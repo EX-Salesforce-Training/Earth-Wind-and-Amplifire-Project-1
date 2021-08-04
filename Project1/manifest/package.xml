@@ -98,6 +98,10 @@
 		<members>*</members>
 		<name>Layout</name>
 	</types>
+	<types>
+		<members>*</members>
+		<name>ApprovalProcess</name>
+	</types>
 
 	<version>51.0</version>
 </Package>
