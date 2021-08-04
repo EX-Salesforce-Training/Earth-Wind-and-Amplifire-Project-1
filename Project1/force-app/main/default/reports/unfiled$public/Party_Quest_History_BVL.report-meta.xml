@@ -28,14 +28,18 @@
         <field>CUST_NAME</field>
     </columns>
     <columns>
-        <field>Quest__c.Quest_Details__c</field>
-    </columns>
-    <columns>
-        <field>Quest__c.Status__c</field>
-    </columns>
-    <columns>
         <field>Quest__c.Sub_Status__c</field>
     </columns>
+    <filter>
+        <criteriaItems>
+            <column>Quest__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Closed</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>

@@ -8,11 +8,13 @@
             <axisBinding>y</axisBinding>
             <column>RowCount</column>
         </chartSummaries>
-        <chartType>VerticalColumn</chartType>
+        <chartType>VerticalColumnGrouped</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>true</expandOthers>
-        <groupingColumn>FK_$Guild_Member__c.Total_Level__c</groupingColumn>
+        <groupingColumn>Quest__c.Danger_Level__c</groupingColumn>
+        <legendPosition>Right</legendPosition>
         <location>CHART_BOTTOM</location>
+        <secondaryGroupingColumn>FK_$Guild_Member__c.Total_Level__c</secondaryGroupingColumn>
         <showAxisLabels>false</showAxisLabels>
         <showPercentage>false</showPercentage>
         <showTotal>false</showTotal>
@@ -29,9 +31,6 @@
     </columns>
     <columns>
         <field>FK_NAME</field>
-    </columns>
-    <columns>
-        <field>Quest__c.Danger_Level__c</field>
     </columns>
     <filter>
         <criteriaItems>
@@ -52,6 +51,11 @@
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
         <field>FK_$Guild_Member__c.Total_Level__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Quest__c.Danger_Level__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Quest Levels that Failed Report</name>
