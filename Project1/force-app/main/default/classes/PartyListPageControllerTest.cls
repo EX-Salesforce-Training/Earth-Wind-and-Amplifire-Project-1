@@ -46,6 +46,7 @@ public class PartyListPageControllerTest {
         testMember.Name = 'bob';
         testMember.Member_Email__c = 'bob@bob.bob';
         testMember.class__c = 'Fighter';
+        testMember.Artificer_Level__c = 1;
         insert testMember;
         testParty = [SELECT id FROM Party__c LIMIT 1];
         partyid = testParty.id;
@@ -75,6 +76,7 @@ public class PartyListPageControllerTest {
             member.Name = 'Bob' + i;
             member.Member_Email__c = 'Bob@bob.bob' + i;
             member.Class__c = 'Barbarian';
+            member.Artificer_Level__c = 1;
             members.add(member);
         }
         insert members;
