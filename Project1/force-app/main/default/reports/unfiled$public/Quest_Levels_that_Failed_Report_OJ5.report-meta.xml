@@ -58,7 +58,7 @@
         <field>Quest__c.Danger_Level__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Quest Levels that Failed Report</name>
+    <name>Member Level vs Danger in Failed Quests</name>
     <params>
         <name>co</name>
         <value>1</value>
