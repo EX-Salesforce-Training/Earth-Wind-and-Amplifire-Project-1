@@ -70,7 +70,7 @@
                                 <apex:column value="{! quest.Danger_Level__c }" headerValue="Danger Level"/>
                                 <apex:column value="{! quest.Location__c }" headerValue="Location" />
                                 <apex:column value="{! quest.Requires_Party__c}" headerValue="Requires Party?" />
-                                <apex:column value="{! quest.Status__c }" />
+                                <apex:column value="{! quest.Status__c }" headerValue="Status" />
                                 <apex:column headerValue="Info">
                                     
                                     <!-- save the questId to the back-end -->
