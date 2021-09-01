@@ -21,3 +21,13 @@ In-game dungeons and dragons project that allows one to manage games from a cust
 * List all available quests
 * Create new quests
 * List available guild halls
+* Data visualization with reports and dashboards
+
+## Getting Started
+ * Create a fresh org
+ * Clone this project and deploy it to the org with `sfdx force:source:deploy -x manifest/package.xml`
+ * If successful, you should see that you now have the D&D app available to you on your org
+
+![image](https://user-images.githubusercontent.com/52726500/131711756-7348f520-b99b-434e-a5bc-f017cf16f4bc.png)
+
+## 
